@@ -24,5 +24,12 @@ class MainActivity : AppCompatActivity() {
         }
         print("lorenzo bangettt brooohh")
         print("kjdbgsbjkhbgksjbgs")
+
+        print("lorenjo")
+        print("lorenjo")
+        print("lorenjo")
+        print("lorenjo")
+        print("lorenjo")
+
     }
 }
