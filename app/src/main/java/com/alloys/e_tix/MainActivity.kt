@@ -8,14 +8,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         print("lorenzo ganteng")
-        print("lorenzo bangettt brooohh")
-        print("lorenzo ganteng")
-        print("lorenzo bangettt brooohh")
-
-
-        print("lorenzo ganteng")
-        print("lorenzo bangettt brooohh")
-        print("lorenzo ganteng")
-        print("lorenzo bangettt brooohh")
     }
 }
