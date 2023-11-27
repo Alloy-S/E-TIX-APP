@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#808080</color>
     <color name="buttonGreen">#2891a3</color>
+    <color name="BackgroundFragment">#E3E5E7</color>
+    <color name="greenCircle">#2891a3</color>
+    <color name="darkGreen">#053740</color>
 </resources>

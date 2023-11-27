@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">E-TIX</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="film">
+
+    </string-array>
 </resources>
