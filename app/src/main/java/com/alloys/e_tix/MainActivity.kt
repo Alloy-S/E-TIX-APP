@@ -7,15 +7,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        print("beberqpa anagka")
-        print("beberqpa anagka")
-
-
-        print("beberqpa anagka")
-
         if (true) {
             print("halo")
         }
+        print("beberqpa anagka")
+        print("beberqpa anagka")
+
+
+        print("beberqpa anagka")
+
         if (true) {
             print("halo")
         }
@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         }
         print("lorenzo bangettt brooohh")
         print("kjdbgsbjkhbgksjbgs")
+        if (true) {
+            print("halo")
+        }
+        if (true) {
+            print("halo")
+        }
 
         print("lorenjo")
         print("lorenjo")
