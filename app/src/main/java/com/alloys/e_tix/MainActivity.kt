@@ -9,6 +9,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         print("lorenzo ganteng")
         print("lorenzo bangettt brooohh")
+        print("lorenzo ganteng")
+        print("lorenzo bangettt brooohh")
 
     }
 }
