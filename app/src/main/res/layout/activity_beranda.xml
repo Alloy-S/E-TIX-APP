@@ -8,6 +8,7 @@
     android:background="@color/BackgroundFragment"
     tools:context=".Beranda">
 
+<!--    logo xxi -->
     <LinearLayout
         android:layout_width="412dp"
         android:layout_height="86dp"
@@ -24,7 +25,7 @@
             app:srcCompat="@drawable/xxi" />
     </LinearLayout>
 
-
+<!--    navbar -->
     <LinearLayout
         android:id="@+id/navbar"
         android:layout_width="417dp"

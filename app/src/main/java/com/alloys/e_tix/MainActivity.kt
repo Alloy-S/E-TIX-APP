@@ -13,10 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //deklarasi untuk login
         var _etHandphone = findViewById<EditText>(R.id.etHandphone)
         var _etPassword = findViewById<EditText>(R.id.etPassword)
 
-        var _btnLogin = findViewById<Button>(R.id.btnLogin)
+        //Button login --> halaman beranda
+        val _btnLogin = findViewById<Button>(R.id.btnLogin)
             _btnLogin.setOnClickListener {
                 val intent = Intent(this@MainActivity, Beranda::class.java).apply {
                     putExtra(Beranda.dataTerima, _etHandphone.text.toString())

@@ -23,7 +23,7 @@ class Beranda : AppCompatActivity() {
             replace(R.id.frameContainer, mfMovie, movieFragment::class.java.simpleName)
             commit()
 
-
+            //Fragment movie
             findViewById<ImageView>(R.id.ivMovie).setOnClickListener {
                 mfMovie.arguments = bundle
                 mFragmentManager.findFragmentByTag(movieFragment::class.java.simpleName)
@@ -32,7 +32,7 @@ class Beranda : AppCompatActivity() {
                     commit()
                 }
             }
-
+            //Fragment Profile
             findViewById<ImageView>(R.id.ivProfile).setOnClickListener {
                 val mfProfile = profileFragment()
                 mfProfile.arguments = bundle
@@ -42,6 +42,7 @@ class Beranda : AppCompatActivity() {
                     commit()
                 }
             }
+            //Fragment Upcoming
             findViewById<ImageView>(R.id.ivUpcoming).setOnClickListener {
                 val mfUpcoming = upcomingFragment()
                 mfUpcoming.arguments = bundle
@@ -51,19 +52,7 @@ class Beranda : AppCompatActivity() {
                     commit()
                 }
             }
-//
-//            var _poster1 = findViewById<ImageView>(R.id.poster1)
-//            _poster1.setOnClickListener {
-//                val intent = Intent(this@Beranda, detail_Film::class.java)
-//                startActivity(intent)
-//            }
-//            var _poster2 = findViewById<ImageView>(R.id.poster2)
-//            _poster2.setOnClickListener {
-//                val intent = Intent(this@Beranda, detail_Film::class.java)
-//                startActivity(intent)
-//            }
         }
-
         }
     companion object {
         const val dataTerima = "GETDATA"
