@@ -10,7 +10,12 @@ class MainActivity : AppCompatActivity() {
         print("lorenzo ganteng")
         print("lorenzo bangettt brooohh")
         print("lorenzo ganteng")
+        if(true) {
+            print("hallo world")
+        }
         print("lorenzo bangettt brooohh")
         print("kjdbgsbjkhbgksjbgs")
+
+
     }
 }
