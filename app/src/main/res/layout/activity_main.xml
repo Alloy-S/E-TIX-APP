@@ -6,13 +6,93 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="272dp"
+        android:layout_height="172dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="71dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="338dp"
+        android:layout_height="43dp"
+        android:hint="PIN/Pasword"
+        android:textColorHint="@color/grey"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="348dp" />
+
+    <EditText
+        android:id="@+id/etHandphone"
+        android:layout_width="338dp"
+        android:layout_height="43dp"
+        android:hint="Handphone"
+        android:textColorHint="@color/grey"
+        android:textSize="18dp"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="296dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="365dp"
+        android:layout_height="46dp"
+        android:background="@drawable/login"
+        android:text="Log In"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="431dp" />
+
+    <TextView
+        android:id="@+id/tvForgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot PIN/Password?"
+        tools:layout_editor_absoluteX="247dp"
+        tools:layout_editor_absoluteY="608dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textSize="17dp"
+        tools:layout_editor_absoluteX="197dp"
+        tools:layout_editor_absoluteY="494dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRegister"
+        android:layout_width="365dp"
+        android:layout_height="46dp"
+        android:background="@drawable/register"
+        android:text="Register "
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="540dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="25dp"
+        android:layout_height="28dp"
+        app:srcCompat="@drawable/handphone"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="304dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="24dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/padlock"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="353dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
