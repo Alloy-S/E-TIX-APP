@@ -10,6 +10,19 @@ class MainActivity : AppCompatActivity() {
         print("beberqpa anagka")
         print("beberqpa anagka")
 
-        print("test")
+
+        print("beberqpa anagka")
+
+        if (true) {
+            print("halo")
+        }
+        if (true) {
+            print("halo")
+        }
+        if (true) {
+            print("halo")
+        }
+        print("lorenzo bangettt brooohh")
+        print("kjdbgsbjkhbgksjbgs")
     }
 }
