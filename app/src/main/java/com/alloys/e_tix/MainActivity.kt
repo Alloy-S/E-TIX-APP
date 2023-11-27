@@ -11,6 +11,11 @@ class MainActivity : AppCompatActivity() {
         print("lorenzo bangettt brooohh")
         print("lorenzo ganteng")
         print("lorenzo bangettt brooohh")
-        print("kjdbgsbjkhbgksjbgs")
+
+
+        print("lorenzo ganteng")
+        print("lorenzo bangettt brooohh")
+        print("lorenzo ganteng")
+        print("lorenzo bangettt brooohh")
     }
 }
