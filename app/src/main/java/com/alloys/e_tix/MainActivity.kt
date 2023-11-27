@@ -22,5 +22,12 @@ class MainActivity : AppCompatActivity() {
         }
         print("lorenzo bangettt brooohh")
         print("kjdbgsbjkhbgksjbgs")
+
+        if (true) {
+            print("halo")
+        }
+        if (true) {
+            print("halo")
+        }
     }
 }
