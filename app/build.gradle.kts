@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.alloys.e_tix"
-        minSdk = 34
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
