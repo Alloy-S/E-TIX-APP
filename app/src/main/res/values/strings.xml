@@ -2,6 +2,7 @@
     <string name="app_name">E-TIX</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string-array name="film">
-
+        <item>Midnight Show</item>
+        <item>Srimulat: Hidup Memang Komedi</item>
     </string-array>
 </resources>

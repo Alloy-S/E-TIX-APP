@@ -1,8 +1,10 @@
 package com.alloys.e_tix
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 
 class Beranda : AppCompatActivity() {
@@ -49,6 +51,17 @@ class Beranda : AppCompatActivity() {
                     commit()
                 }
             }
+//
+//            var _poster1 = findViewById<ImageView>(R.id.poster1)
+//            _poster1.setOnClickListener {
+//                val intent = Intent(this@Beranda, detail_Film::class.java)
+//                startActivity(intent)
+//            }
+//            var _poster2 = findViewById<ImageView>(R.id.poster2)
+//            _poster2.setOnClickListener {
+//                val intent = Intent(this@Beranda, detail_Film::class.java)
+//                startActivity(intent)
+//            }
         }
 
         }
