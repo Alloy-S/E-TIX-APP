@@ -10,26 +10,6 @@ class MainActivity : AppCompatActivity() {
         print("beberqpa anagka")
         print("beberqpa anagka")
 
-
-        print("beberqpa anagka")
-
-        print("lorenzo ganteng")
-        print("beberqpa anagka")
-        print("beberqpa anagka")
-        print("lorenzo ganteng")
-        print("lorenzo bangettt brooohh")
-        print("lorenzo ganteng")
-        print("lorenzo bangettt brooohh")
-        print("kjdbgsbjkhbgksjbgs")
-
-        print("lorenzo ganteng")
-        print("lorenzo bangettt brooohh")
-        print("lorenzo ganteng")
-
-        if (true) {
-            print("halo")
-        }
-        print("lorenzo bangettt brooohh")
-        print("kjdbgsbjkhbgksjbgs")
+        print("test")
     }
 }
