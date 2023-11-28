@@ -6,20 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!--    logo xxi -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="412dp"
+        android:layout_height="86dp"
+        android:background="@color/darkGreen"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/xxi" />
+    </LinearLayout>
 <!--    logo e-tix-->
+
+    <!--    isi nomor-->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="272dp"
         android:layout_height="172dp"
         android:layout_marginStart="69dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="71dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:srcCompat="@drawable/logo" />
 
-<!--    isi nomor-->
     <EditText
         android:id="@+id/etHandphone"
         android:layout_width="365dp"
@@ -109,6 +128,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
+    <LinearLayout
+        android:id="@+id/loginAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="68dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="328dp"
+        android:layout_marginBottom="2dp"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="47dp"
+            android:layout_height="39dp"
+            app:srcCompat="@drawable/admin" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Admin"
+            tools:layout_editor_absoluteX="84dp"
+            tools:layout_editor_absoluteY="696dp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
