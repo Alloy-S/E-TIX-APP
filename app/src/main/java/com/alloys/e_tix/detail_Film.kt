@@ -7,5 +7,10 @@ class detail_Film : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_film)
+
+
+
     }
+
+
 }
