@@ -13,6 +13,12 @@
         android:theme="@style/Theme.ETIX"
         tools:targetApi="31">
         <activity
+            android:name=".shortcutPageDev"
+            android:exported="false" />
+        <activity
+            android:name=".selectStudio"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

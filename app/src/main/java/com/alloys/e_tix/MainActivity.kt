@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         //Button login --> halaman beranda
         val _btnLogin = findViewById<Button>(R.id.btnLogin)
             _btnLogin.setOnClickListener {
-                val intent = Intent(this@MainActivity, Beranda::class.java).apply {
+                val intent = Intent(this@MainActivity, shortcutPageDev::class.java).apply {
                     putExtra(Beranda.dataTerima, _etHandphone.text.toString())
                     _etHandphone.text.clear()
                     _etPassword.text.clear()
