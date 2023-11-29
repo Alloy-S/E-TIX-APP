@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 
 class shortcutPageDev : AppCompatActivity() {
+//    hehehehhehe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shortcut_page_dev)
