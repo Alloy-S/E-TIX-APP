@@ -58,6 +58,7 @@ class AdapterSelectStudio (
             )
 
             layoutParams.rightMargin = (10 * dpToPixels).toInt()
+            layoutParams.bottomMargin = (10 * dpToPixels).toInt()
             frameLayout.layoutParams = layoutParams
             frameLayout.setBackgroundResource(R.drawable.layout_border)
 
@@ -74,6 +75,10 @@ class AdapterSelectStudio (
             textView.text = time
 
             frameLayout.addView(textView)
+
+            frameLayout.setOnClickListener {
+
+            }
             holder._listWaktu.addView(frameLayout)
         }
 

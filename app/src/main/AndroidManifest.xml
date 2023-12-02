@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ETIX"
         tools:targetApi="31">
         <activity
+            android:name=".selectSeat"
+            android:exported="false" />
+        <activity
             android:name=".shortcutPageDev"
             android:exported="false" />
         <activity
