@@ -64,6 +64,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.2")
 
     implementation ("com.squareup.picasso:picasso:2.71828")
-
+    implementation ("com.google.zxing:core:3.3.0")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
 
 }
