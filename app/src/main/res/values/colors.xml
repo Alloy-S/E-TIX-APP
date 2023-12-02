@@ -9,4 +9,7 @@
     <color name="darkGreen">#053740</color>
     <color name="surabaya">#FF5722</color>
     <color name="registrationEtix">#FDF8F8</color>
+    <color name="greenSeat">#4cb050</color>
+    <color name="yellowSeat">#f5cd07</color>
+    <color name="redSeat">#e82305</color>
 </resources>

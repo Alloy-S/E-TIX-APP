@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Total Tiket"
+        android:text="Tiket: 0, Total : IDR0"
         app:layout_constraintStart_toStartOf="@+id/tvtanggalPenayangan"
         app:layout_constraintTop_toBottomOf="@+id/tvtanggalPenayangan" />
 
@@ -92,6 +92,8 @@
         android:id="@+id/btnConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="Confirm Seat Placement"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +103,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNamaFilm">
 
         <HorizontalScrollView
@@ -112,28 +119,1065 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                android:id="@+id/llSeat"
+                android:orientation="vertical">
 
-                    <FrameLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/square_btn"
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
 
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="A1"
-                            android:layout_gravity="center"
-                            android:textColor="@color/white"
-                            />
-                    </FrameLayout>
-                </LinearLayout>
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA2"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A2"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA3"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A3"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA4"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A4"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA5"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A5"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA6"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A6"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA7"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A7"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA8"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A8"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA9"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A9"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flA10"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="A10"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB2"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B2"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB3"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B3"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB4"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B4"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB5"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B5"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB6"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B6"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB7"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B7"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB8"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B8"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB9"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B9"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flB10"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="B10"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC2"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C2"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC3"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C3"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC4"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C4"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC5"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C5"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC6"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C6"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC7"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C7"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC8"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C8"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC9"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C9"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flC10"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="C10"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD2"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D2"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD3"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D3"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD4"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D4"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD5"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D5"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD6"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D6"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD7"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D7"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD8"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D8"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD9"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D9"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flD10"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="D10"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE2"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E2"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE3"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E3"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE4"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E4"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE5"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E5"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE6"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E6"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE7"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E7"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE8"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E8"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE9"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E9"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flE10"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="E10"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF2"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F2"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF3"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F3"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF4"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F4"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF5"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F5"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF6"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F6"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF7"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F7"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF8"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F8"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF9"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F9"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flF10"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="F10"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flG1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="G1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flI1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="I1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flJ1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="J1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flK1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="K1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flL1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="L1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flM1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="M1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:scrollbars="none"-->
+<!--                    android:layout_marginBottom="5dp">-->
+
+<!--                    <FrameLayout-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:background="@drawable/square_btn"-->
+<!--                        android:id="@+id/flN1"-->
+<!--                        android:layout_marginRight="5dp"-->
+<!--                        >-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:text="N1"-->
+<!--                            android:textColor="@color/white" />-->
+<!--                    </FrameLayout>-->
+
+<!--                </LinearLayout>-->
+
             </LinearLayout>
 
         </HorizontalScrollView>

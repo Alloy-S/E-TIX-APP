@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.content.Intent
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -77,7 +78,13 @@ class AdapterSelectStudio (
             frameLayout.addView(textView)
 
             frameLayout.setOnClickListener {
-
+                val intent = Intent(holder.context, selectSeat::class.java).apply {
+                    putExtra("namaMall", mall.namaMall.toString())
+                    putExtra("tanggal", formatted.toString())
+                    putExtra("hargaTiket", 25000)
+                    putExtra("waktuMulai", time)
+                }
+                holder.context.startActivity(intent)
             }
             holder._listWaktu.addView(frameLayout)
         }
