@@ -37,5 +37,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Button ke admin
+        var _imgAdmin = findViewById<ImageView>(R.id.imgAdmin)
+        _imgAdmin.setOnClickListener {
+            val intent = Intent(this@MainActivity, adminPage::class.java)
+            startActivity(intent)
         }
     }
+}
