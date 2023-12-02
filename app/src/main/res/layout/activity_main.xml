@@ -40,7 +40,7 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/etHandphone"
+        android:id="@+id/etEmailLogin"
         android:layout_width="365dp"
         android:layout_height="43dp"
         android:layout_marginStart="24dp"
@@ -66,7 +66,7 @@
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etHandphone" />
+        app:layout_constraintTop_toBottomOf="@+id/etEmailLogin" />
 
 <!--    tombol login menuju beranda-->
     <androidx.appcompat.widget.AppCompatButton

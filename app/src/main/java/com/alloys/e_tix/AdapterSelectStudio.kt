@@ -22,7 +22,7 @@ class AdapterSelectStudio (
         var _nama = itemView.findViewById<TextView>(R.id.tvNamaMall)
         var _tanggal = itemView.findViewById<TextView>(R.id.tvTanggal)
         var _harga = itemView.findViewById<TextView>(R.id.tvHarga)
-        var _listWaktu = itemView.findViewById<FlexboxLayout>(R.id.lvListWaktu)
+//        var _listWaktu = itemView.findViewById<FlexboxLayout>(R.id.lvListWaktu)
         var context = itemView.context
     }
 
@@ -79,7 +79,7 @@ class AdapterSelectStudio (
             frameLayout.setOnClickListener {
 
             }
-            holder._listWaktu.addView(frameLayout)
+//            holder._listWaktu.addView(frameLayout)
         }
 
     }
