@@ -16,6 +16,9 @@
             android:name=".selectSeat"
             android:exported="false" />
         <activity
+            android:name=".adminPage"
+            android:exported="false" />
+        <activity
             android:name=".shortcutPageDev"
             android:exported="false" />
         <activity
