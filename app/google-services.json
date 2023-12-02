@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "993218686827",
+    "project_id": "e-tix-8c2b4",
+    "storage_bucket": "e-tix-8c2b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993218686827:android:7ddd437d885382edd7e62e",
+        "android_client_info": {
+          "package_name": "com.alloys.e_tix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA95inpZLZgkrAI5MSep7k9KB2y9PcmzeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
