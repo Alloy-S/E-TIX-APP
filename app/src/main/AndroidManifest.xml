@@ -19,7 +19,13 @@
             android:name=".forgotPassword"
             android:exported="false" />
         <activity
+            android:name=".detailTiket"
+            android:exported="false" />
+        <activity
             android:name=".selectSeat"
+            android:exported="false" />
+        <activity
+            android:name=".adminPage"
             android:exported="false" />
         <activity
             android:name=".shortcutPageDev"

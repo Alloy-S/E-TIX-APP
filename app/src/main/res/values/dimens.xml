@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="frame_size_seat">40dp</dimen>
+    <dimen name="frame_margin_seat">5dp</dimen>
+</resources>

@@ -54,7 +54,7 @@ class Beranda : AppCompatActivity() {
                 }
             }
         }
-        }
+    }
     companion object {
         const val dataTerima = "GETDATA"
     }

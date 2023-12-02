@@ -60,6 +60,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Empty Fields are not Allowed", Toast.LENGTH_SHORT).show()
             }
 
+        //Button ke admin
+        var _imgAdmin = findViewById<ImageView>(R.id.imgAdmin)
+        _imgAdmin.setOnClickListener {
+            val intent = Intent(this@MainActivity, adminPage::class.java)
+            startActivity(intent)
         }
 
         //deklarasi untuk login
@@ -93,3 +98,4 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
     }
+}
