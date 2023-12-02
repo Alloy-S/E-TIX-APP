@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.alloys.e_tix.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
@@ -34,18 +35,18 @@ class MainActivity : AppCompatActivity() {
 
             val currentUser = firebaseAuth.currentUser
             val displayName = currentUser?.displayName
-            Log.d("NAMAKUH",displayName.toString())
+            Log.d("NAMAKUH", displayName.toString())
 
-            if (email.isNotBlank() && pass.isNotEmpty()){
+            if (email.isNotBlank() && pass.isNotEmpty()) {
 
-                    firebaseAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener {
-                        if(it.isSuccessful){
-                            val intent = Intent(this,Beranda::class.java )
-                            startActivity(intent)
+                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val intent = Intent(this, Beranda::class.java)
+                        startActivity(intent)
 
-                        }else{
-                            Toast.makeText(this,it.exception.toString(), Toast.LENGTH_SHORT).show()
-                        }
+                    } else {
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                    }
 //                        val bundle = Bundle()
 //                        bundle.putString("Username", displayName.toString())
 //                        val fragment = movieFragment()
@@ -55,23 +56,23 @@ class MainActivity : AppCompatActivity() {
 //                        transaction.replace(R.id.FragmentMovie, fragment)
 ////            transaction.addToBackStack(null)  // Optional: Add to back stack if needed
 //                        transaction.commit()
-                    }
-            }else{
+                }
+            } else {
                 Toast.makeText(this, "Empty Fields are not Allowed", Toast.LENGTH_SHORT).show()
             }
 
-        //Button ke admin
-        var _imgAdmin = findViewById<ImageView>(R.id.imgAdmin)
-        _imgAdmin.setOnClickListener {
-            val intent = Intent(this@MainActivity, adminPage::class.java)
-            startActivity(intent)
-        }
+            //Button ke admin
+            var _imgAdmin = findViewById<ImageView>(R.id.imgAdmin)
+            _imgAdmin.setOnClickListener {
+                val intent = Intent(this@MainActivity, adminPage::class.java)
+                startActivity(intent)
+            }
 
-        //deklarasi untuk login
-        var _etHandphone = findViewById<EditText>(R.id.etEmailLogin)
-        var _etPassword = findViewById<EditText>(R.id.etPassword)
+            //deklarasi untuk login
+            var _etHandphone = findViewById<EditText>(R.id.etEmailLogin)
+            var _etPassword = findViewById<EditText>(R.id.etPassword)
 
-        //Button login --> halaman beranda
+            //Button login --> halaman beranda
 //        val _btnLogin = findViewById<Button>(R.id.btnLogin)
 //            _btnLogin.setOnClickListener {
 //                val intent = Intent(this@MainActivity, shortcutPageDev::class.java).apply {
@@ -89,13 +90,14 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         }
-
+    }
     override fun onStart() {
         super.onStart()
 //        if(firebaseAuth.currentUser != null){
 //            val intent = Intent(this@MainActivity, shortcutPageDev::class.java)
 //            startActivity(intent)
 //        }
-    }
+
+
     }
 }
