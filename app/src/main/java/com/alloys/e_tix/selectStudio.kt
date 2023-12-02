@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class selectStudio : AppCompatActivity() {
 
     lateinit var _rvMallOption: RecyclerView
-    var arMall = ArrayList<Mall>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_studio)
@@ -19,7 +19,7 @@ class selectStudio : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         val _btnBack = findViewById<ImageView>(R.id.btnBack)
-
+        var arMall = ArrayList<Mall>()
         arMall.add(Mall("CIPUTRA WORLD SUARABAYA", arrayListOf("10.30", "11.30","13.30", "15.30", "19.30", "10.30", "11.30","13.30", "15.30", "19.30")))
         arMall.add(Mall("TUNJUNGAN 5", arrayListOf("10.30")))
         arMall.add(Mall("TRANS ICON", arrayListOf("11.30","13.30")))

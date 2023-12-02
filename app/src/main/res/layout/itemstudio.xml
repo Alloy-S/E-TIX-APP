@@ -41,24 +41,24 @@
         app:layout_constraintTop_toTopOf="@+id/tvTanggal" />
 
 
-<!--    <com.google.android.flexbox.FlexboxLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/lvListWaktu"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        app:flexWrap="wrap"-->
-<!--        app:alignItems="stretch"-->
-<!--        app:alignContent="stretch"-->
-<!--        app:justifyContent="flex_start"-->
-<!--        app:flexDirection="row"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tvHarga"-->
-<!--        tools:ignore="MissingClass">-->
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvListWaktu"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="10dp"
+        app:flexWrap="wrap"
+        app:alignItems="stretch"
+        app:alignContent="stretch"
+        app:justifyContent="flex_start"
+        app:flexDirection="row"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHarga"
+        tools:ignore="MissingClass">
 
 <!--        &lt;!&ndash;        contoh waktunya&ndash;&gt;-->
 <!--        &lt;!&ndash;        <FrameLayout&ndash;&gt;-->
@@ -74,9 +74,9 @@
 <!--        &lt;!&ndash;                android:text="10:30" />&ndash;&gt;-->
 <!--        &lt;!&ndash;        </FrameLayout>&ndash;&gt;-->
 
-<!--        &lt;!&ndash; END contoh waktu &ndash;&gt;-->
+        <!-- END contoh waktu -->
 
 
-<!--    </com.google.android.flexbox.FlexboxLayout>-->
+    </com.google.android.flexbox.FlexboxLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

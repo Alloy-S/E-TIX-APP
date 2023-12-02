@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import android.content.Intent
 import android.os.Parcel
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,7 @@ class AdapterSelectStudio (
         var _nama = itemView.findViewById<TextView>(R.id.tvNamaMall)
         var _tanggal = itemView.findViewById<TextView>(R.id.tvTanggal)
         var _harga = itemView.findViewById<TextView>(R.id.tvHarga)
-//        var _listWaktu = itemView.findViewById<FlexboxLayout>(R.id.lvListWaktu)
+        var _listWaktu = itemView.findViewById<FlexboxLayout>(R.id.lvListWaktu)
         var context = itemView.context
     }
 
@@ -50,6 +51,7 @@ class AdapterSelectStudio (
         holder._tanggal.setText(formatted)
         holder._harga.setText("Rp.25.000")
         val dpToPixels = holder.context.resources.displayMetrics.density
+        Log.d("jumlah arrwaktu", mall.arWaktu.toString())
         for (time in mall.arWaktu) {
 
             val frameLayout = FrameLayout(holder.context)
@@ -86,7 +88,7 @@ class AdapterSelectStudio (
                 }
                 holder.context.startActivity(intent)
             }
-//            holder._listWaktu.addView(frameLayout)
+            holder._listWaktu.addView(frameLayout)
         }
 
     }
