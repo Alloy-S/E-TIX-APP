@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,6 +14,7 @@ import java.util.Currency
 
 class selectSeat : AppCompatActivity() {
     var selectedSeat = ArrayList<String>()
+    var purchasedSeat = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_seat)
@@ -21,6 +23,7 @@ class selectSeat : AppCompatActivity() {
         val _tvNamaMall = findViewById<TextView>(R.id.tvNamaMallSeat)
         val _tvtanggal = findViewById<TextView>(R.id.tvtanggalPenayangan)
         val _tvTotalTiket = findViewById<TextView>(R.id.tvTotalTiket)
+        val _btnConfirm = findViewById<Button>(R.id.btnConfirm)
 
         val namaMall = intent.getStringExtra("namaMall")
         val tanggal = intent.getStringExtra("tanggal")
@@ -37,7 +40,7 @@ class selectSeat : AppCompatActivity() {
 
         var kolomTitle = 'A'
 
-        var purchasedSeat = ArrayList<String>()
+
         purchasedSeat.add("A2")
         purchasedSeat.add("A3")
         purchasedSeat.add("D8")
@@ -141,6 +144,8 @@ class selectSeat : AppCompatActivity() {
             _llSeat.addView(linearLayout)
             kolomTitle++
         }
+
+
 
     }
 

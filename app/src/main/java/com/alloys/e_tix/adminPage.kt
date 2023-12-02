@@ -17,7 +17,7 @@ class adminPage : AppCompatActivity() {
         mfMovieAdmin.arguments = bundle
         mFragmentManager.findFragmentByTag(fragmentMovieAdmin::class.java.simpleName)
         mFragmentManager.beginTransaction().apply {
-            replace(R.id.adminPage, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
+            replace(R.id.containeradmin, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
             commit()
 
             //Fragment movie
@@ -25,7 +25,7 @@ class adminPage : AppCompatActivity() {
                 mfMovieAdmin.arguments = bundle
                 mFragmentManager.findFragmentByTag(fragmentMovieAdmin::class.java.simpleName)
                 mFragmentManager.beginTransaction().apply {
-                    replace(R.id.adminPage, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
+                    replace(R.id.containeradmin, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
                     commit()
                 }
             }
@@ -35,7 +35,7 @@ class adminPage : AppCompatActivity() {
                 mfProfile.arguments = bundle
                 mFragmentManager.findFragmentByTag(fragmentProfileAdmin::class.java.simpleName)
                 mFragmentManager.beginTransaction().apply {
-                    replace(R.id.adminPage, mfProfile, fragmentProfileAdmin::class.java.simpleName)
+                    replace(R.id.containeradmin, mfProfile, fragmentProfileAdmin::class.java.simpleName)
                     commit()
                 }
             }
@@ -45,7 +45,7 @@ class adminPage : AppCompatActivity() {
                 mfAddMovie.arguments = bundle
                 mFragmentManager.findFragmentByTag(fragmentAddMovieAdmin::class.java.simpleName)
                 mFragmentManager.beginTransaction().apply {
-                    replace(R.id.adminPage, mfAddMovie, fragmentAddMovieAdmin::class.java.simpleName)
+                    replace(R.id.containeradmin, mfAddMovie, fragmentAddMovieAdmin::class.java.simpleName)
                     commit()
                 }
             }

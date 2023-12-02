@@ -9,6 +9,7 @@
 
     <!--    logo xxi -->
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="412dp"
         android:layout_height="86dp"
         android:background="@color/darkGreen"
@@ -24,6 +25,13 @@
             app:srcCompat="@drawable/xxi" />
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/containeradmin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navbar"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
     <!--    navbar -->
     <LinearLayout
         android:id="@+id/navbar"
@@ -37,6 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
 
         <!-- movie -->
         <LinearLayout
