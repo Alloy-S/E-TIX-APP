@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".detail_Film">
 
     <!--    logo xxi -->
@@ -47,6 +48,263 @@
                 app:srcCompat="@drawable/xxi" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    <!-- Genre -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/header">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/titleBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="MIDNIGHT SHOW"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/age"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="24dp"
+                android:lineSpacingExtra="0sp"
+                android:text="13+"
+                android:textAlignment="center"
+                android:textColor="@color/BackgroundFragment"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Horor, Thriller"
+                android:textColor="@color/grey"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/titleBold" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Film">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/poster1"
+                android:layout_width="143dp"
+                android:layout_height="209dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/poster1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="196dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/duration" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="110dp"
+                android:text="158 Minutes"
+                android:textColor="#015351"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="175dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/poster1"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                app:srcCompat="@drawable/square"></ImageView>
+
+            <TextView
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="190dp"
+                android:text="2D"
+                android:textColor="#015351"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/poster1"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            <Button
+                android:id="@+id/btnPlaying"
+                android:layout_width="186dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="85dp"
+                android:layout_marginEnd="32dp"
+                android:backgroundTint="#015351"
+                android:text="PLAYING AT"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/cardview_default_radius"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnBuyTiket"
+                android:layout_width="186dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:backgroundTint="#015351"
+                android:text="BUY TIKET"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/cardview_default_radius"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnPlaying" />
+
+            <Button
+                android:id="@+id/btnTrailer"
+                android:layout_width="186dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="32dp"
+                android:backgroundTint="#015351"
+                android:text="TRAILER"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/cardview_default_radius"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnBuyTiket" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
+
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:id="@+id/textView8"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Mendapatkan tawaran menjadi bintang nasional,
+membawa grup Srimulat berhadapan dengan
+kerasnya ibukota dan kendala bahasa. Saat ber..." />
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="READ SYNOPSIS"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Producer:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Susanti Dewi, Emilka Chaidir"/>
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Director:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Fajar Nugros"/>
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Writer:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Fajar Nugros"/>
+
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Cast:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:paddingLeft="33dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Juan Bio One, Elang EL Gibran, Ibnu Jamil, Dimas
+Anggara, Teuku Rifnu Wikana, Erick Estrada,
+7olfa Msharani Manen Ma Mimme Alii.fri"/>
+
 
 </LinearLayout>
 
@@ -59,5 +317,11 @@
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
 
