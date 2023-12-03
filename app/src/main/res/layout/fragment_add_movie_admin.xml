@@ -9,27 +9,46 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
+<!--        Judul Film-->
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="10dp"
             android:text="Judul Film"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <EditText
+            android:id="@+id/etJudul"
+            android:layout_width="375dp"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Judul Film"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+<!--        Casts Film-->
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Sinopsis Film"
+            android:text="Casts Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            app:layout_constraintTop_toBottomOf="@+id/etJudul" />
 
+        <EditText
+            android:id="@+id/etCasts"
+            android:layout_width="375dp"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Casts Film"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+<!--        Deskripsi Film-->
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
@@ -37,17 +56,17 @@
             android:layout_marginTop="20dp"
             android:text="Deskripsi Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/editText7" />
+            app:layout_constraintTop_toBottomOf="@+id/etCasts" />
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etDeskripsi"
+            android:layout_width="375dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Jadwal Tayang Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/editText9" />
+            android:hint="Masukkan Deskripsi Film"
+            app:layout_constraintStart_toStartOf="@+id/etJudul"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
+<!--        Durasi Film-->
         <TextView
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
@@ -55,176 +74,209 @@
             android:layout_marginTop="20dp"
             android:text="Durasi Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/editText8" />
+            app:layout_constraintTop_toBottomOf="@+id/etDeskripsi" />
 
+        <EditText
+            android:id="@+id/etDurasi"
+            android:layout_width="375dp"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Durasi Film"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+<!--        Genre Film-->
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Genre Film"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/etDurasi" />
+
+        <CheckBox
+            android:id="@+id/cbDrama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Drama"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <CheckBox
+            android:id="@+id/cbRomance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Romance"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/cbDrama" />
+
+        <CheckBox
+            android:id="@+id/cbComedy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comedy"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/cbRomance" />
+
+        <CheckBox
+            android:id="@+id/cbHorror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Horror"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/cbComedy" />
+
+        <CheckBox
+            android:id="@+id/cbAdventure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="Adventure"
+            app:layout_constraintStart_toEndOf="@+id/cbRomance"
+            app:layout_constraintTop_toTopOf="@+id/cbRomance" />
+
+        <CheckBox
+            android:id="@+id/cbAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:text="Action"
+            app:layout_constraintStart_toEndOf="@+id/cbDrama"
+            app:layout_constraintTop_toTopOf="@+id/cbDrama" />
+
+        <CheckBox
+            android:id="@+id/cbDocumenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Documenter"
+            app:layout_constraintStart_toEndOf="@+id/cbHorror"
+            app:layout_constraintTop_toTopOf="@+id/cbHorror" />
+
+        <CheckBox
+            android:id="@+id/cbAnimation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:text="Animation"
+            app:layout_constraintStart_toEndOf="@+id/cbComedy"
+            app:layout_constraintTop_toTopOf="@+id/cbComedy" />
+
+        <CheckBox
+            android:id="@+id/cbFantasy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Fantasy"
+            app:layout_constraintStart_toEndOf="@+id/cbDocumenter"
+            app:layout_constraintTop_toTopOf="@+id/cbDocumenter" />
+
+        <CheckBox
+            android:id="@+id/cbScifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:text="Sci-Fi"
+            app:layout_constraintStart_toEndOf="@+id/cbAnimation"
+            app:layout_constraintTop_toTopOf="@+id/cbAnimation" />
+
+        <CheckBox
+            android:id="@+id/cbThriller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:text="Thriller"
+            app:layout_constraintStart_toEndOf="@+id/cbAdventure"
+            app:layout_constraintTop_toTopOf="@+id/cbAdventure" />
+
+        <CheckBox
+            android:id="@+id/cbMistery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:text="Mistery"
+            app:layout_constraintStart_toEndOf="@+id/cbAction"
+            app:layout_constraintTop_toTopOf="@+id/cbAction" />
+
+<!--        Penulis Film-->
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Lokasi Bioskop"
+            android:text="Penulis Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+            app:layout_constraintTop_toBottomOf="@+id/cbHorror" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/etPenulis"
             android:layout_width="375dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-        <EditText
-            android:id="@+id/editText7"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        <EditText
-            android:id="@+id/editText8"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/editText6"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-        <EditText
-            android:id="@+id/editText9"
-            android:layout_width="375dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12.00"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="13.30"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-
-        <CheckBox
-            android:id="@+id/checkBox4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="15.00"
-            app:layout_constraintStart_toEndOf="@+id/checkBox"
-            app:layout_constraintTop_toTopOf="@+id/checkBox" />
-
-        <CheckBox
-            android:id="@+id/checkBox5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="16.30"
-            app:layout_constraintStart_toEndOf="@+id/checkBox3"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="18.00"
-            app:layout_constraintStart_toEndOf="@+id/checkBox4"
-            app:layout_constraintTop_toTopOf="@+id/checkBox4" />
-
-        <CheckBox
-            android:id="@+id/checkBox6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="19.30"
-            app:layout_constraintStart_toEndOf="@+id/checkBox5"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="21.00"
-            app:layout_constraintStart_toEndOf="@+id/checkBox2"
-            app:layout_constraintTop_toTopOf="@+id/checkBox2" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="22.30"
-            app:layout_constraintStart_toEndOf="@+id/checkBox6"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
-
-        <CheckBox
-            android:id="@+id/checkBox7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CIPUTRA WORLD XXI"
+            android:hint="Masukkan Penulis Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
-        <CheckBox
-            android:id="@+id/checkBox8"
+<!--        Produksi Film-->
+        <TextView
+            android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="GALAXY XXI"
+            android:layout_marginTop="20dp"
+            android:text="Produksi Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+            app:layout_constraintTop_toBottomOf="@+id/etPenulis" />
 
-        <CheckBox
-            android:id="@+id/checkBox9"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etProduksi"
+            android:layout_width="375dp"
             android:layout_height="wrap_content"
-            android:text="GRAND CITY XXI"
+            android:hint="Masukkan Produksi Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-        <CheckBox
-            android:id="@+id/checkBox10"
+<!--        Produser Film-->
+        <TextView
+            android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LENMARC XXI"
+            android:layout_marginTop="20dp"
+            android:text="Produser Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
+            app:layout_constraintTop_toBottomOf="@+id/etProduksi" />
 
-        <CheckBox
-            android:id="@+id/checkBox11"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etProduser"
+            android:layout_width="375dp"
             android:layout_height="wrap_content"
-            android:text="PAKUWON CITY XXI"
+            android:hint="Masukkan Produser"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox10" />
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-        <CheckBox
-            android:id="@+id/checkBox12"
+<!--        Sutradara Film-->
+        <TextView
+            android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PTC XXI"
+            android:layout_marginTop="20dp"
+            android:text="Sutradara Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox11" />
+            app:layout_constraintTop_toBottomOf="@+id/etProduser" />
 
-        <CheckBox
-            android:id="@+id/checkBox13"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etSutradara"
+            android:layout_width="375dp"
             android:layout_height="wrap_content"
-            android:text="TRANSMART RUNGKUT XXI"
+            android:hint="Masukkan Sutradara Film"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox12" />
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btNext"
+            android:layout_width="375dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="TUNJUNGAN PLAZA XXI"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            android:text="NEXT"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox13" />
+            app:layout_constraintTop_toBottomOf="@+id/etSutradara" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
