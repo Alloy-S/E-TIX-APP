@@ -29,6 +29,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, Register::class.java)
             startActivity(intent)
         }
+        //Button ke admin
+        var _imgAdmin = findViewById<ImageView>(R.id.imgAdmin)
+        _imgAdmin.setOnClickListener {
+            val intent = Intent(this@MainActivity, adminPage::class.java)
+            startActivity(intent)
+        }
+
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmailLogin.text.toString()
             val pass = binding.etPassword.text.toString()
@@ -61,12 +68,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Empty Fields are not Allowed", Toast.LENGTH_SHORT).show()
             }
 
-            //Button ke admin
-            var _imgAdmin = findViewById<ImageView>(R.id.imgAdmin)
-            _imgAdmin.setOnClickListener {
-                val intent = Intent(this@MainActivity, adminPage::class.java)
-                startActivity(intent)
-            }
+
 
             //deklarasi untuk login
             var _etHandphone = findViewById<EditText>(R.id.etEmailLogin)

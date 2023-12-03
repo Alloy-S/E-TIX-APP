@@ -7,4 +7,16 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  Buat Lokasi Bioskop  -->
+    <string-array name="lokasi">
+        <item>CIPUTRA WORLD XXI</item>
+        <item>GALAXY XXI</item>
+        <item>GRAND CITY XXI</item>
+        <item>LENMARC XXI</item>
+        <item>PAKUWON CITY XXI</item>
+        <item>PTC XXI</item>
+        <item>TRANSMART RUNGKUT XXI</item>
+        <item>TUNJUNGAN PLAZA XXI</item>
+    </string-array>
 </resources>

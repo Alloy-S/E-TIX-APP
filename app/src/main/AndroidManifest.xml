@@ -19,6 +19,9 @@
             android:name=".History"
             android:exported="false" />
         <activity
+            android:name=".addJadwalMovieAdmin"
+            android:exported="false" />
+        <activity
             android:name=".forgotPassword"
             android:exported="false" />
         <activity
