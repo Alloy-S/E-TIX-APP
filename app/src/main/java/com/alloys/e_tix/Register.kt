@@ -35,6 +35,7 @@ class Register : AppCompatActivity() {
 
             if (email.isNotBlank() && pass.isNotEmpty() && confirmPass.isNotEmpty() && name.isNotEmpty()) {
                 if (pass == confirmPass) {
+
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // User registration is successful
