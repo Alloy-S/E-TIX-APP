@@ -50,7 +50,7 @@
     </LinearLayout>
     <!--  Navigation -->
     <ImageView
-        android:id="@+id/posterStudio"
+        android:id="@+id/ivPosterStudio"
         android:layout_width="128dp"
         android:layout_height="173dp"
         android:layout_marginStart="20dp"
@@ -60,7 +60,7 @@
         app:srcCompat="@drawable/poster2" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvJudulFilmStudio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -69,20 +69,20 @@
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/posterStudio"
-        app:layout_constraintTop_toTopOf="@+id/posterStudio" />
+        app:layout_constraintStart_toEndOf="@+id/ivPosterStudio"
+        app:layout_constraintTop_toTopOf="@+id/ivPosterStudio" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginTop="14dp"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="@+id/tvJudulFilmStudio"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulFilmStudio"
         app:srcCompat="@drawable/repeat" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tvDurasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -98,5 +98,5 @@
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/posterStudio" />
+        app:layout_constraintTop_toBottomOf="@+id/ivPosterStudio" />
 </androidx.constraintlayout.widget.ConstraintLayout>
