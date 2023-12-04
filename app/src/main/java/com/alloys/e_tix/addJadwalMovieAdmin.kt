@@ -25,8 +25,7 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
         var _btnBack = findViewById<ImageView>(R.id.btnBack)
         _btnBack.setOnClickListener {
-            val intent = Intent(this, fragmentAddMovieAdmin::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
     }
 

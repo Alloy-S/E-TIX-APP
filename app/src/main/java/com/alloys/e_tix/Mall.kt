@@ -6,6 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Mall(
     var namaMall: String,
-    var arWaktu: ArrayList<String>,
+    var arWaktu: List<String>,
 
 ) : Parcelable
