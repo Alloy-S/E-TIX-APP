@@ -48,14 +48,14 @@ class adapterHistory (
     override fun onBindViewHolder(holder: adapterHistory.ListViewHolder, position: Int) {
         var history = listHistory[position]
 
-        holder._posterFilm.setImageResource(history.posterFilm)
-        holder._date.setText(history.date)
-        holder._time.setText(history.time)
-        holder._movie.setText(history.movie)
-        holder._mall.setText(history.mall)
-        holder._code.setText(history.code)
-        holder._dateShow.setText(history.dateShow)
-        holder._timeShow.setText(history.timeShow)
+        holder._posterFilm.setImageResource(history.detail.toInt())
+        holder._date.setText(history.transaction_date)
+        holder._time.setText(history.transaction_date)
+        holder._movie.setText(history.movieId)
+        holder._mall.setText(history.location)
+        holder._code.setText(history.booking_code)
+        holder._dateShow.setText(history.show_date)
+        holder._timeShow.setText(history.show_date)
 
     }
 

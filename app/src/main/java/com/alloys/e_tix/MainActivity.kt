@@ -98,10 +98,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 //        buat matiin login
-//        if(firebaseAuth.currentUser != null){
-//            val intent = Intent(this@MainActivity, shortcutPageDev::class.java)
-//            startActivity(intent)
-//        }
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(this@MainActivity, shortcutPageDev::class.java)
+            startActivity(intent)
+        }
 
 
     }
