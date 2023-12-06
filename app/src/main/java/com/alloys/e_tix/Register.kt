@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.alloys.e_tix.databinding.ActivityRegisterBinding
 import com.google.firebase.Firebase
@@ -17,12 +18,13 @@ import com.google.firebase.firestore.firestore
 class Register : AppCompatActivity() {
     private lateinit var binding : ActivityRegisterBinding
     private lateinit var firebaseAuth : FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val db = Firebase.firestore
         firebaseAuth = FirebaseAuth.getInstance()
 
         binding.btnRegist.setOnClickListener {
@@ -40,6 +42,14 @@ class Register : AppCompatActivity() {
                         if (task.isSuccessful) {
                             // User registration is successful
                             val currentUser = firebaseAuth.currentUser
+
+//                            create data in firestore db
+                            val data = hashMapOf(
+                                "full_name" to name,
+                            )
+                            db.collection("users").document(currentUser!!.uid).set(data).addOnSuccessListener {
+                                Log.d("ADDED TO FIRESTORE", "succes")
+                            }
 
                             // Set additional user information
                             val profileUpdates = UserProfileChangeRequest.Builder()

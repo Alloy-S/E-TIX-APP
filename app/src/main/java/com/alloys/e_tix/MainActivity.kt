@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        Log.d("CEK CURRENT USER", firebaseAuth.currentUser?.uid.toString())
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmailLogin.text.toString()
             val pass = binding.etPassword.text.toString()

@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.helper.Currency
 import com.google.android.flexbox.FlexboxLayout
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -44,15 +45,19 @@ class AdapterSelectStudio (
         var mall = listMall[position]
 
         val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+        val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
         val formatted = current.format(formatter)
+        val dateTime = formatted.split(" ")
 
         holder._nama.setText(mall.namaMall)
         holder._tanggal.setText(formatted)
-        holder._harga.setText("Rp.25.000")
+
+        val hargaInIDR = Currency.formatToIDRCurrency(mall.hargaTiket)
+        holder._harga.setText(hargaInIDR)
         val dpToPixels = holder.context.resources.displayMetrics.density
-        Log.d("jumlah arrwaktu", mall.arWaktu.toString())
-        for (time in mall.arWaktu) {
+        Log.d("NAMA MALL", mall.namaMall.toString())
+//        Log.d("isi SHOWTIME", mall.showtime[position].toString()
+        for (time in mall.showtime) {
 
             val frameLayout = FrameLayout(holder.context)
             val layoutParams = LinearLayout.LayoutParams(
@@ -75,16 +80,18 @@ class AdapterSelectStudio (
 
             textParams.setMargins(margin, margin, margin, margin)
             textView.layoutParams = textParams
-            textView.text = time
+            textView.text = time.showtime
 
             frameLayout.addView(textView)
 
             frameLayout.setOnClickListener {
                 val intent = Intent(holder.context, selectSeat::class.java).apply {
-                    putExtra("namaMall", mall.namaMall.toString())
+                    putExtra("movieID", mall.tmpMovieID)
+                    putExtra("namaMall", mall.namaMall)
                     putExtra("tanggal", formatted.toString())
                     putExtra("hargaTiket", 25000)
-                    putExtra("waktuMulai", time)
+                    putExtra("waktuMulai", time.showtime)
+                    putExtra("seats", time.purchased_seat)
                 }
                 holder.context.startActivity(intent)
             }
