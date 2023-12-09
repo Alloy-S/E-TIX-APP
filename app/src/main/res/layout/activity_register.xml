@@ -52,13 +52,13 @@
         android:layout_width="410dp"
         android:layout_height="40dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="7dp"
         android:background="@color/registrationEtix"
         android:gravity="center"
         android:text="E-Tix Registration"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llXXI" />
 
@@ -67,11 +67,10 @@
         android:layout_width="334dp"
         android:layout_height="41dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="129dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="61dp"
         android:hint="Full Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -82,7 +81,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="61dp"
-        android:hint="Email Address"
+        android:hint="Email Address (Use Real Email)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etName" />
@@ -91,14 +90,13 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="43dp"
         android:layout_marginEnd="256dp"
         android:text="PIN/Password"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
@@ -131,8 +129,8 @@
         android:layout_width="356dp"
         android:layout_height="30dp"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="27dp"
         android:background="@drawable/login"
         android:text="Register"
         android:textColor="@color/white"
@@ -146,11 +144,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="23dp"
         android:text="By clicking Register Account, I confirm I have \nagreed to,"
-        app:layout_constraintBottom_toTopOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegist" />
@@ -160,13 +156,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="138dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="139dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="72dp"
         android:text="Terms &amp; Condition"
         android:textColor="@color/surabaya"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <ProgressBar
         android:id="@+id/progressBar"

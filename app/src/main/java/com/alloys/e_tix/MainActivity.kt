@@ -8,11 +8,13 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.alloys.e_tix.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import org.w3c.dom.Text
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
@@ -47,8 +49,9 @@ class MainActivity : AppCompatActivity() {
             Log.d("NAMAKUH", displayName.toString())
 
             if (email.isNotBlank() && pass.isNotEmpty()) {
-
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                if (currentUser?.isEmailVerified == true){
+
                     if (it.isSuccessful) {
                         val intent = Intent(this, Beranda::class.java)
                         startActivity(intent)
@@ -56,43 +59,19 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
-//                        val bundle = Bundle()
-//                        bundle.putString("Username", displayName.toString())
-//                        val fragment = movieFragment()
-//                        fragment.arguments = bundle
-//                        val fragmentManager = supportFragmentManager
-//                        val transaction = fragmentManager.beginTransaction()
-//                        transaction.replace(R.id.FragmentMovie, fragment)
-////            transaction.addToBackStack(null)  // Optional: Add to back stack if needed
-//                        transaction.commit()
+                }else{
+                    Toast.makeText(this,"Please verify your email first, Check your email",Toast.LENGTH_LONG).show()
+                    currentUser?.sendEmailVerification()
                 }
+                }
+
             } else {
                 Toast.makeText(this, "Empty Fields are not Allowed", Toast.LENGTH_SHORT).show()
             }
-
-
-
-            //deklarasi untuk login
-            var _etHandphone = findViewById<EditText>(R.id.etEmailLogin)
-            var _etPassword = findViewById<EditText>(R.id.etPassword)
-
-            //Button login --> halaman beranda
-//        val _btnLogin = findViewById<Button>(R.id.btnLogin)
-//            _btnLogin.setOnClickListener {
-//                val intent = Intent(this@MainActivity, shortcutPageDev::class.java).apply {
-//                    putExtra(Beranda.dataTerima, _etHandphone.text.toString())
-//                    _etHandphone.text.clear()
-//                    _etPassword.text.clear()
-//
-//                }
-//                startActivity(intent)
-//            }
-//        val _btnRegister = findViewById<Button>(R.id.btnRegister)
-//        _btnRegister.setOnClickListener {
-//            val intent = Intent(this@MainActivity, Register::class.java)
-//            startActivity(intent)
-//        }
-
+        }
+        binding.tvForgot.setOnClickListener {
+            val intent = Intent(this, forgotPassword::class.java)
+            startActivity(intent)
         }
     }
     override fun onStart() {
