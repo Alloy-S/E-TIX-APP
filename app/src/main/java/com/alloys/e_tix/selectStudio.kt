@@ -80,7 +80,7 @@ class selectStudio : AppCompatActivity() {
                     val data = document.data.get("showtime") as List<Map<*, *>>
                     for (i in data) {
                         Log.d("isi SHOWTIME", i.toString())
-                        arShowtime.add(jadwalFilm(i["waktu"].toString(), (i["seats"] as DocumentReference).path))
+                        arShowtime.add(jadwalFilm(i["waktu"].toString(), i["seats"].toString()))
                     }
                     var readData = Mall(
                         document.id,
