@@ -1,19 +1,26 @@
 package com.alloys.e_tix
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.helper.DialogHelper.dismissDialog
+import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
+import com.alloys.e_tix.helper.DialogHelper.showDialogBar
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.model.Document
 import com.google.firebase.storage.storage
+import java.io.File
 
 
 class selectStudio : AppCompatActivity() {
@@ -36,11 +43,36 @@ class selectStudio : AppCompatActivity() {
         val _tvJudulFilm = findViewById<TextView>(R.id.tvJudulFilmStudio)
         val _tvDurasi = findViewById<TextView>(R.id.tvDurasi)
         val _ivPoster = findViewById<ImageView>(R.id.ivPosterStudio)
+        val _ivIconDurasi = findViewById<ImageView>(R.id.ivIconDurasai)
 
         var arMall = ArrayList<Mall>()
+        _tvJudulFilm.isInvisible = true
+        _tvDurasi.isInvisible = true
+        _ivPoster.isInvisible = true
+        _ivIconDurasi.isInvisible = true
 
+        showDialogBar(this, "Loading....")
+        val isDialogVisible = isDialogVisible()
 
-        db.collection("movies").document("BKryf5atmLbczKBae3l0").get().addOnSuccessListener {
+//    START STORAGE
+        val localFile = File.createTempFile("img", ".jpg")
+//    GET ALL NAME IN THE FOLDER
+        val arDaftarPoster = ArrayList<String>()
+        storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
+            for (item in result.items) {
+                Log.d("ISI STORAGE", item.name)
+                arDaftarPoster.add(item.name)
+            }
+        }
+
+        for (item in arDaftarPoster) {
+            val isImgRef = storage.reference.child(item)
+            isImgRef.getFile(localFile).addOnSuccessListener {
+                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+            }
+        }
+        val movieID = "BKryf5atmLbczKBae3l0"
+        db.collection("movies").document(movieID).get().addOnSuccessListener {
             val readData = Movie(
                 it.data?.get("judul_film").toString(),
                 it.data?.get("deskripsi").toString(),
@@ -54,53 +86,59 @@ class selectStudio : AppCompatActivity() {
                 it.data?.get("produksi").toString(),
             )
 
-//            db.collection("purchased_seats").document("ZV6jrzhtAWKa8PLapT2l").get().addOnSuccessListener {
-//                val movieid = it.data!!.get("movieID") as DocumentReference
-//                movieid.get().addOnSuccessListener {
-//                    Log.d("inside movieID judul", it.data?.get("judul_film").toString())
-//                }
-//            }
+//            GET SINGLE IMAGE
+            val isImgRef = storage.reference.child("img_poster_film/${readData.urlPoster}")
+            isImgRef.getFile(localFile).addOnSuccessListener {
+
+                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+
+                _tvJudulFilm.setText(readData.judul_film)
+                _tvDurasi.setText("${readData.durasi} Minutes")
+                _ivPoster.setImageBitmap(bitmap)
 
 
-            Log.d("read data", readData.toString())
+                db.collection("movies").document(movieID).collection("show_schedule").get().addOnSuccessListener {
+                        result ->
 
-            _tvJudulFilm.setText(readData.judul_film)
-            _tvDurasi.setText("${readData.durasi} Minutes")
-
-            val imageRes = this.resources.getIdentifier(readData.urlPoster, "drawable", this.packageName)
-            _ivPoster.setImageResource(imageRes)
-        }
-
-        val movieID = "BKryf5atmLbczKBae3l0"
-         db.collection("movies").document(movieID).collection("show_schedule").get().addOnSuccessListener {
-            result ->
-            arMall.clear()
-            for (document in result) {
-                    val arShowtime = ArrayList<jadwalFilm>()
-                    val data = document.data.get("showtime") as List<Map<*, *>>
-                    for (i in data) {
-                        Log.d("isi SHOWTIME", i.toString())
-                        arShowtime.add(jadwalFilm(i["waktu"].toString(), i["seats"].toString()))
-                    }
-                    var readData = Mall(
-                        document.id,
-                        document.data.get("nama_mall") as String,
-                        arShowtime,
-                        document.data.get("harga_tiket").toString().toInt(),
-                        movieID
-                    )
+                    arMall.clear()
+                    for (document in result) {
+                        val arShowtime = ArrayList<jadwalFilm>()
+                        val data = document.data.get("showtime") as List<Map<*, *>>
+                        for (i in data) {
+                            Log.d("isi SHOWTIME", i.toString())
+                            arShowtime.add(jadwalFilm(i["waktu"].toString(), i["seats"].toString()))
+                        }
+                        var readData = Mall(
+                            document.id,
+                            document.data.get("nama_mall") as String,
+                            arShowtime,
+                            document.data.get("harga_tiket").toString().toInt(),
+                            movieID
+                        )
 
 //                    Log.d("MAP FIRESTORE", document)
 
-                    arMall.add(readData)
+                        arMall.add(readData)
+                    }
+
+                    _rvMallOption = findViewById(R.id.rvSelectStudio)
+
+                    _rvMallOption.layoutManager = LinearLayoutManager(this)
+                    val adapterS = AdapterSelectStudio(arMall)
+                    _rvMallOption.adapter = adapterS
+
+
+                    dismissDialog()
+                    _tvJudulFilm.isInvisible = false
+                    _tvDurasi.isInvisible = false
+                    _ivPoster.isInvisible = false
+                    _ivIconDurasi.isInvisible = false
                 }
-
-             _rvMallOption = findViewById(R.id.rvSelectStudio)
-
-             _rvMallOption.layoutManager = LinearLayoutManager(this)
-             val adapterS = AdapterSelectStudio(arMall)
-             _rvMallOption.adapter = adapterS
+            }
         }
+
+
+
 
 
 

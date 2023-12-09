@@ -1,6 +1,9 @@
 package com.alloys.e_tix
 
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -76,9 +79,9 @@ class selectSeat : AppCompatActivity() {
 //        val startTimestamp = Timestamp(Date(startOfDay))
 //        val endTimestamp = Timestamp(Date(endOfDay))
 
+        _btnConfirm.isEnabled = false
+
         _btnConfirm.setOnClickListener {
-
-
             if (purchased_seatsRef != null && selectedSeat.isNotEmpty()) {
                 showDialogBar(this, "Process....")
                 val isDialogVisible = isDialogVisible()
@@ -138,14 +141,26 @@ class selectSeat : AppCompatActivity() {
                                     putExtra("UIDTransaksi", uidTransaksi)
                                 }
                                 finish()
-                                this.startActivity(intent)
+                                startActivity(intent)
                             }
                         }
                     } else {
+                        val alertDialog = AlertDialog.Builder(this)
+                            .setTitle("Transaksi Gagal")
+                            .setMessage("Kursi sudaah dibeli")
+                            .setPositiveButton(
+                                "Ok",
+                                DialogInterface.OnClickListener { dialog, which ->
+                                    dialog.dismiss()
+                                }
+                            )
+                        alertDialog.show()
                         throw FirebaseFirestoreException(
                             "Kursi sudah Terbeli",
                             FirebaseFirestoreException.Code.ABORTED,
                         )
+
+
                     }
                 }
 
@@ -226,6 +241,9 @@ class selectSeat : AppCompatActivity() {
                                         frameLayout.background = ContextCompat.getDrawable(this, R.drawable.square_btn_selected)
                                         selectedSeat.add(textView.text.toString())
                                     }
+
+
+                                    _btnConfirm.isEnabled = selectedSeat.size != 0
                                     val totalHarga = selectedSeat.size * hargaTiket
 
                                     val hargaFormatted = formatToIDRCurrency(totalHarga)
@@ -239,9 +257,6 @@ class selectSeat : AppCompatActivity() {
                                     R.drawable.square_btn_purchased
                                 )
                             }
-
-
-
 
                             textLayoutParams.gravity = Gravity.CENTER
                             frameLayout.addView(textView)
@@ -259,24 +274,6 @@ class selectSeat : AppCompatActivity() {
         } else {
             onBackPressed()
         }
-
-
-//        purchasedSeat.add("A2")
-//        purchasedSeat.add("A3")
-//        purchasedSeat.add("D8")
-//        purchasedSeat.add("D9")
-//        purchasedSeat.add("D10")
-//        purchasedSeat.add("D11")
-//        purchasedSeat.add("D7")
-//        purchasedSeat.add("C9")
-//        purchasedSeat.add("C10")
-//        purchasedSeat.add("C11")
-//        purchasedSeat.add("C7")
-
-
-
-
-
 
     }
 }

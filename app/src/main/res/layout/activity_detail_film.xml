@@ -71,11 +71,11 @@
                 android:text="MIDNIGHT SHOW"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/ivIconDurasai"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/ivIconDurasai"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="36dp"
@@ -107,7 +107,7 @@
                 android:layout_marginTop="4dp"
                 android:text="Horor, Thriller"
                 android:textColor="@color/grey"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/ivIconDurasai"
                 app:layout_constraintTop_toBottomOf="@+id/titleBold" />
 
 

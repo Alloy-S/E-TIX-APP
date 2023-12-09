@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="@+id/ivPosterStudio" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/ivIconDurasai"
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginTop="14dp"
@@ -88,8 +88,8 @@
         android:layout_marginStart="5dp"
         android:text="105 Minutes"
         android:textSize="10sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintStart_toEndOf="@+id/ivIconDurasai"
+        app:layout_constraintTop_toTopOf="@+id/ivIconDurasai" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSelectStudio"
