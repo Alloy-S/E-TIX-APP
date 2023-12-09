@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -95,8 +96,9 @@ class selectSeat : AppCompatActivity() {
                 "payment" to "Free",
                 "seats" to selectedSeat,
                 "total_tiket" to selectedSeat.size,
-                "total_order" to selectedSeat.size * hargaTiket,
-                "show_date" to showtime
+                "total_order" to (selectedSeat.size * hargaTiket) + (selectedSeat.size * 2500),
+                "show_date" to showtime,
+                "admFee" to 2500
             )
 
 
@@ -106,8 +108,14 @@ class selectSeat : AppCompatActivity() {
                     for (seat in selectedSeat) {
                         purchasedSeat.add(seat)
                     }
+
+                    val uidTransaksi = it.id
                     db.document(purchased_seatsRef).update("seats", purchasedSeat).addOnSuccessListener {
-                        onBackPressed()
+                        val intent = Intent(this, detailTiket::class.java).apply {
+                            putExtra("UIDTransaksi", uidTransaksi)
+                        }
+                        finish()
+                        this.startActivity(intent)
                     }
                 }
             }
