@@ -5,6 +5,8 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.alloys.e_tix.helper.DialogHelper
+import com.alloys.e_tix.helper.DialogHelper.dismissDialog
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -28,6 +30,7 @@ class detailTiket : AppCompatActivity() {
         val _tvJudulFilm = findViewById<TextView>(R.id.tvJudulFilm)
         val _tvNamaMallDetail = findViewById<TextView>(R.id.tvNamaMallDetail)
         val _tvTanggalShow = findViewById<TextView>(R.id.tvTanggalShow)
+        val _tvJamShow = findViewById<TextView>(R.id.tvJamShow)
         val _tvBookingCode = findViewById<TextView>(R.id.tvBookingCode)
         val _tvSeats = findViewById<TextView>(R.id.tvSeats)
         val _tvStudio = findViewById<TextView>(R.id.tvStudio)
@@ -41,6 +44,8 @@ class detailTiket : AppCompatActivity() {
 
         val uidTransaksi = intent.getStringExtra("UIDTransaksi")
         Log.d("UID current user", auth.currentUser!!.uid)
+        DialogHelper.showDialogBar(this, "Loading....")
+        val isDialogVisible = DialogHelper.isDialogVisible()
         db.collection("users").document(auth.currentUser!!.uid).collection("transaction").document(uidTransaksi.toString()).get().addOnSuccessListener {
             Log.d("UID transaksi", uidTransaksi.toString())
             Log.d("isi detail transaksi", it.data.toString())
@@ -53,10 +58,11 @@ class detailTiket : AppCompatActivity() {
             val studio = it.data?.get("studio").toString()
             val totalTiket = it.data?.get("total_tiket").toString().toInt()
             val tiketPrice = it.data?.get("harga_tiket").toString().toInt()
-//            val admFee = it.data?.get("admFee")
-            val totalOrder = it.data?.get("total_tiket").toString().toInt()
+            val admFee = it.data?.get("admFee").toString()
+            val totalOrder = it.data?.get("total_order").toString().toInt()
             val payment = it.data?.get("payment").toString()
             val totalPayment = it.data?.get("total_order").toString().toInt()
+
             db.collection("movies").document(movieID.toString()).get().addOnSuccessListener {
                 Log.d("get Movie data", it.data.toString())
                 val multiFormatWriter = MultiFormatWriter();
@@ -69,10 +75,16 @@ class detailTiket : AppCompatActivity() {
                     e.printStackTrace();
                 }
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+                val dateFormat2 = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
+                val dateshow = dateFormat2.format(showDate).split(" ")
+
+                dismissDialog()
                 _tvTanggalTransaksi.setText(dateFormat.format(tangglTransaksi))
                 _tvJudulFilm.setText(it.data?.get("judul_film").toString())
                 _tvNamaMallDetail.setText(namaMall)
-                _tvTanggalShow.setText(dateFormat.format(showDate))
+                _tvTanggalShow.setText(dateshow[0])
+                _tvJamShow.setText(dateshow[1])
                 _tvSeats.setText(seats.toString())
                 _tvStudio.setText(studio)
                 _tvTotalTicket.setText(totalTiket.toString())
@@ -81,6 +93,7 @@ class detailTiket : AppCompatActivity() {
                 _tvPayment.setText(payment)
                 _tvTotalPayment.setText(totalPayment.toString())
                 _tvBookingCode.setText(bookingCode)
+                _tvAdmFee.setText(admFee)
             }
         }
 

@@ -1,25 +1,26 @@
 package com.alloys.e_tix
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.alloys.e_tix.helper.Currency.formatToIDRCurrency
+import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
+import com.alloys.e_tix.helper.DialogHelper.showDialogBar
+import com.alloys.e_tix.helper.DialogHelper.dismissDialog
 import com.google.firebase.Firebase
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.auth
-import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.firestore
-import java.text.NumberFormat
 import java.util.Calendar
-import java.util.Currency
-import java.util.Date
 import kotlin.random.Random
 
 class selectSeat : AppCompatActivity() {
@@ -37,6 +38,7 @@ class selectSeat : AppCompatActivity() {
         val _tvtanggal = findViewById<TextView>(R.id.tvtanggalPenayangan)
         val _tvTotalTiket = findViewById<TextView>(R.id.tvTotalTiket)
         val _btnConfirm = findViewById<Button>(R.id.btnConfirm)
+        val _btnBack = findViewById<ImageView>(R.id.btnBack)
 
         val movieId = intent.getStringExtra("movieID")
         val namaMall = intent.getStringExtra("namaMall")
@@ -45,6 +47,9 @@ class selectSeat : AppCompatActivity() {
         val hargaTiket = intent.getIntExtra("hargaTiket", 0)
         val purchased_seatsRef = intent.getStringExtra("seats")
 
+        _btnBack.setOnClickListener {
+            onBackPressed()
+        }
 
         _tvNamaMall.setText(namaMall)
         _tvtanggal.setText("$tanggal | $waktuMulai")
@@ -58,73 +63,100 @@ class selectSeat : AppCompatActivity() {
         var kolomTitle = 'A'
 
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 0)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        val startOfDay = calendar.timeInMillis
-
-        calendar.set(Calendar.HOUR_OF_DAY, 23)
-        calendar.set(Calendar.MINUTE, 59)
-        calendar.set(Calendar.SECOND, 59)
-        val endOfDay = calendar.timeInMillis
-
-        val startTimestamp = Timestamp(Date(startOfDay))
-        val endTimestamp = Timestamp(Date(endOfDay))
+//        calendar.set(Calendar.HOUR_OF_DAY, 0)
+//        calendar.set(Calendar.MINUTE, 0)
+//        calendar.set(Calendar.SECOND, 0)
+//        val startOfDay = calendar.timeInMillis
+//
+//        calendar.set(Calendar.HOUR_OF_DAY, 23)
+//        calendar.set(Calendar.MINUTE, 59)
+//        calendar.set(Calendar.SECOND, 59)
+//        val endOfDay = calendar.timeInMillis
+//
+//        val startTimestamp = Timestamp(Date(startOfDay))
+//        val endTimestamp = Timestamp(Date(endOfDay))
 
         _btnConfirm.setOnClickListener {
-            val userID = auth.currentUser?.uid
-            val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9') // Define the character pool
-            val randomString = (1..6)
-                .map { Random.nextInt(0, charPool.size) }
-                .map(charPool::get)
-                .joinToString("")
-            val currentTimestamp = calendar.timeInMillis
-            val dataShowtime = waktuMulai?.split(":")
-            calendar.set(Calendar.HOUR_OF_DAY, dataShowtime!!.get(0).toInt())
-            calendar.set(Calendar.MINUTE, dataShowtime!!.get(1).toInt())
-            val showtime = calendar.timeInMillis
-            println("Random string of 6 characters: $randomString")
-
-
-            val dataTransaksi = hashMapOf(
-                "transaction_date" to currentTimestamp,
-                "movieId" to movieId,
-                "location" to namaMall,
-                "booking_code" to randomString,
-                "harga_tiket" to hargaTiket,
-                "studio" to 1,
-                "payment" to "Free",
-                "seats" to selectedSeat,
-                "total_tiket" to selectedSeat.size,
-                "total_order" to (selectedSeat.size * hargaTiket) + (selectedSeat.size * 2500),
-                "show_date" to showtime,
-                "admFee" to 2500
-            )
-
 
 
             if (purchased_seatsRef != null && selectedSeat.isNotEmpty()) {
-                db.collection("users").document(userID!!).collection("transaction").add(dataTransaksi).addOnSuccessListener {
+                showDialogBar(this, "Process....")
+                val isDialogVisible = isDialogVisible()
+                val purchasedSeatRef =   db.collection("purchased_seats").document(purchased_seatsRef)
+
+                db.runTransaction { transaction ->
+                    val snapshot = transaction.get(purchasedSeatRef)
+
+                    val seats = snapshot.get("seats") as List<String>
+                    var available = true
+                    Log.d("CEK SEATS", seats.toString())
                     for (seat in selectedSeat) {
-                        purchasedSeat.add(seat)
+                        if (seats.contains(seat)) {
+                            available = false
+                        }
                     }
 
-                    val uidTransaksi = it.id
-                    db.document(purchased_seatsRef).update("seats", purchasedSeat).addOnSuccessListener {
-                        val intent = Intent(this, detailTiket::class.java).apply {
-                            putExtra("UIDTransaksi", uidTransaksi)
+                    if (available) {
+                        val userID = auth.currentUser?.uid
+                        val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9') // Define the character pool
+                        val randomString = (1..6)
+                            .map { Random.nextInt(0, charPool.size) }
+                            .map(charPool::get)
+                            .joinToString("")
+                        val currentTimestamp = calendar.timeInMillis
+                        val dataShowtime = waktuMulai?.split(":")
+                        calendar.set(Calendar.HOUR_OF_DAY, dataShowtime!!.get(0).toInt())
+                        calendar.set(Calendar.MINUTE, dataShowtime!!.get(1).toInt())
+                        val showtime = calendar.timeInMillis
+                        println("Random string of 6 characters: $randomString")
+
+
+                        val dataTransaksi = hashMapOf(
+                            "transaction_date" to currentTimestamp,
+                            "movieId" to movieId,
+                            "location" to namaMall,
+                            "booking_code" to randomString,
+                            "harga_tiket" to hargaTiket,
+                            "studio" to 1,
+                            "payment" to "Free",
+                            "seats" to selectedSeat,
+                            "total_tiket" to selectedSeat.size,
+                            "total_order" to (selectedSeat.size * hargaTiket) + (selectedSeat.size * 2500),
+                            "show_date" to showtime,
+                            "admFee" to 2500
+                        )
+
+                        db.collection("users").document(userID!!).collection("transaction").add(dataTransaksi).addOnSuccessListener {
+                            for (seat in selectedSeat) {
+                                purchasedSeat.add(seat)
+                            }
+
+                            val uidTransaksi = it.id
+                            db.collection("purchased_seats").document(purchased_seatsRef).update("seats", purchasedSeat).addOnSuccessListener {
+                                dismissDialog()
+                                val intent = Intent(this, detailTiket::class.java).apply {
+                                    putExtra("UIDTransaksi", uidTransaksi)
+                                }
+                                finish()
+                                this.startActivity(intent)
+                            }
                         }
-                        finish()
-                        this.startActivity(intent)
+                    } else {
+                        throw FirebaseFirestoreException(
+                            "Kursi sudah Terbeli",
+                            FirebaseFirestoreException.Code.ABORTED,
+                        )
                     }
                 }
+
+
             }
         }
 
 
         Log.d("input to DB", "$movieId $waktuMulai")
         if (purchased_seatsRef != null) {
-            db.document(purchased_seatsRef).get().addOnSuccessListener {
+            db.collection("purchased_seats").document(purchased_seatsRef).get().addOnSuccessListener {
                 Log.d("ISI SEATS", it.data?.get("seats").toString())
                 for (seat in it.data?.get("seats") as List<String>) {
                     purchasedSeat.add(seat)
