@@ -66,8 +66,9 @@ class movieFragment : Fragment() {
                     for (document in task.result) {
                         val judulFilm: String = document.getString("judul_film") ?: ""
                         val durasi: String = document.getString("durasi") ?: ""
-                        val imageUrl: String = document.getString("urlPoster") ?: ""
+                        val imageFileName: String = document.getString("urlPoster") ?: ""
 
+                        val imageUrl = "gs://e-tix-8c2b4.appspot.com/$imageFileName"
                         val movies = dataMovie(judulFilm, durasi,imageUrl)
                         movieArrayList.add(movies)
                     }
