@@ -69,4 +69,9 @@ dependencies {
     implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
 
     implementation ("com.hanks:passcodeview:0.1.2")
+
+    //getImage
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
 }

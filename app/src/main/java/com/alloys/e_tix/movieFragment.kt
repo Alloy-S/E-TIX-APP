@@ -1,13 +1,26 @@
 package com.alloys.e_tix
 
+import android.annotation.SuppressLint
+import android.media.session.MediaSessionManager.OnMediaKeyEventSessionChangedListener
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alloys.e_tix.databinding.FragmentMovieBinding
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.auth.User
+import com.google.firebase.firestore.toObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +38,10 @@ class movieFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var movieArrayList: ArrayList<dataMovie>
+    private lateinit var db : FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,10 +52,32 @@ class movieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//                val data = arguments?.getString("Username")
-//        val _etNamaUser = view.findViewById<TextView>(R.id.tvNamaUser)
-//        _etNamaUser.text = data
+
+        recyclerView = view.findViewById(R.id.rvMovie)
+        recyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        movieArrayList = arrayListOf()
+
+        db = FirebaseFirestore.getInstance()
+
+        db.collection("movies").get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result) {
+                        val judulFilm: String = document.getString("judul_film") ?: ""
+                        val durasi: String = document.getString("durasi") ?: ""
+                        val imageUrl: String = document.getString("urlPoster") ?: ""
+
+                        val movies = dataMovie(judulFilm, durasi,imageUrl)
+                        movieArrayList.add(movies)
+                    }
+                    recyclerView.adapter = movieAdapter(movieArrayList)
+                } else {
+                    Toast.makeText(this.context, "Error fetching movies", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
