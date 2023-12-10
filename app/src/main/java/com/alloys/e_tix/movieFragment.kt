@@ -65,20 +65,10 @@ class movieFragment : Fragment(){
         db = FirebaseFirestore.getInstance()
 
 
-//        DownloadImagePoster.DownloadImagesTask().execute()
-//        val downloadTask = DownloadImagePoster.DownloadImagesTask(this.context)
-//        downloadTask.execute()
-
-
         db.collection("movies").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     for (document in task.result) {
-//                        val judulFilm: String = document.getString("judul_film") ?: ""
-//                        val durasi: String = document.getString("durasi") ?: ""
-//                        val imageUrl: String = document.getString("urlPoster") ?: ""
-
-
                         val readData = Movie(
                             document.data.get("judul_film").toString(),
                             document.data.get("deskripsi").toString(),
@@ -136,22 +126,6 @@ class movieFragment : Fragment(){
                 }
             }
     }
-
-//    override fun onDownloadComplete(imageFiles: List<File>) {
-//        // Handle the downloaded image files (e.g., update UI, set adapter, etc.)
-//        Log.d("MainActivity", "Download complete. Total images: ${imageFiles.size}")
-//        // You can now use imageFiles to update your UI or perform other actions.
-////        Log.d("ISI POSTER", arPoster.toString())
-//        movies = dataMovie(arMovie, imageFiles)
-//        recyclerView.adapter = movieAdapter(movies)
-//        dismissDialog()
-//    }
-//
-//    override fun onDownloadError(error: String) {
-//        // Handle the download error (e.g., show an error message)
-//        Log.e("MainActivity", "Download error: $error")
-//    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
