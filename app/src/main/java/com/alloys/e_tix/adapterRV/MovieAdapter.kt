@@ -1,14 +1,16 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.adapterRV
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.R
+import com.alloys.e_tix.dataClass.dataMovie
+import com.alloys.e_tix.detail_Film
 
 
 class movieAdapter(
@@ -27,7 +29,7 @@ class movieAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): movieAdapter.ListViewHolder {
+    ): ListViewHolder {
         val view : View = LayoutInflater.from(parent.context)
             .inflate(R.layout.itemmovie,parent,false)
         return ListViewHolder(view)

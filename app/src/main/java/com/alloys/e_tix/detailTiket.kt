@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -14,9 +15,7 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
-import kotlin.math.log
 
 
 class detailTiket : AppCompatActivity() {
@@ -40,12 +39,20 @@ class detailTiket : AppCompatActivity() {
         val _tvTotalOrder = findViewById<TextView>(R.id.tvTotalOrder)
         val _tvPayment = findViewById<TextView>(R.id.tvPayment)
         val _tvTotalPayment = findViewById<TextView>(R.id.tvTotalPayment)
-        val imageView = findViewById<ImageView>(R.id.ivBarcode)
+        val _ivBarcode = findViewById<ImageView>(R.id.ivBarcode)
+        val _ivPosterFilm = findViewById<ImageView>(R.id.ivPosterFilm)
 
         val uidTransaksi = intent.getStringExtra("UIDTransaksi")
         Log.d("UID current user", auth.currentUser!!.uid)
         DialogHelper.showDialogBar(this, "Loading....")
         val isDialogVisible = DialogHelper.isDialogVisible()
+
+        val poster = intent.getParcelableExtra("poster", Bitmap::class.java)
+//
+        if (poster != null) {
+            _ivPosterFilm.setImageBitmap(poster)
+        }
+
         db.collection("users").document(auth.currentUser!!.uid).collection("transaction").document(uidTransaksi.toString()).get().addOnSuccessListener {
             Log.d("UID transaksi", uidTransaksi.toString())
             Log.d("isi detail transaksi", it.data.toString())
@@ -70,7 +77,7 @@ class detailTiket : AppCompatActivity() {
                     val bitMatrix = multiFormatWriter.encode(bookingCode, BarcodeFormat.QR_CODE,400,400);
                     val barcodeEncoder = BarcodeEncoder();
                     val bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                    imageView.setImageBitmap(bitmap);
+                    _ivBarcode.setImageBitmap(bitmap);
                 } catch (e: WriterException) {
                     e.printStackTrace();
                 }

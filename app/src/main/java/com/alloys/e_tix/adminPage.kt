@@ -3,6 +3,9 @@ package com.alloys.e_tix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import com.alloys.e_tix.fragmentAddMovieAdmin
+import com.alloys.e_tix.fragmentMovieAdmin
+import com.alloys.e_tix.fragmentProfileAdmin
 
 class adminPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

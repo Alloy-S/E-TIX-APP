@@ -1,4 +1,4 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.dataClass
 
 data class JadwalMovie(
     val lokasi : String,

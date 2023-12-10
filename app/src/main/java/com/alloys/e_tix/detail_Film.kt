@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.alloys.e_tix.dataClass.Movie
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 

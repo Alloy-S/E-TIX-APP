@@ -1,7 +1,8 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.dataClass
 
 import android.graphics.Bitmap
-import java.io.File
+import com.alloys.e_tix.dataClass.Movie
+
 
 data class dataMovie(
 //    val judul_film: String,

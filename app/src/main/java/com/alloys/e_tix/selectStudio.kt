@@ -12,13 +12,15 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.adapterRV.AdapterSelectStudio
+import com.alloys.e_tix.dataClass.Mall
+import com.alloys.e_tix.dataClass.Movie
+import com.alloys.e_tix.dataClass.jadwalFilm
 import com.alloys.e_tix.helper.DialogHelper.dismissDialog
 import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
 import com.alloys.e_tix.helper.DialogHelper.showDialogBar
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.model.Document
 import com.google.firebase.storage.storage
 import java.io.File
 

@@ -4,20 +4,21 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.adapterRV.movieAdapter
+import com.alloys.e_tix.dataClass.Movie
+import com.alloys.e_tix.dataClass.dataMovie
+import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.storage
 import java.io.File
-import com.alloys.e_tix.helper.DialogHelper.dismissDialog
-import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
-import com.alloys.e_tix.helper.DialogHelper.showDialogBar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +38,7 @@ class movieFragment : Fragment(){
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieArrayList: ArrayList<dataMovie>
-    private lateinit var db : FirebaseFirestore
+    private val db = Firebase.firestore
     private var storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
     lateinit var movies: dataMovie
     var arMovie = ArrayList<Movie>()
@@ -54,15 +55,12 @@ class movieFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showDialogBar(this.context, "Loading....")
-        val isDialogVisible = isDialogVisible()
+        DialogHelper.showDialogBar(this.context, "Loading....")
+        val isDialogVisible = DialogHelper.isDialogVisible()
         recyclerView = view.findViewById(R.id.rvMovie)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-
-        movieArrayList = arrayListOf()
-
-        db = FirebaseFirestore.getInstance()
-
+        arMovie.clear()
+        imageBitmap.clear()
 
         db.collection("movies").get()
             .addOnCompleteListener { task ->
@@ -104,7 +102,7 @@ class movieFragment : Fragment(){
                                 if (counterDownload == arDaftarPoster.size) {
                                     movies = dataMovie(arMovie, imageBitmap)
                                     recyclerView.adapter = movieAdapter(movies)
-                                    dismissDialog()
+                                    DialogHelper.dismissDialog()
                                 }
                             }
                         }
@@ -145,4 +143,3 @@ class movieFragment : Fragment(){
             }
     }
 }
-

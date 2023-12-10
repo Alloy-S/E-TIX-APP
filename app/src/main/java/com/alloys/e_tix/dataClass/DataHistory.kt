@@ -1,13 +1,15 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.dataClass
 
 import android.media.Image
+import android.os.Parcelable
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import kotlinx.parcelize.Parcelize
 import java.util.Date
-
+@Parcelize
 data class dataHistory(
-    val movieId : String,
+    val transactionID : String,
     val transaction_date : Long,
     val show_date : Long,
     val booking_code : String,
@@ -21,5 +23,5 @@ data class dataHistory(
     val admfee: String,
     val totalOrder: Int,
     val payment: String,
-    val totalPayment: Int
-)
+    val totalPayment: Int,
+) : Parcelable

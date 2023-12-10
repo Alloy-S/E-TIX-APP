@@ -48,6 +48,7 @@ object DialogHelper {
             builder.setCancelable(true)
             builder.setView(ll)
             dialog = builder.create()
+            dialog!!.setCancelable(false)
             dialog!!.show()
             val window: Window = dialog!!.getWindow()!!
             if (window != null) {

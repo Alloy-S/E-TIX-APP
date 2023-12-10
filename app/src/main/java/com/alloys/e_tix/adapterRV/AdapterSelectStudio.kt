@@ -1,8 +1,6 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.adapterRV
 
 import android.content.Intent
-import android.os.Parcel
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +9,13 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.dataClass.Mall
+import com.alloys.e_tix.R
 import com.alloys.e_tix.helper.Currency
+import com.alloys.e_tix.selectSeat
 import com.google.android.flexbox.FlexboxLayout
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 class AdapterSelectStudio (
     private val listMall: ArrayList<Mall>
@@ -32,7 +32,7 @@ class AdapterSelectStudio (
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AdapterSelectStudio.ListViewHolder {
+    ): ListViewHolder {
         val view : View = LayoutInflater.from(parent.context).inflate(R.layout.itemstudio, parent, false)
         return ListViewHolder(view)
     }
@@ -41,7 +41,7 @@ class AdapterSelectStudio (
         return listMall.size
     }
 
-    override fun onBindViewHolder(holder: AdapterSelectStudio.ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         var mall = listMall[position]
 
         val current = LocalDateTime.now()

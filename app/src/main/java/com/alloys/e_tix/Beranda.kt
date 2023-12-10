@@ -1,11 +1,11 @@
 package com.alloys.e_tix
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
+import com.alloys.e_tix.movieFragment
+import com.alloys.e_tix.profileFragment
+import com.alloys.e_tix.upcomingFragment
 
 class Beranda : AppCompatActivity() {
 

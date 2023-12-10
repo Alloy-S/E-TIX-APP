@@ -1,9 +1,7 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.dataClass
 
 import android.os.Parcel
 import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
 
 
 data class Mall(

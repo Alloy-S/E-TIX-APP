@@ -2,13 +2,14 @@ package com.alloys.e_tix
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import androidx.fragment.app.Fragment
+import com.alloys.e_tix.dataClass.Movie
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -96,7 +97,18 @@ class fragmentAddMovieAdmin : Fragment() {
 
     fun TambahData(judul_film : String, deskripsi : String, durasi : Int, produser : String, sutradara : String,
                    penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String){
-        val dataBaru = Movie(judul_film, deskripsi, durasi, produser, sutradara, penulis, casts, jenis_film, urlPoster, produksi)
+        val dataBaru = Movie(
+            judul_film,
+            deskripsi,
+            durasi,
+            produser,
+            sutradara,
+            penulis,
+            casts,
+            jenis_film,
+            urlPoster,
+            produksi
+        )
         db.collection("movies").add(dataBaru)
             .addOnSuccessListener { documentReference ->
                 // DocumentSnapshot added with ID: documentReference.id
