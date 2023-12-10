@@ -58,6 +58,7 @@ class selectStudio : AppCompatActivity() {
         val localFile = File.createTempFile("img", ".jpg")
 //    GET ALL NAME IN THE FOLDER
         val arDaftarPoster = ArrayList<String>()
+        val arPoster = ArrayList<Bitmap>()
         storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
             for (item in result.items) {
                 Log.d("ISI STORAGE", item.name)
@@ -69,8 +70,11 @@ class selectStudio : AppCompatActivity() {
             val isImgRef = storage.reference.child(item)
             isImgRef.getFile(localFile).addOnSuccessListener {
                 val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+                arPoster.add(bitmap)
             }
         }
+
+
         val movieID = "BKryf5atmLbczKBae3l0"
         db.collection("movies").document(movieID).get().addOnSuccessListener {
             val readData = Movie(

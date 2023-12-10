@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 
-class movieAdapter(private val listMovie : ArrayList<dataMovie>) :
+
+class movieAdapter(
+    private val dataMovie : dataMovie
+) :
     RecyclerView.Adapter<movieAdapter.ListViewHolder>() {
 
     inner class ListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -29,17 +31,19 @@ class movieAdapter(private val listMovie : ArrayList<dataMovie>) :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val movie = listMovie[position]
+        val movie = dataMovie.arMovie[position]
+        val poster = dataMovie.arPoster[position]
 //        holder._poster.setImageResource(movie.urlPoster.toInt())
         holder._judul.setText(movie.judul_film)
-        holder._durasi.setText(movie.durasi + " Minutes")
-        Glide.with(holder.itemView.context)
-            .load(movie.urlPoster)
-            .into(holder._poster)
+        holder._durasi.setText(movie.durasi.toString() + " Minutes")
+        holder._poster.setImageBitmap(poster)
+//        Glide.with(holder.itemView.context)
+//            .load(movie.urlPoster)
+//            .into(holder._poster)
     }
 
     override fun getItemCount(): Int {
-        return listMovie.size
+        return dataMovie.arMovie.size
     }
 
 }
