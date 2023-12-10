@@ -1,29 +1,18 @@
 package com.alloys.e_tix
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.media.session.MediaSessionManager.OnMediaKeyEventSessionChangedListener
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alloys.e_tix.databinding.FragmentMovieBinding
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.storage
 import java.io.File
 import com.alloys.e_tix.helper.DialogHelper.dismissDialog
@@ -100,10 +89,6 @@ class movieFragment : Fragment() {
 
                         arMovie.add(readData)
 
-//                        movieArrayList.add(movies)
-                        val imageUrl = "gs://e-tix-8c2b4.appspot.com/$imageFileName"
-                        val movies = dataMovie(judulFilm, durasi,imageUrl)
-                        movieArrayList.add(movies)
                     }
 
                     //    START STORAGE
