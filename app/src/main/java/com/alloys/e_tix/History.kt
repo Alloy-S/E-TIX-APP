@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Transaction
@@ -19,7 +20,8 @@ import com.google.firebase.firestore.firestore
 class History : AppCompatActivity() {
 
     var listHistory = ArrayList<dataHistory>()
-    var db = Firebase.firestore
+    val db = Firebase.firestore
+    val auth = Firebase.auth
 
 //    lateinit var _lvAdapterSimple : SimpleAdapter
 //    var barcode =  findViewById<Button>(R.id.barcode)
@@ -51,45 +53,67 @@ class History : AppCompatActivity() {
 //            }
 
 
-        db.collection("users").document("IiGl00Z8zFPt732DLEUAVzjrGdJ3").collection("transaction").get()
+        db.collection("users").document(auth.currentUser!!.uid).collection("transaction").get()
             .addOnSuccessListener { results ->
                 listHistory.clear()
 
                 for (document in results) {
-                    val transactionDate: String = document.getString("transaction_date") ?: ""
-                    val transactionTime: String = document.getString("transaction_time") ?: ""
-                    val bookingCode: String = document.getString("booking_code") ?: ""
-                    val mallName: String = document.getString("mall_name") ?: ""
-                    val movieId: String = document.getString("movie_id") ?: ""
+//                    val transactionDate: String = document.getString("transaction_date") ?: ""
+//                    val transactionTime: String = document.getString("transaction_time") ?: ""
+//                    val bookingCode: String = document.getString("booking_code") ?: ""
+//                    val mallName: String = document.getString("mall_name") ?: ""
+//                    val movieId: String = document.getString("movie_id") ?: ""
+
+                    val movieID = document.data.get("movieId").toString()
+                    val tangglTransaksi = document.data.get("transaction_date").toString().toLong()
+                    val namaMall = document.data.get("location").toString()
+                    val showDate = document.data.get("show_date").toString().toLong()
+                    val bookingCode = document.data.get("booking_code").toString()
+                    val seats = document.data.get("seats") as List<String>
+                    val studio = document.data.get("studio").toString()
+                    val totalTiket = document.data.get("total_tiket").toString().toInt()
+                    val tiketPrice = document.data.get("harga_tiket").toString().toInt()
+                    val admFee = document.data.get("admFee").toString()
+                    val totalOrder = document.data.get("total_order").toString().toInt()
+                    val payment = document.data.get("payment").toString()
+                    val totalPayment = document.data.get("total_order").toString().toInt()
 
                     // Now, let's retrieve movie details using the movie ID
-                    db.collection("movies").document(movieId).get()
+                    db.collection("movies").document(movieID).get()
                         .addOnSuccessListener { movieDocument ->
                             val judulFilm: String = movieDocument.getString("judul_film") ?: ""
                             val imageUrl: String = movieDocument.getString("urlPoster") ?: ""
 
                             val readData = dataHistory(
                                 document.id,
-                                transactionDate,
-                                transactionTime,
+                                tangglTransaksi,
+                                showDate,
                                 bookingCode,
-                                mallName,
+                                namaMall,
                                 judulFilm,
-                                imageUrl
+                                imageUrl,
+                                seats,
+                                studio,
+                                totalTiket,
+                                tiketPrice,
+                                admFee,
+                                totalOrder,
+                                payment,
+                                totalPayment
                             )
 
                             listHistory.add(readData)
+
+                            // Update RecyclerView adapter here if needed
+                            _rvHistory.layoutManager = LinearLayoutManager(this)
+                            val adapters = adapterHistory(listHistory)
+                            _rvHistory.adapter = adapters
                         }
                         .addOnFailureListener { exception ->
                             // Handle the failure to retrieve movie details
                             Log.e("Firestore", "Error getting movie details: $exception")
                         }
                 }
-
-                // Update RecyclerView adapter here if needed
-                _rvHistory.layoutManager = LinearLayoutManager(this)
-                val adapters = adapterHistory(listHistory)
-                _rvHistory.adapter = adapters
             }
             .addOnFailureListener { exception ->
                 // Handle the failure to retrieve user transactions
@@ -99,7 +123,7 @@ class History : AppCompatActivity() {
 
 
 //        db.collection("users").document("IiGl00Z8zFPt732DLEUAVzjrGdJ3").collection("transaction").get().addOnSuccessListener {
-//            results-> listHistory.clear()so
+//            results-> listHistory.clear()
 
 
 //            for (document in results) {

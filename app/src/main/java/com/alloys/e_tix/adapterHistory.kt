@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
 
 class adapterHistory (
     private val listHistory: ArrayList<dataHistory>
@@ -41,13 +42,18 @@ class adapterHistory (
 
 
 //        holder._posterFilm.setImageResource(history.movieId)
-        holder._date.setText(history.transaction_date)
-        holder._time.setText(history.transaction_date)
-        holder._movie.setText(history.movieId)
+
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+        val dateFormat2 = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        val traansactionDate = dateFormat.format(history.transaction_date).split(" ")
+        val dateshow = dateFormat2.format(history.transaction_date).split(" ")
+        holder._date.setText(traansactionDate[0])
+        holder._time.setText(traansactionDate[1])
+        holder._movie.setText(history.judulFilm)
         holder._mall.setText(history.location)
         holder._code.setText(history.booking_code)
-        holder._dateShow.setText(history.show_date)
-        holder._timeShow.setText(history.show_date)
+        holder._dateShow.setText(dateshow[0])
+        holder._timeShow.setText(dateshow[1])
 
     }
 

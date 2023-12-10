@@ -1,34 +1,24 @@
 package com.alloys.e_tix
 
-import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.media.session.MediaSessionManager.OnMediaKeyEventSessionChangedListener
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.alloys.e_tix.databinding.FragmentMovieBinding
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.storage
 import java.io.File
 import com.alloys.e_tix.helper.DialogHelper.dismissDialog
 import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
 import com.alloys.e_tix.helper.DialogHelper.showDialogBar
+import com.alloys.e_tix.helper.DownloadImagePoster
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [movieFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class movieFragment : Fragment() {
+class movieFragment : Fragment(){
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -51,6 +41,8 @@ class movieFragment : Fragment() {
     private lateinit var db : FirebaseFirestore
     private var storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
     lateinit var movies: dataMovie
+    var arMovie = ArrayList<Movie>()
+    var arPoster = ArrayList<Bitmap>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,10 +64,15 @@ class movieFragment : Fragment() {
 
         db = FirebaseFirestore.getInstance()
 
+
+//        DownloadImagePoster.DownloadImagesTask().execute()
+//        val downloadTask = DownloadImagePoster.DownloadImagesTask(this.context)
+//        downloadTask.execute()
+
+
         db.collection("movies").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val arMovie = ArrayList<Movie>()
                     for (document in task.result) {
 //                        val judulFilm: String = document.getString("judul_film") ?: ""
 //                        val durasi: String = document.getString("durasi") ?: ""
@@ -104,7 +101,7 @@ class movieFragment : Fragment() {
                     val localFile = File.createTempFile("img", ".jpg")
                     //    GET ALL NAME IN THE FOLDER
                     val arDaftarPoster = ArrayList<String>()
-                    val arPoster = ArrayList<Bitmap>()
+//                    val arPoster = ArrayList<Bitmap>()
                     storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
                         for (item in result.items) {
                             Log.d("ISI STORAGE", item.name)
@@ -139,6 +136,21 @@ class movieFragment : Fragment() {
                 }
             }
     }
+
+//    override fun onDownloadComplete(imageFiles: List<File>) {
+//        // Handle the downloaded image files (e.g., update UI, set adapter, etc.)
+//        Log.d("MainActivity", "Download complete. Total images: ${imageFiles.size}")
+//        // You can now use imageFiles to update your UI or perform other actions.
+////        Log.d("ISI POSTER", arPoster.toString())
+//        movies = dataMovie(arMovie, imageFiles)
+//        recyclerView.adapter = movieAdapter(movies)
+//        dismissDialog()
+//    }
+//
+//    override fun onDownloadError(error: String) {
+//        // Handle the download error (e.g., show an error message)
+//        Log.e("MainActivity", "Download error: $error")
+//    }
 
 
     override fun onCreateView(

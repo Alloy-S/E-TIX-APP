@@ -7,12 +7,19 @@ import android.widget.TextView
 import java.util.Date
 
 data class dataHistory(
-    var movieId : String,
-    var transaction_date : String,
-    var show_date : String,
-    var booking_code : String,
-    var location : String,
-    var judulFilm: String,
-    var poster : String
-
+    val movieId : String,
+    val transaction_date : Long,
+    val show_date : Long,
+    val booking_code : String,
+    val location : String,
+    val judulFilm: String,
+    val poster : String,
+    val seats: List<String>,
+    val studio: String,
+    val totalTiket: Int,
+    val tiketPrice: Int,
+    val admfee: String,
+    val totalOrder: Int,
+    val payment: String,
+    val totalPayment: Int
 )

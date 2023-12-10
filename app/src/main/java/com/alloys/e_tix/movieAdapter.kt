@@ -1,6 +1,7 @@
 package com.alloys.e_tix
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,8 @@ class movieAdapter(
         val movie = dataMovie.arMovie[position]
         val poster = dataMovie.arPoster[position]
 //        holder._poster.setImageResource(movie.urlPoster.toInt())
+
+//        val bitmap = BitmapFactory.decodeFile(poster.absolutePath)
         holder._judul.setText(movie.judul_film)
         holder._durasi.setText(movie.durasi.toString() + " Minutes")
         holder._poster.setImageBitmap(poster)
