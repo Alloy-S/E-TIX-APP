@@ -1,22 +1,12 @@
 package com.alloys.e_tix
 
-import android.content.Intent
-import android.os.Parcel
-import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.FlexboxLayout
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 class adapterHistory (
     private val listHistory: ArrayList<dataHistory>
@@ -41,14 +31,16 @@ class adapterHistory (
         viewType: Int
     ): adapterHistory.ListViewHolder {
         val view : View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.historypembelian,parent,false)
+            .inflate(R.layout.itemhistory,parent,false)
         return ListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: adapterHistory.ListViewHolder, position: Int) {
         var history = listHistory[position]
 
-        holder._posterFilm.setImageResource(history.detail.toInt())
+
+
+//        holder._posterFilm.setImageResource(history.movieId)
         holder._date.setText(history.transaction_date)
         holder._time.setText(history.transaction_date)
         holder._movie.setText(history.movieId)

@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,12 +10,15 @@ import androidx.appcompat.app.AppCompatDelegate
 class shortcutPageDev : AppCompatActivity() {
 //    hehehehhehe
 //    halo
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shortcut_page_dev)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        val _beranda = findViewById<Button>(R.id.berandaDev)
+
+    val _historySelected = findViewById<Button>(R.id.historySelected)
+    val _beranda = findViewById<Button>(R.id.berandaDev)
         val _select = findViewById<Button>(R.id.selectStudioDev)
         val _detailTiket = findViewById<Button>(R.id.detilTiker)
 
@@ -47,5 +51,14 @@ class shortcutPageDev : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
+
+    _historySelected.setOnClickListener {
+        val intent = Intent(this@shortcutPageDev, History::class.java).apply {
+
+        }
+        startActivity(intent)
+    }
+
     }
 }

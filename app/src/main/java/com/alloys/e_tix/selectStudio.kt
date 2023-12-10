@@ -19,7 +19,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.model.Document
-import com.google.firebase.storage.storage
+//import com.google.firebase.storage.storage
 import java.io.File
 
 
@@ -28,7 +28,7 @@ class selectStudio : AppCompatActivity() {
     lateinit var _rvMallOption: RecyclerView
 
     private val db = Firebase.firestore
-    private var storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
+//    private var storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
 //    val storageRef = storage.reference
 //    val pathReference = storageRef.child("image/poster.jpg")
 //    val getReference =

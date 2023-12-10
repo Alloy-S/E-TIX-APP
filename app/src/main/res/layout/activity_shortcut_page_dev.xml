@@ -29,4 +29,14 @@
         android:text="Detail Tiket"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectStudioDev" />
+
+
+    <Button
+        android:id="@+id/historySelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="History"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detilTiker" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
