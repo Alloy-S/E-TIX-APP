@@ -8,5 +8,5 @@ data class dataMovie(
 //    val durasi: String,
 //    val urlPoster:String,
     val arMovie: ArrayList<Movie>,
-    val arPoster: ArrayList<Bitmap>
+    val arPoster: Map<String, Bitmap>
 )

@@ -18,7 +18,6 @@ import java.io.File
 import com.alloys.e_tix.helper.DialogHelper.dismissDialog
 import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
 import com.alloys.e_tix.helper.DialogHelper.showDialogBar
-import com.alloys.e_tix.helper.DownloadImagePoster
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,7 +41,7 @@ class movieFragment : Fragment(){
     private var storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
     lateinit var movies: dataMovie
     var arMovie = ArrayList<Movie>()
-    var arPoster = ArrayList<Bitmap>()
+    val imageBitmap = mutableMapOf<String, Bitmap>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,17 +80,13 @@ class movieFragment : Fragment(){
                             document.data.get("urlPoster").toString(),
                             document.data.get("produksi").toString(),
                         )
-
                         arMovie.add(readData)
-
-//                        movieArrayList.add(movies)
                     }
 
                     //    START STORAGE
                     val localFile = File.createTempFile("img", ".jpg")
                     //    GET ALL NAME IN THE FOLDER
                     val arDaftarPoster = ArrayList<String>()
-//                    val arPoster = ArrayList<Bitmap>()
                     storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
                         for (item in result.items) {
                             Log.d("ISI STORAGE", item.name)
@@ -103,29 +98,23 @@ class movieFragment : Fragment(){
                             val isImgRef = storage.reference.child("img_poster_film/$item")
                             isImgRef.getFile(localFile).addOnSuccessListener {
                                 val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-                                arPoster.add(bitmap)
+                                imageBitmap[item] = bitmap
                                 counterDownload++
 
                                 if (counterDownload == arDaftarPoster.size) {
-                                    Log.d("ISI POSTER", arPoster.toString())
-                                    movies = dataMovie(arMovie, arPoster)
+                                    movies = dataMovie(arMovie, imageBitmap)
                                     recyclerView.adapter = movieAdapter(movies)
                                     dismissDialog()
                                 }
                             }
-
-
                         }
                     }
-
-
-
-
                 } else {
                     Toast.makeText(this.context, "Error fetching movies", Toast.LENGTH_SHORT).show()
                 }
             }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

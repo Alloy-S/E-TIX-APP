@@ -36,17 +36,14 @@ class movieAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val movie = dataMovie.arMovie[position]
-        val poster = dataMovie.arPoster[position]
+        val poster = dataMovie.arPoster[movie.urlPoster]
 
-//        holder._poster.setImageResource(movie.urlPoster.toInt())
 
-//        val bitmap = BitmapFactory.decodeFile(poster.absolutePath)
         holder._judul.setText(movie.judul_film)
         holder._durasi.setText(movie.durasi.toString() + " Minutes")
         holder._poster.setImageBitmap(poster)
-//        Glide.with(holder.itemView.context)
-//            .load(movie.urlPoster)
-//            .into(holder._poster)
+
+
         holder._poster.setOnClickListener {
             val intent = Intent(it.context, detail_Film::class.java)
             it.context.startActivity(intent)
