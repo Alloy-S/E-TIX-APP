@@ -3,7 +3,7 @@ package com.alloys.e_tix.dataClass
 data class Movie(
     val judul_film: String,
     val deskripsi: String,
-    val durasi: Int,
+    val durasi: String,
     val produser: String,
     val sutradara: String,
     val penulis: String,

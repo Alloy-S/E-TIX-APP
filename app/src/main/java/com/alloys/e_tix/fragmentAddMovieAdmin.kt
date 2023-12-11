@@ -100,7 +100,7 @@ class fragmentAddMovieAdmin : Fragment() {
         val dataBaru = Movie(
             judul_film,
             deskripsi,
-            durasi,
+            durasi.toString(),
             produser,
             sutradara,
             penulis,

@@ -82,7 +82,7 @@ class selectStudio : AppCompatActivity() {
             val readData = Movie(
                 it.data?.get("judul_film").toString(),
                 it.data?.get("deskripsi").toString(),
-                it.data?.get("durasi").toString().toInt(),
+                it.data?.get("durasi").toString(),
                 it.data?.get("produser").toString(),
                 it.data?.get("sutradara").toString(),
                 it.data?.get("penulis").toString(),

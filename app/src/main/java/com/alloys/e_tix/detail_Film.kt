@@ -18,10 +18,13 @@ class detail_Film : AppCompatActivity() {
                 result ->
             arMovies.clear()
             for (document in result) {
+                val durasi = document.data.get("durasi").toString().toInt()
+                val durasiWithMinutes = "$durasi Minutes"
+
                 var readData = Movie(
                     document.data.get("judul_film").toString(),
                     document.data.get("deskripsi").toString(),
-                    document.data.get("durasi").toString().toInt(),
+                    durasiWithMinutes,
                     document.data.get("produser").toString(),
                     document.data.get("sutradara").toString(),
                     document.data.get("penulis").toString(),

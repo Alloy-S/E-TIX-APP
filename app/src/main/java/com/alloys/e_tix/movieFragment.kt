@@ -65,11 +65,12 @@ class movieFragment : Fragment(){
         db.collection("movies").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+
                     for (document in task.result) {
                         val readData = Movie(
                             document.data.get("judul_film").toString(),
                             document.data.get("deskripsi").toString(),
-                            document.data.get("durasi").toString().toInt(),
+                            document.data.get("durasi").toString(),
                             document.data.get("produser").toString(),
                             document.data.get("sutradara").toString(),
                             document.data.get("penulis").toString(),
