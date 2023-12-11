@@ -22,6 +22,7 @@ class detail_Film : AppCompatActivity() {
                 val durasiWithMinutes = "$durasi Minutes"
 
                 var readData = Movie(
+                    document.id,
                     document.data.get("judul_film").toString(),
                     document.data.get("deskripsi").toString(),
                     durasiWithMinutes,

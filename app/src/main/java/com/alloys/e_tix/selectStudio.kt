@@ -80,6 +80,7 @@ class selectStudio : AppCompatActivity() {
         val movieID = "BKryf5atmLbczKBae3l0"
         db.collection("movies").document(movieID).get().addOnSuccessListener {
             val readData = Movie(
+                it.id,
                 it.data?.get("judul_film").toString(),
                 it.data?.get("deskripsi").toString(),
                 it.data?.get("durasi").toString(),

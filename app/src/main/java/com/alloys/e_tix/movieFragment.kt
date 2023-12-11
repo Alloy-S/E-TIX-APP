@@ -68,6 +68,7 @@ class movieFragment : Fragment(){
 
                     for (document in task.result) {
                         val readData = Movie(
+                            document.id,
                             document.data.get("judul_film").toString(),
                             document.data.get("deskripsi").toString(),
                             document.data.get("durasi").toString(),

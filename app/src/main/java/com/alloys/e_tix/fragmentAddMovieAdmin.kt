@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.alloys.e_tix.dataClass.Movie
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
 // TODO: Rename parameter arguments, choose names that match
@@ -90,14 +91,23 @@ class fragmentAddMovieAdmin : Fragment() {
                 _etCasts.text.toString(),
                 selectedGenres,
                 "a",
-                _etProduksi.text.toString())
+                _etProduksi.text.toString(),
+                generateRandomStringId())
 
         }
     }
 
+    fun generateRandomStringId(): String {
+        val firestore = FirebaseFirestore.getInstance()
+        // Create a reference to a new document with an auto-generated ID
+        val documentReference = firestore.collection("movies").document()
+        return documentReference.id
+    }
+
     fun TambahData(judul_film : String, deskripsi : String, durasi : Int, produser : String, sutradara : String,
-                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String){
+                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String){
         val dataBaru = Movie(
+            id,
             judul_film,
             deskripsi,
             durasi.toString(),

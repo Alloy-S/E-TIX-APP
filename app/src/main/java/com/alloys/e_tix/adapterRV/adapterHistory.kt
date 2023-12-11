@@ -60,7 +60,7 @@ class adapterHistory (
 
         holder._detail.setOnClickListener {
             val intent = Intent(holder.context, detailTiket::class.java).apply {
-                putExtra("dataTransaksi", dataHistory::class.java)
+                putExtra("dataTransaksi", history)
                 putExtra("poster", poster)
                 putExtra("UIDTransaksi", history.transactionID)
             }

@@ -47,7 +47,10 @@ class movieAdapter(
 
 
         holder._poster.setOnClickListener {
-            val intent = Intent(it.context, detail_Film::class.java)
+            val intent = Intent(it.context, detail_Film::class.java).apply {
+                putExtra("movieID", movie.movieID)
+                putExtra("dataMovie", movie)
+            }
             it.context.startActivity(intent)
         }
 

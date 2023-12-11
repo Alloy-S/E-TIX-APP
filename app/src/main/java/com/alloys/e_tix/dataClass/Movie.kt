@@ -1,6 +1,11 @@
 package com.alloys.e_tix.dataClass
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Movie(
+    val movieID: String,
     val judul_film: String,
     val deskripsi: String,
     val durasi: String,
@@ -11,4 +16,4 @@ data class Movie(
     val jenis_film: List<String>,
     val urlPoster: String,
     val produksi: String
-)
+) : Parcelable
