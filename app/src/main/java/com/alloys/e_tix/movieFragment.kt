@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alloys.e_tix.adapterRV.movieAdapter
@@ -59,7 +60,7 @@ class movieFragment : Fragment(){
         DialogHelper.showDialogBar(this.context, "Loading....")
         val isDialogVisible = DialogHelper.isDialogVisible()
         recyclerView = view.findViewById(R.id.rvMovie)
-        recyclerView.layoutManager = LinearLayoutManager(this.context)
+        recyclerView.layoutManager = GridLayoutManager(this.context,2)
         arMovie.clear()
         imageBitmap.clear()
 
