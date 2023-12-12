@@ -4,20 +4,22 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.adapterRV.movieAdapter
+import com.alloys.e_tix.dataClass.Movie
+import com.alloys.e_tix.dataClass.dataMovie
+import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.storage
 import java.io.File
-import com.alloys.e_tix.helper.DialogHelper.dismissDialog
-import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
-import com.alloys.e_tix.helper.DialogHelper.showDialogBar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,7 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [movieFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class movieFragment : Fragment() {
+class movieFragment : Fragment(){
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -37,9 +39,11 @@ class movieFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieArrayList: ArrayList<dataMovie>
-    private lateinit var db : FirebaseFirestore
+    private val db = Firebase.firestore
     private var storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
     lateinit var movies: dataMovie
+    var arMovie = ArrayList<Movie>()
+    val imageBitmap = mutableMapOf<String, Bitmap>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,19 +56,17 @@ class movieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showDialogBar(this.context, "Loading....")
-        val isDialogVisible = isDialogVisible()
+        DialogHelper.showDialogBar(this.context, "Loading....")
+        val isDialogVisible = DialogHelper.isDialogVisible()
         recyclerView = view.findViewById(R.id.rvMovie)
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-
-        movieArrayList = arrayListOf()
-
-        db = FirebaseFirestore.getInstance()
+        arMovie.clear()
+        imageBitmap.clear()
 
         db.collection("movies").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val arMovie = ArrayList<Movie>()
+
                     for (document in task.result) {
 //                        val judulFilm: String = document.getString("judul_film") ?: ""
 //                        val durasi: String = document.getString("durasi") ?: ""
@@ -75,9 +77,10 @@ class movieFragment : Fragment() {
                         val imageFileName: String = document.getString("urlPoster") ?: ""
 
                         val readData = Movie(
+                            document.id,
                             document.data.get("judul_film").toString(),
                             document.data.get("deskripsi").toString(),
-                            document.data.get("durasi").toString().toInt(),
+                            document.data.get("durasi").toString(),
                             document.data.get("produser").toString(),
                             document.data.get("sutradara").toString(),
                             document.data.get("penulis").toString(),
@@ -86,7 +89,6 @@ class movieFragment : Fragment() {
                             document.data.get("urlPoster").toString(),
                             document.data.get("produksi").toString(),
                         )
-
                         arMovie.add(readData)
 
                     }
@@ -95,7 +97,6 @@ class movieFragment : Fragment() {
                     val localFile = File.createTempFile("img", ".jpg")
                     //    GET ALL NAME IN THE FOLDER
                     val arDaftarPoster = ArrayList<String>()
-                    val arPoster = ArrayList<Bitmap>()
                     storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
                         for (item in result.items) {
                             Log.d("ISI STORAGE", item.name)
@@ -107,24 +108,17 @@ class movieFragment : Fragment() {
                             val isImgRef = storage.reference.child("img_poster_film/$item")
                             isImgRef.getFile(localFile).addOnSuccessListener {
                                 val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-                                arPoster.add(bitmap)
+                                imageBitmap[item] = bitmap
                                 counterDownload++
 
                                 if (counterDownload == arDaftarPoster.size) {
-                                    Log.d("ISI POSTER", arPoster.toString())
-                                    movies = dataMovie(arMovie, arPoster)
+                                    movies = dataMovie(arMovie, imageBitmap)
                                     recyclerView.adapter = movieAdapter(movies)
-                                    dismissDialog()
+                                    DialogHelper.dismissDialog()
                                 }
                             }
-
-
                         }
                     }
-
-
-
-
                 } else {
                     Toast.makeText(this.context, "Error fetching movies", Toast.LENGTH_SHORT).show()
                 }
@@ -161,4 +155,3 @@ class movieFragment : Fragment() {
             }
     }
 }
-

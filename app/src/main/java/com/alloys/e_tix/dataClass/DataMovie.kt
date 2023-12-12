@@ -1,11 +1,13 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.dataClass
 
 import android.graphics.Bitmap
+import com.alloys.e_tix.dataClass.Movie
+
 
 data class dataMovie(
 //    val judul_film: String,
 //    val durasi: String,
 //    val urlPoster:String,
     val arMovie: ArrayList<Movie>,
-    val arPoster: ArrayList<Bitmap>
+    val arPoster: Map<String, Bitmap>
 )

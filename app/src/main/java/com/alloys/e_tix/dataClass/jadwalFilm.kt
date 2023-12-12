@@ -1,4 +1,4 @@
-package com.alloys.e_tix
+package com.alloys.e_tix.dataClass
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.alloys.e_tix.dataClass.Movie
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -17,10 +18,14 @@ class detail_Film : AppCompatActivity() {
                 result ->
             arMovies.clear()
             for (document in result) {
+                val durasi = document.data.get("durasi").toString().toInt()
+                val durasiWithMinutes = "$durasi Minutes"
+
                 var readData = Movie(
+                    document.id,
                     document.data.get("judul_film").toString(),
                     document.data.get("deskripsi").toString(),
-                    document.data.get("durasi").toString().toInt(),
+                    durasiWithMinutes,
                     document.data.get("produser").toString(),
                     document.data.get("sutradara").toString(),
                     document.data.get("penulis").toString(),

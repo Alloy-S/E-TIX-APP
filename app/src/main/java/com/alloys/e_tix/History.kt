@@ -1,52 +1,132 @@
 package com.alloys.e_tix
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.SimpleAdapter
-import android.widget.TextView
+import android.view.WindowManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.adapterRV.adapterHistory
+import com.alloys.e_tix.dataClass.Movie
+import com.alloys.e_tix.dataClass.dataHistory
+import com.alloys.e_tix.dataClass.dataMovie
+import com.alloys.e_tix.dataClass.dataTransaksi
+import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.storage
+import java.io.File
 
 class History : AppCompatActivity() {
 
     var listHistory = ArrayList<dataHistory>()
-    var db = Firebase.firestore
+    val db = Firebase.firestore
+    val auth = Firebase.auth
+    val storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
+    var arMovie = ArrayList<Movie>()
+    val imageBitmap = mutableMapOf<String, Bitmap>()
+    lateinit var dataTransaksi: dataTransaksi
+    lateinit var _rvHistory : RecyclerView
 
-    lateinit var _lvAdapterSimple :SimpleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
+        _rvHistory =  findViewById(R.id.selectHistory)
+        DialogHelper.showDialogBar(this, "Loading....")
+        val isDialogVisible = DialogHelper.isDialogVisible()
 
-        db.collection("movies").document("g5MVjLHzSvGsyfLJu18a").get().addOnSuccessListener {
-            val posterURL = it.data!!.get("urlPoster")
-        }
+
+        db.collection("users").document(auth.currentUser!!.uid).collection("transaction").get()
+            .addOnSuccessListener { results ->
+                listHistory.clear()
+
+                for (document in results) {
+                    val movieID = document.data.get("movieId").toString()
+                    val tangglTransaksi = document.data.get("transaction_date").toString().toLong()
+                    val namaMall = document.data.get("location").toString()
+                    val showDate = document.data.get("show_date").toString().toLong()
+                    val bookingCode = document.data.get("booking_code").toString()
+                    val seats = document.data.get("seats") as List<String>
+                    val studio = document.data.get("studio").toString()
+                    val totalTiket = document.data.get("total_tiket").toString().toInt()
+                    val tiketPrice = document.data.get("harga_tiket").toString().toInt()
+                    val admFee = document.data.get("admFee").toString()
+                    val totalOrder = document.data.get("total_order").toString().toInt()
+                    val payment = document.data.get("payment").toString()
+                    val totalPayment = document.data.get("total_order").toString().toInt()
+
+                    // Now, let's retrieve movie details using the movie ID
+                    db.collection("movies").document(movieID).get()
+                        .addOnSuccessListener { movieDocument ->
+                            val judulFilm: String = movieDocument.getString("judul_film") ?: ""
+                            val imageUrl: String = movieDocument.getString("urlPoster") ?: ""
+
+                            val readData = dataHistory(
+                                document.id,
+                                tangglTransaksi,
+                                showDate,
+                                bookingCode,
+                                namaMall,
+                                judulFilm,
+                                imageUrl,
+                                seats,
+                                studio,
+                                totalTiket,
+                                tiketPrice,
+                                admFee,
+                                totalOrder,
+                                payment,
+                                totalPayment,
+                            )
+
+                            listHistory.add(readData)
+                        }
+                }
+                    //    START STORAGE
+                    val localFile = File.createTempFile("img", ".jpg")
+                    //    GET ALL NAME IN THE FOLDER
+                    val arDaftarPoster = ArrayList<String>()
+                    storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
+                        for (item in result.items) {
+//                                    Log.d("ISI STORAGE", item.name)
+                            arDaftarPoster.add(item.name)
+                        }
+
+                        Log.d("ISI ARBITMAP", arDaftarPoster.toString())
+
+                        var counterDownload = 0
+                        for (item in arDaftarPoster) {
+                            val isImgRef = storage.reference.child("img_poster_film/$item")
+                            isImgRef.getFile(localFile).addOnSuccessListener {
+                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+                                imageBitmap[item] = bitmap
+                                counterDownload++
+
+                                if (counterDownload == arDaftarPoster.size) {
+                                    Log.d("ISI ARBITMAP", imageBitmap.size.toString())
+                                    listHistory.sortBy { it.transaction_date }
+                                    dataTransaksi = dataTransaksi(listHistory, imageBitmap)
+                                    _rvHistory.layoutManager = LinearLayoutManager(this)
+                                    val adapters = adapterHistory(dataTransaksi)
+                                    _rvHistory.adapter = adapters
+                                    DialogHelper.dismissDialog()
+
+                                }
+                            }
+                        }
+                    }
 
 
-        db.collection("users").document(" IiGl00Z8zFPt732DLEUAVzjrGdJ3").get().addOnSuccessListener {
-            val transaction = it.data!!.get("transaction") as DocumentReference
 
-            db.collection("transaction").document("3DjlbmU5k3TKkF071HxF").get().addOnSuccessListener {
-                val bookingCode = it.data!!.get("booking_code") as DocumentReference
             }
-        }
-
-
-
-        db.collection("users").document("IiGl00Z8zFPt732DLEUAVzjrGdJ3").collection("transaction").get().addOnSuccessListener {
-
-        }
-
-//        db.collection("purchased_seats").document("ZV6jrzhtAWKa8PLapT2l").get().addOnSuccessListener {
-//            val movieid = it.data!!.get("movieID") as DocumentReference
-//            movieid.get().addOnSuccessListener {
-//                Log.d("inside movieID judul", it.data?.get("judul_film").toString() )
-//            }
-//        }
-
+            .addOnFailureListener { exception ->
+                            // Handle the failure to retrieve movie details
+                            Log.e("Firestore", "Error getting movie details: $exception")
+            }
     }
 }
+

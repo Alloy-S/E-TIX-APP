@@ -1,16 +1,33 @@
 package com.alloys.e_tix
 
+import android.app.Activity
+import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.MimeTypeMap
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Spinner
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.alloys.e_tix.dataClass.Movie
 import com.google.firebase.Firebase
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,12 +39,20 @@ private const val ARG_PARAM2 = "param2"
  * Use the [fragmentAddMovieAdmin.newInstance] factory method to
  * create an instance of this fragment.
  */
-class fragmentAddMovieAdmin : Fragment() {
+class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val PICK_IMAGE_REQUEST: Int = 1
+    private lateinit var mButtonChooseImage: Button
+    private lateinit var mEditTextFileName: EditText
+    private lateinit var mImageView: ImageView
+    private lateinit var mImageUri: Uri
+    private lateinit var mStorageRef : StorageReference
+    private lateinit var mDatabaseRef : DatabaseReference
     val db = Firebase.firestore
     var idMovie : String = ""
+    var selectedItem: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +64,14 @@ class fragmentAddMovieAdmin : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        var spinner: Spinner = view.findViewById(R.id.spStatus)
+        var adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(requireContext(),R.array.status,
+            com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = this
 
         val _etJudul = view.findViewById<EditText>(R.id.etJudul)
         val _etCasts = view.findViewById<EditText>(R.id.etCasts)
@@ -80,6 +113,7 @@ class fragmentAddMovieAdmin : Fragment() {
 
         var _btnNext = view.findViewById<Button>(R.id.btNext)
         _btnNext.setOnClickListener {
+            //Buat tambah data
             TambahData(_etJudul.text.toString(),
                 _etDeskripsi.text.toString(),
                 _etDurasi.text.toString().toInt(),
@@ -89,14 +123,89 @@ class fragmentAddMovieAdmin : Fragment() {
                 _etCasts.text.toString(),
                 selectedGenres,
                 "a",
-                _etProduksi.text.toString())
+                _etProduksi.text.toString(),
+                generateRandomStringId())
 
+            //Buat upload image
+            uploadFile()
+        }
+
+        //Buat image
+        mButtonChooseImage = view.findViewById(R.id.btChooseImage)
+        mImageView = view.findViewById(R.id.ivImage)
+        mEditTextFileName = view.findViewById(R.id.etNamaImage)
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads")
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads")
+
+        //Buat buka file di hp
+        mButtonChooseImage.setOnClickListener {
+            openFileChooser()
         }
     }
 
+    fun openFileChooser() {
+        val intent = Intent()
+        intent.setType("image/*")
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+
+    fun getFileExtension(uri : Uri) : String? {
+        val cR: ContentResolver = requireContext().contentResolver
+        val mime: MimeTypeMap = MimeTypeMap.getSingleton()
+        return mime.getExtensionFromMimeType(cR.getType(uri))
+    }
+    fun uploadFile() {
+        val fileReference: StorageReference = mStorageRef.child("${mEditTextFileName.text}.${getFileExtension(mImageUri)}")
+        fileReference.putFile(mImageUri)
+            .addOnSuccessListener {taskSnapshot: UploadTask.TaskSnapshot ->
+                Toast.makeText(requireContext(), "Upload Successful", Toast.LENGTH_SHORT).show()
+                val upload = Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
+                val uploadId : String? = mDatabaseRef.push().key
+                if (uploadId != null) {
+                    mDatabaseRef.child(uploadId).setValue(upload)
+                }
+            }.addOnFailureListener {
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
+            && data != null && data.data != null){
+            mImageUri = data.data!!
+
+            Picasso.get().load(mImageUri).into(mImageView)
+            mImageView.setImageURI(mImageUri)
+        }
+    }
+
+    fun generateRandomStringId(): String {
+        val firestore = FirebaseFirestore.getInstance()
+        // Create a reference to a new document with an auto-generated ID
+        val documentReference = firestore.collection("movies").document()
+        return documentReference.id
+    }
+
     fun TambahData(judul_film : String, deskripsi : String, durasi : Int, produser : String, sutradara : String,
-                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String){
-        val dataBaru = Movie(judul_film, deskripsi, durasi, produser, sutradara, penulis, casts, jenis_film, urlPoster, produksi)
+                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String){
+        val dataBaru = Movie(
+            id,
+            judul_film,
+            deskripsi,
+            durasi.toString(),
+            produser,
+            sutradara,
+            penulis,
+            casts,
+            jenis_film,
+            urlPoster,
+            produksi
+        )
         db.collection("movies").add(dataBaru)
             .addOnSuccessListener { documentReference ->
                 // DocumentSnapshot added with ID: documentReference.id
@@ -140,5 +249,13 @@ class fragmentAddMovieAdmin : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        selectedItem = parent?.getItemAtPosition(position).toString()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }

@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/frameContainer"
+    android:id="@+id/beranda"
     android:background="@color/BackgroundFragment"
     tools:context=".Beranda">
 
 <!--    logo xxi -->
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="412dp"
         android:layout_height="86dp"
         android:background="@color/darkGreen"
@@ -24,6 +25,14 @@
             android:layout_height="100dp"
             app:srcCompat="@drawable/xxi" />
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 <!--    navbar -->
     <LinearLayout

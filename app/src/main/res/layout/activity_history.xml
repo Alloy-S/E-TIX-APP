@@ -50,7 +50,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/purchaseHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
@@ -63,6 +63,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llXXI" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/selectHistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/purchaseHistory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
