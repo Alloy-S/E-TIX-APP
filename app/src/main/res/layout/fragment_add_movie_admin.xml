@@ -13,7 +13,7 @@
 
 <!--        Judul Film-->
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/hsSynopsis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -27,8 +27,8 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:hint="Masukkan Judul Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+            app:layout_constraintTop_toBottomOf="@+id/hsSynopsis" />
 
 <!--        Casts Film-->
         <TextView
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Casts Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etJudul" />
 
         <EditText
@@ -45,7 +45,7 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:hint="Masukkan Casts Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 <!--        Deskripsi Film-->
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Deskripsi Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etCasts" />
 
         <EditText
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Durasi Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etDeskripsi" />
 
         <EditText
@@ -81,7 +81,7 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:hint="Masukkan Durasi Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
 <!--        Genre Film-->
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Genre Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etDurasi" />
 
         <CheckBox
@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Drama"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <CheckBox
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Romance"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/cbDrama" />
 
         <CheckBox
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comedy"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/cbRomance" />
 
         <CheckBox
@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Horror"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/cbComedy" />
 
         <CheckBox
@@ -205,7 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Penulis Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/cbHorror" />
 
         <EditText
@@ -213,7 +213,7 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:hint="Masukkan Penulis Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
 <!--        Produksi Film-->
@@ -223,7 +223,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Produksi Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etPenulis" />
 
         <EditText
@@ -231,7 +231,7 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:hint="Masukkan Produksi Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
 <!--        Produser Film-->
@@ -241,7 +241,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Produser Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etProduksi" />
 
         <EditText
@@ -249,7 +249,7 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:hint="Masukkan Produser"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
 <!--        Sutradara Film-->
@@ -259,7 +259,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Sutradara Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etProduser" />
 
         <EditText
@@ -267,7 +267,7 @@
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:hint="Masukkan Sutradara Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         <TextView
@@ -276,14 +276,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Status Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/etSutradara" />
 
         <Spinner
             android:id="@+id/spStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
         <TextView
@@ -293,7 +293,7 @@
             android:layout_marginTop="20dp"
             android:textColor="@color/black"
             android:text="Poster Film"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/spStatus" />
 
         <Button
@@ -303,7 +303,7 @@
             android:text="Choose File"
             android:textColor="@color/black"
             android:backgroundTint="#d6d5d6"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <EditText
@@ -319,7 +319,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/btChooseImage"/>
 
         <Button
@@ -330,7 +330,7 @@
             android:layout_marginEnd="16dp"
             android:text="NEXT"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/ivImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
