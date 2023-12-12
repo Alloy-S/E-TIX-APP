@@ -270,13 +270,68 @@
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Status Film"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/etSutradara" />
+
+        <Spinner
+            android:id="@+id/spStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:text="Poster Film"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/spStatus" />
+
+        <Button
+            android:id="@+id/btChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose File"
+            android:textColor="@color/black"
+            android:backgroundTint="#d6d5d6"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <EditText
+            android:id="@+id/etNamaImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan Nama Image"
+            app:layout_constraintStart_toEndOf="@+id/btChooseImage"
+            app:layout_constraintTop_toTopOf="@+id/btChooseImage" />
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/btChooseImage"/>
+
         <Button
             android:id="@+id/btNext"
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
             android:text="NEXT"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/etSutradara" />
+            app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

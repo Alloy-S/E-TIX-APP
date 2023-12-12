@@ -19,4 +19,10 @@
         <item>TRANSMART RUNGKUT XXI</item>
         <item>TUNJUNGAN PLAZA XXI</item>
     </string-array>
+
+    <!--  Buat Status  -->
+    <string-array name="status">
+        <item>Now Playing</item>
+        <item>UpComing</item>
+    </string-array>
 </resources>
