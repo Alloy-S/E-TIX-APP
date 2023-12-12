@@ -14,14 +14,14 @@ import com.alloys.e_tix.dataClass.dataMovie
 import com.alloys.e_tix.detail_Film
 
 
-class movieAdapter(
+class adapterMovieAdmin(
     private val dataMovie : dataMovie,
 ) :
-    RecyclerView.Adapter<movieAdapter.ListViewHolder>() {
+    RecyclerView.Adapter<adapterMovieAdmin.ListViewHolder>() {
 
 
     inner class ListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-//        var _poster = itemView.findViewById<ImageView>(R.id.ivPoster)
+        //        var _poster = itemView.findViewById<ImageView>(R.id.ivPoster)
         var _judul = itemView.findViewById<TextView>(R.id.tvJudul)
         var _durasi = itemView.findViewById<TextView>(R.id.tvDurasiFilm)
         var _poster = itemView.findViewById<ImageView>(R.id.ivPoster)
@@ -43,17 +43,17 @@ class movieAdapter(
 
 
         holder._judul.setText(movie.judul_film)
-        holder._durasi.setText(movie.durasi.toString() + " Minutes")
+        holder._durasi.setText(movie.durasi + " Minutes")
         holder._poster.setImageBitmap(poster)
 
 
         holder._itemMoview.setOnClickListener {
-            val intent = Intent(it.context, detail_Film::class.java).apply {
-                putExtra("movieID", movie.movieID)
-                putExtra("dataMovie", movie)
-                putExtra("posterMovie", poster)
-            }
-            it.context.startActivity(intent)
+//            val intent = Intent(it.context, detail_Film::class.java).apply {
+//                putExtra("movieID", movie.movieID)
+//                putExtra("dataMovie", movie)
+//                putExtra("posterMovie", poster)
+//            }
+//            it.context.startActivity(intent)
         }
 
     }

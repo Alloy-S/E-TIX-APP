@@ -43,7 +43,7 @@ class shortcutPageDev : AppCompatActivity() {
         }
 
     _detailTiket.setOnClickListener {
-        val intent = Intent(this@shortcutPageDev, detailTiket::class.java).apply {
+        val intent = Intent(this@shortcutPageDev, addJadwalMovieAdmin::class.java).apply {
 //                putExtra(Beranda.dataTerima, _etHandphone.text.toString())
 //                _etHandphone.text.clear()
 //                _etPassword.text.clear()

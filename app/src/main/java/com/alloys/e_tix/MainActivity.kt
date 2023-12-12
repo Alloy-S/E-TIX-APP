@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.alloys.e_tix.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -77,10 +79,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 //        buat matiin login
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(this@MainActivity, shortcutPageDev::class.java)
-            startActivity(intent)
-        }
+//        if(firebaseAuth.currentUser != null){
+//            val intent = Intent(this@MainActivity, shortcutPageDev::class.java)
+//            startActivity(intent)
+//        }
 
 
     }

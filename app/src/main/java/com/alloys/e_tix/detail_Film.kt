@@ -1,8 +1,11 @@
 package com.alloys.e_tix
 
+import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import com.alloys.e_tix.dataClass.Movie
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -13,33 +16,20 @@ class detail_Film : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_film)
 
-        var arMovies = ArrayList<Movie>()
-        val dataMovie = db.collection("movies").get().addOnSuccessListener {
-                result ->
-            arMovies.clear()
-            for (document in result) {
-                val durasi = document.data.get("durasi").toString().toInt()
-                val durasiWithMinutes = "$durasi Minutes"
+        val _btnBuyTiket = findViewById<Button>(R.id.btnBuyTiket)
+        val datamovie = intent.getParcelableExtra("dataMovie", Movie::class.java)
+        val posterMovie = intent.getParcelableExtra("posterMovie", Bitmap::class.java)
 
-                var readData = Movie(
-                    document.id,
-                    document.data.get("judul_film").toString(),
-                    document.data.get("deskripsi").toString(),
-                    durasiWithMinutes,
-                    document.data.get("produser").toString(),
-                    document.data.get("sutradara").toString(),
-                    document.data.get("penulis").toString(),
-                    document.data.get("casts").toString(),
-                    document.data.get("jenis_film") as List<String>,
-                    document.data.get("urlPoster").toString(),
-                    document.data.get("produksi").toString(),
-                )
-
-                arMovies.add(readData)
+        _btnBuyTiket.setOnClickListener {
+            val intent = Intent(this, selectStudio::class.java).apply {
+                putExtra("dataMovie", datamovie)
+                putExtra("posterMovie", posterMovie)
             }
-            Log.d("arMovies", arMovies.toString())
 
+            startActivity(intent)
         }
+
+
 
     }
 

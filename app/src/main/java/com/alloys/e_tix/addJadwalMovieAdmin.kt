@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -25,6 +26,14 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
         var adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this,R.array.lokasi,
             com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
 
+//        db.collection("theaters").document("hOmYMmqdr16ciXkb3WYZ").get().addOnSuccessListener {
+//            val listTheaters = it.data!!.get("theaters_name") as List<String>
+//
+//            val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listTheaters)
+//
+//            spinner.adapter = adapter2
+//            spinner.onItemSelectedListener = this
+//        }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         spinner.adapter = adapter
@@ -63,7 +72,9 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
         val _btnAdd = findViewById<Button>(R.id.btnAdd)
         _btnAdd.setOnClickListener {
-            TambahJadwal(selectedItem.toString(),selectedJadwal)
+            Log.d("SELECTED ITEM", selectedItem)
+            Log.d("selected Jadwal", selectedJadwal.toString())
+//            TambahJadwal(selectedItem.toString(),selectedJadwal)
         }
     }
 

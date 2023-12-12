@@ -112,6 +112,20 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         var _btnNext = view.findViewById<Button>(R.id.btNext)
+
+
+        //Buat image
+        mButtonChooseImage = view.findViewById(R.id.btChooseImage)
+        mImageView = view.findViewById(R.id.ivImage)
+        mEditTextFileName = view.findViewById(R.id.etNamaImage)
+        mStorageRef = FirebaseStorage.getInstance().getReference("img_poster_film")
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("img_poster_film")
+
+        //Buat buka file di hp
+        mButtonChooseImage.setOnClickListener {
+            openFileChooser()
+        }
+
         _btnNext.setOnClickListener {
             //Buat tambah data
             TambahData(_etJudul.text.toString(),
@@ -122,24 +136,12 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
                 _etPenulis.text.toString(),
                 _etCasts.text.toString(),
                 selectedGenres,
-                "a",
+                "${mEditTextFileName.text}.${getFileExtension(mImageUri)}",
                 _etProduksi.text.toString(),
                 generateRandomStringId())
 
             //Buat upload image
             uploadFile()
-        }
-
-        //Buat image
-        mButtonChooseImage = view.findViewById(R.id.btChooseImage)
-        mImageView = view.findViewById(R.id.ivImage)
-        mEditTextFileName = view.findViewById(R.id.etNamaImage)
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads")
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads")
-
-        //Buat buka file di hp
-        mButtonChooseImage.setOnClickListener {
-            openFileChooser()
         }
     }
 
@@ -206,6 +208,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
             urlPoster,
             produksi
         )
+
         db.collection("movies").add(dataBaru)
             .addOnSuccessListener { documentReference ->
                 // DocumentSnapshot added with ID: documentReference.id
