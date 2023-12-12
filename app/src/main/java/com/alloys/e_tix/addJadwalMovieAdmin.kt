@@ -9,8 +9,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -70,19 +72,27 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
             }
         }
 
+        val _etHarga = findViewById<EditText>(R.id.etHarga)
+        val _etMulai = findViewById<EditText>(R.id.etMulai)
+        val _etBerakhir = findViewById<EditText>(R.id.etBerakhir)
+
         val _btnAdd = findViewById<Button>(R.id.btnAdd)
         _btnAdd.setOnClickListener {
             Log.d("SELECTED ITEM", selectedItem)
             Log.d("selected Jadwal", selectedJadwal.toString())
 //            TambahJadwal(selectedItem.toString(),selectedJadwal)
+            TambahJadwal(selectedItem.toString(),selectedJadwal,_etHarga.text.toString().toInt(),_etMulai.text.toString(),_etBerakhir.text.toString())
         }
     }
 
-    fun TambahJadwal(lokasi : String, jadwal : List<String>) {
+    fun TambahJadwal(lokasi : String, jadwal : List<String>, harga : Int, tgl_mulai : String, tgl_berakhir : String) {
 //        val dataBaru = JadwalMovie(lokasi, jadwal)
         val dataBaru = hashMapOf(
             "lokasi" to lokasi,
-            "jadwal" to jadwal
+            "jadwal" to jadwal,
+            "harga" to harga,
+            "tgl_mulai" to tgl_mulai,
+            "tgl_berakhir" to tgl_berakhir
         )
         db.collection("movies").document(idMovie.toString()).collection("show_schedule").add(dataBaru)
             .addOnSuccessListener { documentReference ->
