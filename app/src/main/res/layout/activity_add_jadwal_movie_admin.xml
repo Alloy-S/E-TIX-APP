@@ -169,4 +169,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Harga Film"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/cb2" />
+
+    <EditText
+        android:id="@+id/etHarga"
+        android:layout_width="375dp"
+        android:layout_height="wrap_content"
+        android:hint="Masukkan Harga Film"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Tanggal Mulai"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/etHarga" />
+
+    <EditText
+        android:id="@+id/etMulai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="dd/mm/yyyy"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+    <EditText
+        android:id="@+id/etBerakhir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:hint="dd/mm/yyyy"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/etMulai"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tanggal Berakhir"
+        app:layout_constraintStart_toStartOf="@+id/etBerakhir"
+        app:layout_constraintTop_toTopOf="@+id/textView26" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
