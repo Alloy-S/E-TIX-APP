@@ -80,7 +80,6 @@ class selectStudio : AppCompatActivity() {
 //            }
 //        }
 
-
         val dataMovie = intent.getParcelableExtra("dataMovie", Movie::class.java)
         val posterMovie = intent.getParcelableExtra("posterMovie", Bitmap::class.java)
 
@@ -99,13 +98,6 @@ class selectStudio : AppCompatActivity() {
                     it.data?.get("urlPoster").toString(),
                     it.data?.get("produksi").toString(),
                 )
-
-//            GET SINGLE IMAGE
-//                val isImgRef = storage.reference.child("img_poster_film/${readData.urlPoster}")
-//                isImgRef.getFile(localFile).addOnSuccessListener {
-//
-//                    val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-
                     _tvJudulFilm.setText(readData.judul_film)
                     _tvDurasi.setText("${readData.durasi} Minutes")
                     _ivPoster.setImageBitmap(posterMovie)
@@ -158,17 +150,5 @@ class selectStudio : AppCompatActivity() {
         } else {
             onBackPressed()
         }
-
-
-
-
-
-
-
-
     }
-
-
-
-
 }

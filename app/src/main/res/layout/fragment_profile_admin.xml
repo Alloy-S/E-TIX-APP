@@ -51,7 +51,7 @@
             android:id="@+id/btnBackForgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/logout" />
+            android:src="@drawable/logoutprofile" />
 
         <TextView
             android:id="@+id/textView22"

@@ -82,4 +82,5 @@ dependencies {
 
     //upload image
     implementation("com.squareup.picasso:picasso:2.8")
+
 }
