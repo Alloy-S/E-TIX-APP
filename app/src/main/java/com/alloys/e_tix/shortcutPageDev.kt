@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.firebase.auth.FirebaseAuth
 
 class shortcutPageDev : AppCompatActivity() {
 //    hehehehhehe
@@ -17,11 +18,11 @@ class shortcutPageDev : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
-    val _historySelected = findViewById<Button>(R.id.historySelected)
-    val _beranda = findViewById<Button>(R.id.berandaDev)
+        val _historySelected = findViewById<Button>(R.id.historySelected)
+        val _beranda = findViewById<Button>(R.id.berandaDev)
         val _select = findViewById<Button>(R.id.selectStudioDev)
         val _detailTiket = findViewById<Button>(R.id.detilTiker)
-
+        val _btnLogout = findViewById<Button>(R.id.btnLogOut)
         _beranda.setOnClickListener {
             val intent = Intent(this@shortcutPageDev, Beranda::class.java).apply {
 //                putExtra(Beranda.dataTerima, _etHandphone.text.toString())
@@ -42,6 +43,7 @@ class shortcutPageDev : AppCompatActivity() {
             startActivity(intent)
         }
 
+    _detailTiket.setText("add jadwal movie")
     _detailTiket.setOnClickListener {
         val intent = Intent(this@shortcutPageDev, addJadwalMovieAdmin::class.java).apply {
 //                putExtra(Beranda.dataTerima, _etHandphone.text.toString())
@@ -58,6 +60,11 @@ class shortcutPageDev : AppCompatActivity() {
 
         }
         startActivity(intent)
+    }
+
+    _btnLogout.setOnClickListener {
+        FirebaseAuth.getInstance().signOut()
+        finish()
     }
 
     }

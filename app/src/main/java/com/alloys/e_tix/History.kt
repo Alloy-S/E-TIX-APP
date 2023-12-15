@@ -37,9 +37,10 @@ class History : AppCompatActivity() {
         setContentView(R.layout.activity_history)
         _rvHistory =  findViewById(R.id.selectHistory)
         DialogHelper.showDialogBar(this, "Loading....")
-        val isDialogVisible = DialogHelper.isDialogVisible()
+        DialogHelper.isDialogVisible()
 
 
+        Log.d("USER ID", auth.currentUser!!.uid)
         db.collection("users").document(auth.currentUser!!.uid).collection("transaction").get()
             .addOnSuccessListener { results ->
                 listHistory.clear()
@@ -126,6 +127,8 @@ class History : AppCompatActivity() {
             .addOnFailureListener { exception ->
                             // Handle the failure to retrieve movie details
                             Log.e("Firestore", "Error getting movie details: $exception")
+                DialogHelper.dismissDialog()
+                onBackPressed()
             }
     }
 }

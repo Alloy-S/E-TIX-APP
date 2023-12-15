@@ -81,6 +81,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         val _etProduksi = view.findViewById<EditText>(R.id.etProduksi)
         val _etProduser = view.findViewById<EditText>(R.id.etProduser)
         val _etSutradara = view.findViewById<EditText>(R.id.etSutradara)
+        val _etURLTrailer = view.findViewById<EditText>(R.id.etUrlTrailer)
         val genreCheckBoxes = listOf<CheckBox>(
             view.findViewById(R.id.cbDrama),
             view.findViewById(R.id.cbRomance),
@@ -138,7 +139,8 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
                 selectedGenres,
                 "${mEditTextFileName.text}.${getFileExtension(mImageUri)}",
                 _etProduksi.text.toString(),
-                generateRandomStringId())
+                generateRandomStringId(),
+                _etURLTrailer.text.toString())
 
             //Buat upload image
             uploadFile()
@@ -194,7 +196,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun TambahData(judul_film : String, deskripsi : String, durasi : Int, produser : String, sutradara : String,
-                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String){
+                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String, urlTrailer: String){
         val dataBaru = Movie(
             id,
             judul_film,
@@ -206,7 +208,8 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
             casts,
             jenis_film,
             urlPoster,
-            produksi
+            produksi,
+            urlTrailer
         )
 
         db.collection("movies").add(dataBaru)

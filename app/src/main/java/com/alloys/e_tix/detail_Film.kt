@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -20,6 +21,7 @@ class detail_Film : AppCompatActivity() {
         setContentView(R.layout.activity_detail_film)
 
         val _btnBuyTiket = findViewById<Button>(R.id.btnBuyTiket)
+        val _btnTrailer = findViewById<Button>(R.id.btnTrailer)
         val datamovie = intent.getParcelableExtra("dataMovie", Movie::class.java)
         val posterMovie = intent.getParcelableExtra("posterMovie", Bitmap::class.java)
 
@@ -35,7 +37,7 @@ class detail_Film : AppCompatActivity() {
 
         val genre = StringBuilder()
         for (item in datamovie!!.jenis_film) {
-            genre.append(item)
+            genre.append("$item ")
         }
 
         _hsPoster.setImageBitmap(posterMovie)
@@ -58,6 +60,13 @@ class detail_Film : AppCompatActivity() {
                 putExtra("posterMovie", posterMovie)
             }
 
+            startActivity(intent)
+        }
+
+        _btnTrailer.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(datamovie.URLTrailer));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setPackage("com.google.android.youtube");
             startActivity(intent)
         }
 

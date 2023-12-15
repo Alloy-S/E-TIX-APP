@@ -15,6 +15,7 @@ data class Movie(
     val casts: String,
     val jenis_film: List<String>,
     val urlPoster: String,
-    val produksi: String
+    val produksi: String,
+    val URLTrailer: String,
 //    val status: String
 ) : Parcelable

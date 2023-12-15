@@ -34,7 +34,7 @@ class selectStudio : AppCompatActivity() {
     val storageRef = storage.reference
 //    val pathReference = storageRef.child("image/poster.jpg")
 //    val getReference =
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_studio)
@@ -57,8 +57,8 @@ class selectStudio : AppCompatActivity() {
             onBackPressed()
         }
 
-        showDialogBar(this, "Loading....")
-        val isDialogVisible = isDialogVisible()
+
+
 
 ////    START STORAGE
 //        val localFile = File.createTempFile("img", ".jpg")
@@ -84,22 +84,24 @@ class selectStudio : AppCompatActivity() {
         val posterMovie = intent.getParcelableExtra("posterMovie", Bitmap::class.java)
 
         if (dataMovie != null && posterMovie != null) {
-            db.collection("movies").document(dataMovie.movieID).get().addOnSuccessListener {
-                val readData = Movie(
-                    it.id,
-                    it.data?.get("judul_film").toString(),
-                    it.data?.get("deskripsi").toString(),
-                    it.data?.get("durasi").toString(),
-                    it.data?.get("produser").toString(),
-                    it.data?.get("sutradara").toString(),
-                    it.data?.get("penulis").toString(),
-                    it.data?.get("casts").toString(),
-                    it.data?.get("jenis_film") as List<String>,
-                    it.data?.get("urlPoster").toString(),
-                    it.data?.get("produksi").toString(),
-                )
-                    _tvJudulFilm.setText(readData.judul_film)
-                    _tvDurasi.setText("${readData.durasi} Minutes")
+            showDialogBar(this, "Loading....")
+            val isDialogVisible = isDialogVisible()
+//            db.collection("movies").document(dataMovie.movieID).get().addOnSuccessListener {
+//                val readData = Movie(
+//                    it.id,
+//                    it.data?.get("judul_film").toString(),
+//                    it.data?.get("deskripsi").toString(),
+//                    it.data?.get("durasi").toString(),
+//                    it.data?.get("produser").toString(),
+//                    it.data?.get("sutradara").toString(),
+//                    it.data?.get("penulis").toString(),
+//                    it.data?.get("casts").toString(),
+//                    it.data?.get("jenis_film") as List<String>,
+//                    it.data?.get("urlPoster").toString(),
+//                    it.data?.get("produksi").toString(),
+//                )
+                    _tvJudulFilm.setText(dataMovie.judul_film)
+                    _tvDurasi.setText("${dataMovie.durasi} Minutes")
                     _ivPoster.setImageBitmap(posterMovie)
 
 
@@ -146,7 +148,7 @@ class selectStudio : AppCompatActivity() {
                             _ivIconDurasi.isInvisible = false
                         }
 
-            }
+//            }
         } else {
             onBackPressed()
         }

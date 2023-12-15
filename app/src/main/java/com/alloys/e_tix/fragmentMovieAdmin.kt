@@ -91,6 +91,7 @@ class fragmentMovieAdmin : Fragment() {
                             document.data.get("jenis_film") as List<String>,
                             document.data.get("urlPoster").toString(),
                             document.data.get("produksi").toString(),
+                            document.data.get("URLTrailer").toString()
                         )
                         arMovie.add(readData)
 

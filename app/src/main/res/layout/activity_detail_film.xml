@@ -69,50 +69,33 @@
 
              <TextView
                  android:id="@+id/hsJudulFilm"
-                 android:layout_width="wrap_content"
+                 android:layout_width="0dp"
                  android:layout_height="wrap_content"
-                 android:layout_marginStart="16dp"
+                 android:layout_marginStart="20dp"
                  android:layout_marginTop="16dp"
+                 android:layout_marginEnd="20dp"
                  android:text="MIDNIGHT SHOW"
+                 android:textAlignment="textStart"
                  android:textSize="20sp"
                  android:textStyle="bold"
-                 app:layout_constraintStart_toEndOf="@+id/ivIconDurasai"
-                 app:layout_constraintTop_toTopOf="parent" />
-
-             <ImageView
-                 android:id="@+id/ivIconDurasai"
-                 android:layout_width="50dp"
-                 android:layout_height="50dp"
-                 android:layout_marginStart="36dp"
-                 android:layout_marginTop="16dp"
-                 android:src="@drawable/age"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toTopOf="parent" />
-
-             <TextView
-                 android:id="@+id/tvJudulFilmStudio"
-                 android:layout_width="48dp"
-                 android:layout_height="48dp"
-                 android:layout_marginStart="36dp"
-                 android:layout_marginTop="24dp"
-                 android:lineSpacingExtra="0sp"
-                 android:text="13+"
-                 android:textAlignment="center"
-                 android:textColor="@color/BackgroundFragment"
-                 android:textSize="24sp"
-                 android:textStyle="bold"
+                 app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toTopOf="parent" />
 
              <TextView
                  android:id="@+id/hsGenre"
-                 android:layout_width="wrap_content"
+                 android:layout_width="0dp"
                  android:layout_height="wrap_content"
-                 android:layout_marginStart="16dp"
-                 android:layout_marginTop="4dp"
+                 android:layout_marginStart="20dp"
+                 android:layout_marginTop="5dp"
+                 android:layout_marginEnd="20dp"
+                 android:layout_marginBottom="10dp"
                  android:text="Horor, Thriller"
+                 android:textAlignment="textStart"
                  android:textColor="@color/grey"
-                 app:layout_constraintStart_toEndOf="@+id/ivIconDurasai"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/hsJudulFilm" />
 
 
@@ -134,7 +117,9 @@
                  android:layout_height="209dp"
                  android:layout_marginStart="33dp"
                  android:layout_marginTop="16dp"
+                 android:layout_marginBottom="10dp"
                  android:src="@drawable/poster1"
+                 app:layout_constraintBottom_toBottomOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
                  app:layout_constraintTop_toTopOf="parent" />
 
@@ -187,26 +172,11 @@
                  app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
              <Button
-                 android:id="@+id/btnPlaying"
-                 android:layout_width="0dp"
-                 android:layout_height="40dp"
-                 android:layout_marginStart="18dp"
-                 android:layout_marginTop="85dp"
-                 android:layout_marginEnd="32dp"
-                 android:backgroundTint="#015351"
-                 android:text="PLAYING AT"
-                 android:textStyle="bold"
-                 app:cornerRadius="5sp"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintStart_toEndOf="@+id/hsPoster"
-                 app:layout_constraintTop_toTopOf="parent" />
-
-             <Button
                  android:id="@+id/btnBuyTiket"
                  android:layout_width="0dp"
                  android:layout_height="40dp"
                  android:layout_marginStart="18dp"
-                 android:layout_marginTop="4dp"
+                 android:layout_marginTop="65dp"
                  android:layout_marginEnd="32dp"
                  android:backgroundTint="#015351"
                  android:text="BUY TIKET"
@@ -214,14 +184,14 @@
                  app:cornerRadius="5sp"
                  app:layout_constraintEnd_toEndOf="parent"
                  app:layout_constraintStart_toEndOf="@+id/hsPoster"
-                 app:layout_constraintTop_toBottomOf="@+id/btnPlaying" />
+                 app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
              <Button
                  android:id="@+id/btnTrailer"
                  android:layout_width="0dp"
                  android:layout_height="40dp"
                  android:layout_marginStart="18dp"
-                 android:layout_marginTop="4dp"
+                 android:layout_marginTop="5dp"
                  android:layout_marginEnd="32dp"
                  android:backgroundTint="#015351"
                  android:text="TRAILER"
@@ -236,31 +206,18 @@
      </LinearLayout>
 
 
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="vertical"/>
-
-
-     <TextView
-         android:layout_marginTop="10dp"
-         android:paddingLeft="33dp"
-         android:id="@+id/hsSynopsis"
-         android:layout_width="348dp"
-         android:layout_height="wrap_content"
-         android:text="Mendapatkan tawaran menjadi bintang nasional,
+    <TextView
+        android:id="@+id/hsSynopsis"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="33dp"
+        android:text="Mendapatkan tawaran menjadi bintang nasional,
 membawa grup Srimulat berhadapan dengan
 kerasnya ibukota dan kendala bahasa. Saat ber..." />
 
-     <TextView
-         android:paddingLeft="33dp"
-         android:layout_width="348dp"
-         android:layout_height="wrap_content"
-         android:text="READ SYNOPSIS"
-         android:textStyle="bold"/>
 
-
-     <TextView
+    <TextView
          android:paddingLeft="33dp"
          android:layout_width="348dp"
          android:layout_height="wrap_content"

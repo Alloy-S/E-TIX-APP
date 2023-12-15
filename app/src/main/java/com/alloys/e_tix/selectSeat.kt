@@ -13,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.alloys.e_tix.helper.Currency.formatToIDRCurrency
@@ -66,18 +67,7 @@ class selectSeat : AppCompatActivity() {
         var kolomTitle = 'A'
 
         val calendar = Calendar.getInstance()
-//        calendar.set(Calendar.HOUR_OF_DAY, 0)
-//        calendar.set(Calendar.MINUTE, 0)
-//        calendar.set(Calendar.SECOND, 0)
-//        val startOfDay = calendar.timeInMillis
-//
-//        calendar.set(Calendar.HOUR_OF_DAY, 23)
-//        calendar.set(Calendar.MINUTE, 59)
-//        calendar.set(Calendar.SECOND, 59)
-//        val endOfDay = calendar.timeInMillis
-//
-//        val startTimestamp = Timestamp(Date(startOfDay))
-//        val endTimestamp = Timestamp(Date(endOfDay))
+
 
         _btnConfirm.isEnabled = false
 
@@ -168,110 +158,139 @@ class selectSeat : AppCompatActivity() {
             }
         }
 
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        val startOfDay = calendar.timeInMillis
+
+        calendar.set(Calendar.HOUR_OF_DAY, 23)
+        calendar.set(Calendar.MINUTE, 59)
+        calendar.set(Calendar.SECOND, 59)
+        val endOfDay = calendar.timeInMillis
+
+//        val startTimestamp = Timestamp(Date(startOfDay))
+//        val endTimestamp = Timestamp(Date(endOfDay))
 
         Log.d("input to DB", "$movieId $waktuMulai")
         if (purchased_seatsRef != null) {
-            db.collection("purchased_seats").document(purchased_seatsRef).get().addOnSuccessListener {
-                Log.d("ISI SEATS", it.data?.get("seats").toString())
-                for (seat in it.data?.get("seats") as List<String>) {
-                    purchasedSeat.add(seat)
+            Log.d("query timestamp", "$startOfDay $endOfDay")
+            val query = db.collection("purchased_seats").document(purchased_seatsRef).collection("time_of_purchase").whereGreaterThanOrEqualTo("date", startOfDay).whereLessThanOrEqualTo("date", endOfDay)
+
+            query.get().addOnSuccessListener { result ->
+                Log.d("query", result.query.toString())
+                Log.d("query", result.toString())
+
+                if (result.size() == 0) {
+                    Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
+                for (item in result) {
+                    Log.d("result query", item.data.toString())
 
-                for (baris in 1..totalBaris) {
-                    val linearLayout = LinearLayout(this)
-                    val llLayoutParams = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    llLayoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.frame_margin_seat)
-                    linearLayout.layoutParams = llLayoutParams
-                    linearLayout.orientation = LinearLayout.HORIZONTAL
+                    Log.d("ISI SEATS", item.data?.get("seats").toString())
+                    for (seat in item.data?.get("seats") as List<String>) {
+                        purchasedSeat.add(seat)
+                    }
 
-                    var kolom = 1
-                    for (i in 1..totalKolom) {
+                    for (baris in 1..totalBaris) {
+                        val linearLayout = LinearLayout(this)
+                        val llLayoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+                        llLayoutParams.bottomMargin = resources.getDimensionPixelSize(R.dimen.frame_margin_seat)
+                        linearLayout.layoutParams = llLayoutParams
+                        linearLayout.orientation = LinearLayout.HORIZONTAL
 
-                        if (i == 5 || i == 13) {
-                            val frameLayout = FrameLayout(this)
-                            frameLayout.layoutParams = frameLayoutParams
+                        var kolom = 1
+                        for (i in 1..totalKolom) {
 
-
-                            val textView = TextView(this)
-                            val textLayoutParams = FrameLayout.LayoutParams(
-                                FrameLayout.LayoutParams.WRAP_CONTENT,
-                                FrameLayout.LayoutParams.WRAP_CONTENT
-                            )
-
-                            textLayoutParams.gravity = Gravity.CENTER
-                            textView.layoutParams = textLayoutParams
-                            textView.text = "$kolomTitle" // Use whatever text you need
+                            if (i == 5 || i == 13) {
+                                val frameLayout = FrameLayout(this)
+                                frameLayout.layoutParams = frameLayoutParams
 
 
-                            frameLayout.addView(textView)
-                            linearLayout.addView(frameLayout)
-                        } else {
-                            val frameLayout = FrameLayout(this)
-                            frameLayout.layoutParams = frameLayoutParams
-                            val textView = TextView(this)
-                            val textLayoutParams = FrameLayout.LayoutParams(
-                                FrameLayout.LayoutParams.WRAP_CONTENT,
-                                FrameLayout.LayoutParams.WRAP_CONTENT
-                            )
-
-
-                            textView.layoutParams = textLayoutParams
-                            textView.text = "$kolomTitle$kolom" // Use whatever text you need
-                            textView.setTextColor(
-                                ContextCompat.getColor(
-                                    this,
-                                    R.color.white
+                                val textView = TextView(this)
+                                val textLayoutParams = FrameLayout.LayoutParams(
+                                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                                    FrameLayout.LayoutParams.WRAP_CONTENT
                                 )
-                            ) // Replace with your desired text color
 
-                            if (!purchasedSeat.contains(textView.text.toString())) {
-                                frameLayout.background = ContextCompat.getDrawable(
-                                    this,
-                                    R.drawable.square_btn
-                                ) // Replace with your actual drawable
+                                textLayoutParams.gravity = Gravity.CENTER
+                                textView.layoutParams = textLayoutParams
+                                textView.text = "$kolomTitle" // Use whatever text you need
 
-                                frameLayout.setOnClickListener {
-                                    if (selectedSeat.contains(textView.text.toString())) {
-                                        frameLayout.background = ContextCompat.getDrawable(this, R.drawable.square_btn)
-                                        selectedSeat.remove(textView.text.toString())
-                                    } else {
-                                        frameLayout.background = ContextCompat.getDrawable(this, R.drawable.square_btn_selected)
-                                        selectedSeat.add(textView.text.toString())
+
+                                frameLayout.addView(textView)
+                                linearLayout.addView(frameLayout)
+                            } else {
+                                val frameLayout = FrameLayout(this)
+                                frameLayout.layoutParams = frameLayoutParams
+                                val textView = TextView(this)
+                                val textLayoutParams = FrameLayout.LayoutParams(
+                                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                                    FrameLayout.LayoutParams.WRAP_CONTENT
+                                )
+
+
+                                textView.layoutParams = textLayoutParams
+                                textView.text = "$kolomTitle$kolom" // Use whatever text you need
+                                textView.setTextColor(
+                                    ContextCompat.getColor(
+                                        this,
+                                        R.color.white
+                                    )
+                                ) // Replace with your desired text color
+
+                                if (!purchasedSeat.contains(textView.text.toString())) {
+                                    frameLayout.background = ContextCompat.getDrawable(
+                                        this,
+                                        R.drawable.square_btn
+                                    ) // Replace with your actual drawable
+
+                                    frameLayout.setOnClickListener {
+                                        if (selectedSeat.contains(textView.text.toString())) {
+                                            frameLayout.background = ContextCompat.getDrawable(this, R.drawable.square_btn)
+                                            selectedSeat.remove(textView.text.toString())
+                                        } else {
+                                            frameLayout.background = ContextCompat.getDrawable(this, R.drawable.square_btn_selected)
+                                            selectedSeat.add(textView.text.toString())
+                                        }
+
+
+                                        _btnConfirm.isEnabled = selectedSeat.size != 0
+                                        val totalHarga = selectedSeat.size * hargaTiket
+
+                                        val hargaFormatted = formatToIDRCurrency(totalHarga)
+                                        _tvTotalTiket.setText("TiKet: ${selectedSeat.size}, Total:  ${hargaFormatted}")
+                                        Log.d("SELECTED SEAT", selectedSeat.toString())
                                     }
 
-
-                                    _btnConfirm.isEnabled = selectedSeat.size != 0
-                                    val totalHarga = selectedSeat.size * hargaTiket
-
-                                    val hargaFormatted = formatToIDRCurrency(totalHarga)
-                                    _tvTotalTiket.setText("TiKet: ${selectedSeat.size}, Total:  ${hargaFormatted}")
-                                    Log.d("SELECTED SEAT", selectedSeat.toString())
+                                } else {
+                                    frameLayout.background = ContextCompat.getDrawable(
+                                        this,
+                                        R.drawable.square_btn_purchased
+                                    )
                                 }
 
-                            } else {
-                                frameLayout.background = ContextCompat.getDrawable(
-                                    this,
-                                    R.drawable.square_btn_purchased
-                                )
+                                textLayoutParams.gravity = Gravity.CENTER
+                                frameLayout.addView(textView)
+                                linearLayout.addView(frameLayout)
+                                kolom++
                             }
-
-                            textLayoutParams.gravity = Gravity.CENTER
-                            frameLayout.addView(textView)
-                            linearLayout.addView(frameLayout)
-                            kolom++
                         }
+                        _llSeat.addView(linearLayout)
+                        kolomTitle++
                     }
-                    _llSeat.addView(linearLayout)
-                    kolomTitle++
                 }
 
+
             }.addOnFailureListener {
+                Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                 onBackPressed()
             }
         } else {
+            Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
             onBackPressed()
         }
 

@@ -270,6 +270,24 @@
             app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
+            <!--        URL Trailer-->
+            <TextView
+                android:id="@+id/URlLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="URL Trailer"
+                app:layout_constraintStart_toStartOf="@+id/etSutradara"
+                app:layout_constraintTop_toBottomOf="@+id/etSutradara" />
+
+            <EditText
+                android:id="@+id/etUrlTrailer"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Sutradara Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/URlLabel" />
+
         <TextView
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
@@ -277,7 +295,7 @@
             android:layout_marginTop="20dp"
             android:text="Status Film"
             app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
-            app:layout_constraintTop_toBottomOf="@+id/etSutradara" />
+            app:layout_constraintTop_toBottomOf="@+id/etUrlTrailer" />
 
         <Spinner
             android:id="@+id/spStatus"
