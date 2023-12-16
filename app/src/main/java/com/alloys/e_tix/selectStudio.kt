@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -19,6 +20,7 @@ import com.alloys.e_tix.dataClass.jadwalFilm
 import com.alloys.e_tix.helper.DialogHelper.dismissDialog
 import com.alloys.e_tix.helper.DialogHelper.isDialogVisible
 import com.alloys.e_tix.helper.DialogHelper.showDialogBar
+import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.storage
@@ -81,7 +83,7 @@ class selectStudio : AppCompatActivity() {
 //        }
 
         val dataMovie = intent.getParcelableExtra("dataMovie", Movie::class.java)
-        val posterMovie = intent.getParcelableExtra("posterMovie", Bitmap::class.java)
+        val posterMovie = intent.getParcelableExtra("posterMovie", Uri::class.java)
 
         if (dataMovie != null && posterMovie != null) {
             showDialogBar(this, "Loading....")
@@ -102,7 +104,8 @@ class selectStudio : AppCompatActivity() {
 //                )
                     _tvJudulFilm.setText(dataMovie.judul_film)
                     _tvDurasi.setText("${dataMovie.durasi} Minutes")
-                    _ivPoster.setImageBitmap(posterMovie)
+//                    _ivPoster.setImageBitmap(posterMovie)
+                    Glide.with(this).load(posterMovie).into(_ivPoster)
 
 
                     db.collection("movies").document(dataMovie.movieID).collection("show_schedule").get()

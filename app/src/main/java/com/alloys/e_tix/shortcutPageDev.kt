@@ -62,9 +62,10 @@ class shortcutPageDev : AppCompatActivity() {
         startActivity(intent)
     }
 
+    _btnLogout.setText("admin")
     _btnLogout.setOnClickListener {
-        FirebaseAuth.getInstance().signOut()
-        finish()
+        val intent = Intent(this, adminPage::class.java)
+        startActivity(intent)
     }
 
     }

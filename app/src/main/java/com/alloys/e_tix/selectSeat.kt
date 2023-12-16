@@ -158,6 +158,7 @@ class selectSeat : AppCompatActivity() {
             }
         }
 
+//        calendar.set(Calendar.DAY_OF_MONTH, 16)
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
@@ -173,6 +174,7 @@ class selectSeat : AppCompatActivity() {
 
         Log.d("input to DB", "$movieId $waktuMulai")
         if (purchased_seatsRef != null) {
+
             Log.d("query timestamp", "$startOfDay $endOfDay")
             val query = db.collection("purchased_seats").document(purchased_seatsRef).collection("time_of_purchase").whereGreaterThanOrEqualTo("date", startOfDay).whereLessThanOrEqualTo("date", endOfDay)
 

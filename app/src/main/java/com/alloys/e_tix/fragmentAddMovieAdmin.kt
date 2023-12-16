@@ -3,8 +3,12 @@ package com.alloys.e_tix
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +32,10 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.squareup.picasso.Picasso
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.util.Calendar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -129,7 +137,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
 
         _btnNext.setOnClickListener {
             //Buat tambah data
-            TambahData(_etJudul.text.toString(),
+            uploadFile(_etJudul.text.toString(),
                 _etDeskripsi.text.toString(),
                 _etDurasi.text.toString().toInt(),
                 _etProduser.text.toString(),
@@ -142,8 +150,9 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
                 generateRandomStringId(),
                 _etURLTrailer.text.toString())
 
+
             //Buat upload image
-            uploadFile()
+
         }
     }
 
@@ -159,21 +168,118 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         val mime: MimeTypeMap = MimeTypeMap.getSingleton()
         return mime.getExtensionFromMimeType(cR.getType(uri))
     }
-    fun uploadFile() {
-        val fileReference: StorageReference = mStorageRef.child("${mEditTextFileName.text}.${getFileExtension(mImageUri)}")
-        fileReference.putFile(mImageUri)
-            .addOnSuccessListener {taskSnapshot: UploadTask.TaskSnapshot ->
-                Toast.makeText(requireContext(), "Upload Successful", Toast.LENGTH_SHORT).show()
-                val upload = Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
-                val uploadId : String? = mDatabaseRef.push().key
-                if (uploadId != null) {
-                    mDatabaseRef.child(uploadId).setValue(upload)
-                }
-            }.addOnFailureListener {
+
+    fun File.reduceFileImage(): File {
+        val file = this
+        val bitmap = BitmapFactory.decodeFile(file.path)
+        var compressQuality = 100
+        var streamLength: Int
+        val MAXIMAL_SIZE = 100000
+        do {
+            val bmpStream = ByteArrayOutputStream()
+            bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+            val bmpPicByteArray = bmpStream.toByteArray()
+            streamLength = bmpPicByteArray.size
+            compressQuality -= 5
+        } while (streamLength > MAXIMAL_SIZE)
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+        return file
+    }
+
+    fun uploadFile(judul_film : String, deskripsi : String, durasi : Int, produser : String, sutradara : String,
+                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String, urlTrailer: String) {
+        val calendar = Calendar.getInstance()
+        Log.d("PATH FILE", mImageUri.path.toString())
+//        val fileReference: StorageReference = mStorageRef.child("${mEditTextFileName.text}.${getFileExtension(mImageUri)}")
+//        try {
+//            val inputStream = requireContext().contentResolver.openInputStream(mImageUri)
+//
+//            val tempFile = File.createTempFile("temp", null, requireContext().cacheDir)
+//            tempFile.deleteOnExit()
+//
+//            val outputStream = FileOutputStream(tempFile)
+//            inputStream?.copyTo(outputStream)
+//            inputStream?.close()
+//            outputStream.close()
+//
+//            val recudedFile = tempFile.reduceFileImage()
+//
+//            val reducedUri = Uri.fromFile(recudedFile)
+//
+//
+//            fileReference.putFile(reducedUri)
+//                .addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
+//                    Toast.makeText(requireContext(), "Upload Successful", Toast.LENGTH_SHORT).show()
+//                    val upload =
+//                        Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
+//                    val uploadId: String? = mDatabaseRef.push().key
+//                    if (uploadId != null) {
+//                        mDatabaseRef.child(uploadId).setValue(upload)
+//                    }
+//
+//                    val intent = Intent(requireContext(), addJadwalMovieAdmin::class.java)
+//                    intent.putExtra("ID_MOVIE", idMovie)
+//                    startActivity(intent)
+//                }.addOnFailureListener {
+//                }
+//                .addOnFailureListener {
+//                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+//                    Log.d("EROR FIREBASE", it.message.toString())
+//                }
+//        } catch (e: Exception) {
+//            Log.d("ERROR UPLOAD FILE", e.toString())
+//        }
+
+
+
+        val filename = "${calendar.timeInMillis}.${getFileExtension(mImageUri)}"
+        val childRef2: StorageReference = mStorageRef.child(filename)
+        val bmp: Bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, mImageUri)
+        val baos = ByteArrayOutputStream()
+        var Quality = 100
+        var streamLength: Int
+        var MAXIMAL_SIZE = 1000000
+        do {
+            Log.d("COMPRESS QUALITY", Quality.toString())
+            val bmpStream = ByteArrayOutputStream()
+            bmp?.compress(Bitmap.CompressFormat.JPEG, Quality, bmpStream)
+            val bmpPicByteArray = bmpStream.toByteArray()
+            streamLength = bmpPicByteArray.size
+            Quality -= 5
+            if (Quality <= 5) {
+                Quality = 3
+                break
             }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-            }
+        } while (streamLength > MAXIMAL_SIZE)
+        bmp.compress(Bitmap.CompressFormat.JPEG, Quality, baos)
+        val data: ByteArray = baos.toByteArray()
+
+        // Uploading the image
+        val uploadTask2: UploadTask = childRef2.putBytes(data)
+        uploadTask2.addOnSuccessListener { taskSnapshot ->
+            Log.d("TASKSNAPSHOT", taskSnapshot.toString())
+            TambahData(judul_film, deskripsi, durasi, produser, sutradara, penulis, casts, jenis_film, filename, produksi, id, urlTrailer)
+            val upload = Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
+                    val uploadId: String? = mDatabaseRef.push().key
+                    if (uploadId != null) {
+                        mDatabaseRef.child(uploadId).setValue(upload).addOnSuccessListener {
+                            Log.d("SUCCESFUL UPLOAD ID", "$uploadId, $upload")
+
+//                            val fragmentManager = requireActivity().supportFragmentManager
+//                            val mfMovieAdmin = fragmentMovieAdmin()
+//                            fragmentManager.beginTransaction().apply {
+//                                replace(R.id.containeradmin, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
+//                                commit()
+//                            }
+                        }.addOnFailureListener {
+                            Log.d("EROR UPLOAD ID", it.message.toString())
+                        }
+                    }
+            Toast.makeText(this.context, "Upload successful", Toast.LENGTH_LONG).show()
+
+        }.addOnFailureListener { e ->
+            Toast.makeText(this.context, "Upload Failed -> $e", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -217,9 +323,16 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
                 // DocumentSnapshot added with ID: documentReference.id
                 println("DocumentSnapshot added with ID: ${documentReference.id}")
                 idMovie = documentReference.id
-                val intent = Intent(requireContext(), addJadwalMovieAdmin::class.java)
-                intent.putExtra("ID_MOVIE", idMovie)
-                startActivity(intent)
+//                val intent = Intent(requireContext(), addJadwalMovieAdmin::class.java)
+//                    intent.putExtra("ID_MOVIE", idMovie)
+//                    startActivity(intent)
+                val fragmentManager = requireActivity().supportFragmentManager
+                val mfMovieAdmin = fragmentMovieAdmin()
+                fragmentManager.beginTransaction().apply {
+                    replace(R.id.containeradmin, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
+                    commit()
+                }
+
             }
             .addOnFailureListener { e ->
                 // Handle errors here

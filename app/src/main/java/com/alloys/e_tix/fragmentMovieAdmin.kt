@@ -2,6 +2,7 @@ package com.alloys.e_tix
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,6 +43,7 @@ class fragmentMovieAdmin : Fragment() {
     lateinit var movies: dataMovie
     var arMovie = ArrayList<Movie>()
     val imageBitmap = mutableMapOf<String, Bitmap>()
+    val imageUri = mutableMapOf<String, Uri>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,13 +112,16 @@ class fragmentMovieAdmin : Fragment() {
                         var counterDownload = 0;
                         for (item in arDaftarPoster) {
                             val isImgRef = storage.reference.child("img_poster_film/$item")
-                            isImgRef.getFile(localFile).addOnSuccessListener {
-                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-                                imageBitmap[item] = bitmap
+                            isImgRef.downloadUrl.addOnSuccessListener {
+//                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+//                                imageBitmap[item] = bitmap
+                                imageUri[item] = it
                                 counterDownload++
 
                                 if (counterDownload == arDaftarPoster.size) {
-                                    movies = dataMovie(arMovie, imageBitmap)
+                                    Log.d("IMAGE URI", imageUri.toString())
+
+                                    movies = dataMovie(arMovie, imageUri)
                                     recyclerView.adapter = adapterMovieAdmin(movies)
                                     DialogHelper.dismissDialog()
                                 }

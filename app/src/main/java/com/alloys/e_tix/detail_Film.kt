@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.alloys.e_tix.dataClass.Movie
+import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -23,7 +24,7 @@ class detail_Film : AppCompatActivity() {
         val _btnBuyTiket = findViewById<Button>(R.id.btnBuyTiket)
         val _btnTrailer = findViewById<Button>(R.id.btnTrailer)
         val datamovie = intent.getParcelableExtra("dataMovie", Movie::class.java)
-        val posterMovie = intent.getParcelableExtra("posterMovie", Bitmap::class.java)
+        val posterMovie = intent.getParcelableExtra("posterMovie", Uri::class.java)
 
         val _hsPoster = findViewById<ImageView>(R.id.hsPoster)
         val _hsJudul = findViewById<TextView>(R.id.hsJudulFilm)
@@ -40,7 +41,8 @@ class detail_Film : AppCompatActivity() {
             genre.append("$item ")
         }
 
-        _hsPoster.setImageBitmap(posterMovie)
+//        _hsPoster.setImageBitmap(posterMovie)
+        Glide.with(this).load(posterMovie).into(_hsPoster)
         _hsJudul.setText(datamovie!!.judul_film)
         _hsGenre.setText(genre.toString())
         _hsDurasi.setText(datamovie!!.durasi)
