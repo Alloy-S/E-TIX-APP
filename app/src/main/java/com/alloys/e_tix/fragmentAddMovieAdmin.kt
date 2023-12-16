@@ -23,6 +23,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.alloys.e_tix.dataClass.Movie
+import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -137,6 +138,8 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
 
         _btnNext.setOnClickListener {
             //Buat tambah data
+            DialogHelper.showDialogBar(this.context, "Loading....")
+            val isDialogVisible = DialogHelper.isDialogVisible()
             uploadFile(_etJudul.text.toString(),
                 _etDeskripsi.text.toString(),
                 _etDurasi.text.toString().toInt(),
@@ -326,6 +329,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
 //                val intent = Intent(requireContext(), addJadwalMovieAdmin::class.java)
 //                    intent.putExtra("ID_MOVIE", idMovie)
 //                    startActivity(intent)
+                DialogHelper.dismissDialog()
                 val fragmentManager = requireActivity().supportFragmentManager
                 val mfMovieAdmin = fragmentMovieAdmin()
                 fragmentManager.beginTransaction().apply {
