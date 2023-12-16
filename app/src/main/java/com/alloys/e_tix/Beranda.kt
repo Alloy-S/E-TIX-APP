@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import com.alloys.e_tix.movieFragment
 import com.alloys.e_tix.profileFragment
 import com.alloys.e_tix.upcomingFragment

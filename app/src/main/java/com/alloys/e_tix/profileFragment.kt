@@ -43,10 +43,23 @@ class profileFragment : Fragment() {
         val user = Firebase.auth.currentUser!!
         val _logout = view.findViewById<ConstraintLayout>(R.id.logoutProfile)
         _logout.setOnClickListener {
-            auth.signOut()
-            val intent = Intent(this.context,MainActivity::class.java)
-            startActivity(intent)
+            // Create an AlertDialog to ask for confirmation
+            AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    // User clicked "Yes," proceed with logout
+                    auth.signOut()
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                    Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // User clicked "No," do nothing
+                }
+                .show()
         }
+
 
         val _delete = view.findViewById<ConstraintLayout>(R.id.deleteProfile)
         _delete.setOnClickListener {

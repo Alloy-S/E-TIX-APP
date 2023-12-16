@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +19,7 @@ import com.alloys.e_tix.dataClass.Movie
 import com.alloys.e_tix.dataClass.dataMovie
 import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.storage
@@ -37,7 +40,8 @@ class movieFragment : Fragment(){
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    val auth = Firebase.auth
+    val user = Firebase.auth.currentUser!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieArrayList: ArrayList<dataMovie>
     private val db = Firebase.firestore
@@ -54,6 +58,7 @@ class movieFragment : Fragment(){
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -125,6 +130,8 @@ class movieFragment : Fragment(){
                     Toast.makeText(this.context, "Error fetching movies", Toast.LENGTH_SHORT).show()
                 }
             }
+        val _namaUser = view.findViewById<TextView>(R.id.tvNamaUser)
+        _namaUser.text = "Welcome, " + user.displayName
     }
 
 
