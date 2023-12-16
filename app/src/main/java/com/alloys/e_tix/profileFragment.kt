@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.google.firebase.Firebase
@@ -37,13 +40,43 @@ class profileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val user = Firebase.auth.currentUser!!
         val _logout = view.findViewById<ConstraintLayout>(R.id.logoutProfile)
         _logout.setOnClickListener {
             auth.signOut()
             val intent = Intent(this.context,MainActivity::class.java)
             startActivity(intent)
         }
+
+        val _delete = view.findViewById<ConstraintLayout>(R.id.deleteProfile)
+        _delete.setOnClickListener {
+            // Create an AlertDialog to ask for confirmation
+            AlertDialog.Builder(requireContext())
+                .setTitle("Delete Account")
+                .setMessage("Are you sure you want to delete your account?")
+                .setPositiveButton("Yes") { dialog, which ->
+                    // User clicked "Yes," proceed with account deletion
+                    user.delete().addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                            Toast.makeText(requireContext(), "account has been deleted", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), "Failed to delete account", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    // User clicked "No," do nothing
+                }
+                .show()
+        }
+
+        val _nama = view.findViewById<TextView>(R.id.tvNamaProfile)
+        val _email = view.findViewById<TextView>(R.id.tvEmailProfile)
+        _nama.text = user.displayName
+        _email.text = user.email
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         progressBar = findViewById(R.id.progressBar)
         firebaseAuth = FirebaseAuth.getInstance()
+        val currentUser = firebaseAuth.currentUser
         binding.btnRegister.setOnClickListener {
             val intent = Intent(this@MainActivity, Register::class.java)
             startActivity(intent)
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish() // Finish the current activity to prevent going back to the login screen
         }
-
         Log.d("CEK CURRENT USER", firebaseAuth.currentUser?.uid.toString())
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmailLogin.text.toString()
@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
 
                     if (loginTask.isSuccessful) {
                         val currentUser = firebaseAuth.currentUser
-
                         currentUser?.reload()?.addOnCompleteListener { reloadTask ->
                             hideProgressBar()
                             if (reloadTask.isSuccessful) {
@@ -71,7 +70,12 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     } else {
-                        Toast.makeText(this, "Incorrect email or password", Toast.LENGTH_SHORT).show()
+                        hideProgressBar()
+                        if (currentUser?.isEmailVerified == false){
+                            checkEmailVerification(currentUser)
+                        }else{
+                            Toast.makeText(this, "Incorrect email or password", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             } else {

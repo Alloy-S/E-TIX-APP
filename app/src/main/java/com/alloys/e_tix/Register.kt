@@ -38,7 +38,6 @@ class Register : AppCompatActivity() {
             val pass = binding.etPass.text.toString()
             val confirmPass = binding.etRePass.text.toString()
             val user = Firebase.auth.currentUser
-
             if (email.isNotBlank() && pass.isNotEmpty() && confirmPass.isNotEmpty() && name.isNotEmpty()) {
                 if (pass == confirmPass) {
                     firebaseAuth.createUserWithEmailAndPassword(email, pass)
@@ -80,12 +79,12 @@ class Register : AppCompatActivity() {
                                                 ).show()
                                             }
                                         }
-
                             } else {
                                 // User registration failed
                                 Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT)
                                     .show()
                             }
+                            firebaseAuth.signOut()
                         }
 
                 } else {
