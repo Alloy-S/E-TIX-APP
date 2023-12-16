@@ -33,19 +33,18 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/tvNamaUser"
+                android:id="@+id/tvNamaUserUp"
                 android:layout_width="252dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="8dp"
-                android:text="Welcome, Lorenzo Ganteng"
+                android:text=""
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!--            logo lokasi-->
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="24dp"

@@ -2,7 +2,6 @@ package com.alloys.e_tix
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alloys.e_tix.adapterRV.movieAdapter
 import com.alloys.e_tix.dataClass.Movie
@@ -22,7 +20,6 @@ import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.storage
 import java.io.File
 
