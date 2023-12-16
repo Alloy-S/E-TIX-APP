@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.firestore
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.UUID
 import kotlin.random.Random
 
 class selectSeat : AppCompatActivity() {
@@ -88,26 +89,36 @@ class selectSeat : AppCompatActivity() {
                     var available = true
                     Log.d("CEK SEATS", seats.toString())
                     for (seat in selectedSeat) {
+                        Log.d("CEK", seat.toString())
                         if (seats.contains(seat)) {
                             available = false
                         }
                     }
 
                     if (available) {
+
+                        Log.d("ADDING TRANSACTION", dataMall.toString())
+                        Log.d("ADDING TRANSACTION", "PROSSES 1")
                         val userID = auth.currentUser?.uid
+                        Log.d("ADDING TRANSACTION", "PROSSES 2")
                         val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9') // Define the character pool
-                        val randomString = (1..6)
-                            .map { Random.nextInt(0, charPool.size) }
-                            .map(charPool::get)
-                            .joinToString("")
+                        Log.d("ADDING TRANSACTION", "PROSSES 3")
+                        val randomString = UUID.randomUUID().toString().replace("-","").substring(0, 6)
+
+                        Log.d("ADDING TRANSACTION", "PROSSES 4")
                         val currentTimestamp = calendar.timeInMillis
+                        Log.d("ADDING TRANSACTION", "PROSSES 5")
                         val dataShowtime = waktuMulai?.split(":")
+                        Log.d("ADDING TRANSACTION", "PROSSES 6")
                         calendar.set(Calendar.HOUR_OF_DAY, dataShowtime!!.get(0).toInt())
+                        Log.d("ADDING TRANSACTION", "PROSSES 7")
                         calendar.set(Calendar.MINUTE, dataShowtime!!.get(1).toInt())
+                        Log.d("ADDING TRANSACTION", "PROSSES 8")
                         val showtime = calendar.timeInMillis
-                        println("Random string of 6 characters: $randomString")
+//                        println("Random string of 6 characters: $randomString")
 
 
+                        Log.d("ADDING TRANSACTION", "PROSSES 9")
                         val dataTransaksi = hashMapOf(
                             "transaction_date" to System.currentTimeMillis(),
                             "movieId" to movieId,
@@ -122,6 +133,7 @@ class selectSeat : AppCompatActivity() {
                             "show_date" to showtime,
                             "admFee" to 2500
                         )
+                        Log.d("Make Transaction data", dataTransaksi.toString())
 
                         db.collection("users").document(userID!!).collection("transaction").add(dataTransaksi).addOnSuccessListener {
                             for (seat in selectedSeat) {
@@ -138,7 +150,11 @@ class selectSeat : AppCompatActivity() {
                                 }
                                 finish()
                                 startActivity(intent)
+                            }.addOnFailureListener {
+                                Log.d("GAGAL ADD purchased seats", it.message.toString())
                             }
+                        }.addOnFailureListener {
+                            Log.d("GAGAL ADD TRANSAKSI", it.message.toString())
                         }
                     } else {
                         val alertDialog = AlertDialog.Builder(this)
@@ -204,10 +220,9 @@ class selectSeat : AppCompatActivity() {
                 } else {
                     for (item in result) {
                         Log.d("result query", item.data.toString())
-
+                        purchasedTicketTimeRef = item.id
                         Log.d("ISI SEATS", item.data?.get("seats").toString())
                         for (seat in item.data?.get("seats") as List<String>) {
-                            purchasedTicketTimeRef = item.id
                             purchasedSeat.add(seat)
                         }
 

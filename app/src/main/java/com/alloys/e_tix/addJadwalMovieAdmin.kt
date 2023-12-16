@@ -13,6 +13,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
+import com.alloys.e_tix.dataClass.showTime
+import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
@@ -78,30 +80,48 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
         val _btnAdd = findViewById<Button>(R.id.btnAdd)
         _btnAdd.setOnClickListener {
+            DialogHelper.showDialogBar(this, "Loading....")
+            val isDialogVisible = DialogHelper.isDialogVisible()
             Log.d("SELECTED ITEM", selectedItem)
             Log.d("selected Jadwal", selectedJadwal.toString())
-//            TambahJadwal(selectedItem.toString(),selectedJadwal)
-            TambahJadwal(selectedItem.toString(),selectedJadwal,_etHarga.text.toString().toInt(),_etMulai.text.toString(),_etBerakhir.text.toString())
+            val arShowTime = ArrayList<showTime>()
+
+            var counter = 0
+            for (jam in selectedJadwal) {
+
+                val dataShowtime = hashMapOf(
+                    "movieID" to idMovie,
+                    "nama_mall" to selectedItem,
+                    "showtime" to jam
+                )
+                db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
+                    arShowTime.add(showTime(it.id, jam))
+                    counter++
+                    if (counter == selectedJadwal.size) {
+                        TambahJadwal(selectedItem,arShowTime,_etHarga.text.toString().toInt())
+                    }
+                }
+            }
+
         }
     }
 
-    fun TambahJadwal(lokasi : String, jadwal : List<String>, harga : Int, tgl_mulai : String, tgl_berakhir : String) {
+    fun TambahJadwal(lokasi : String, jadwal : ArrayList<showTime>, harga : Int) {
 //        val dataBaru = JadwalMovie(lokasi, jadwal)
         val dataBaru = hashMapOf(
-            "lokasi" to lokasi,
-            "jadwal" to jadwal,
-            "harga" to harga,
-            "tgl_mulai" to tgl_mulai,
-            "tgl_berakhir" to tgl_berakhir
+            "nama_mall" to lokasi,
+            "showtime" to jadwal,
+            "harga_tiket" to harga,
         )
         db.collection("movies").document(idMovie.toString()).collection("show_schedule").add(dataBaru)
             .addOnSuccessListener { documentReference ->
                 // DocumentSnapshot added with ID: documentReference.id
-                println("Jadwal DocumentSnapshot added with ID: ${documentReference.id}")
+                Toast.makeText(this, "Berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+                DialogHelper.dismissDialog()
             }
             .addOnFailureListener { e ->
                 // Handle errors here
-                println("Error adding jadwal document: $e")
+                Log.d("Add add jadwal eror", e.printStackTrace().toString())
             }
     }
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
