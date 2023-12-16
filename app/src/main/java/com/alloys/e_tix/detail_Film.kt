@@ -3,6 +3,7 @@ package com.alloys.e_tix
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.media.Image
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,7 +26,7 @@ class detail_Film : AppCompatActivity() {
         val _btnTrailer = findViewById<Button>(R.id.btnTrailer)
         val datamovie = intent.getParcelableExtra("dataMovie", Movie::class.java)
         val posterMovie = intent.getParcelableExtra("posterMovie", Uri::class.java)
-
+        val _btnBack = findViewById<ImageView>(R.id.btnBack)
         val _hsPoster = findViewById<ImageView>(R.id.hsPoster)
         val _hsJudul = findViewById<TextView>(R.id.hsJudulFilm)
         val _hsGenre = findViewById<TextView>(R.id.hsGenre)
@@ -45,7 +46,7 @@ class detail_Film : AppCompatActivity() {
         Glide.with(this).load(posterMovie).into(_hsPoster)
         _hsJudul.setText(datamovie!!.judul_film)
         _hsGenre.setText(genre.toString())
-        _hsDurasi.setText(datamovie!!.durasi)
+        _hsDurasi.setText(datamovie!!.durasi + " Minutes")
         _hsSynopsis.setText(datamovie!!.deskripsi)
         _hsProducer.setText(datamovie!!.produser)
         _hsDirector.setText(datamovie!!.produksi)
@@ -70,6 +71,10 @@ class detail_Film : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setPackage("com.google.android.youtube");
             startActivity(intent)
+        }
+
+        _btnBack.setOnClickListener {
+            finish()
         }
 
 

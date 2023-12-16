@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -46,7 +47,7 @@ class detailTiket : AppCompatActivity() {
         val _tvTotalPayment = findViewById<TextView>(R.id.tvTotalPayment)
         val _ivBarcode = findViewById<ImageView>(R.id.ivBarcode)
         val _ivPosterFilm = findViewById<ImageView>(R.id.ivPosterFilm)
-
+        val _btnBack = findViewById<ImageView>(R.id.btnBack)
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener {
             onBackPressed()
@@ -157,7 +158,10 @@ class detailTiket : AppCompatActivity() {
 //        }.addOnFailureListener {
 //            onBackPressed()
 //        }
-
+_btnBack.setOnClickListener {
+    val intent = Intent(this@detailTiket, Beranda::class.java)
+    startActivity(intent)
+}
 
 
     }
