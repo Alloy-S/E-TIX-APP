@@ -62,6 +62,16 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
     val db = Firebase.firestore
     var idMovie : String = ""
     var selectedItem: String = ""
+    private lateinit var _etJudul: EditText
+    private lateinit var _etCasts: EditText
+    private lateinit var _etDeskripsi: EditText
+    private lateinit var _etDurasi: EditText
+    private lateinit var _etPenulis: EditText
+    private lateinit var _etProduksi: EditText
+    private lateinit var _etProduser: EditText
+    private lateinit var _etSutradara: EditText
+    private lateinit var _etURLTrailer: EditText
+    private lateinit var selectedGenres: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,15 +92,15 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         spinner.adapter = adapter
         spinner.onItemSelectedListener = this
 
-        val _etJudul = view.findViewById<EditText>(R.id.etJudul)
-        val _etCasts = view.findViewById<EditText>(R.id.etCasts)
-        val _etDeskripsi = view.findViewById<EditText>(R.id.etDeskripsi)
-        val _etDurasi = view.findViewById<EditText>(R.id.etDurasi)
-        val _etPenulis = view.findViewById<EditText>(R.id.etPenulis)
-        val _etProduksi = view.findViewById<EditText>(R.id.etProduksi)
-        val _etProduser = view.findViewById<EditText>(R.id.etProduser)
-        val _etSutradara = view.findViewById<EditText>(R.id.etSutradara)
-        val _etURLTrailer = view.findViewById<EditText>(R.id.etUrlTrailer)
+        _etJudul = view.findViewById<EditText>(R.id.etJudul)
+        _etCasts = view.findViewById<EditText>(R.id.etCasts)
+        _etDeskripsi = view.findViewById<EditText>(R.id.etDeskripsi)
+        _etDurasi = view.findViewById<EditText>(R.id.etDurasi)
+        _etPenulis = view.findViewById<EditText>(R.id.etPenulis)
+        _etProduksi = view.findViewById<EditText>(R.id.etProduksi)
+        _etProduser = view.findViewById<EditText>(R.id.etProduser)
+        _etSutradara = view.findViewById<EditText>(R.id.etSutradara)
+        _etURLTrailer = view.findViewById<EditText>(R.id.etUrlTrailer)
         val genreCheckBoxes = listOf<CheckBox>(
             view.findViewById(R.id.cbDrama),
             view.findViewById(R.id.cbRomance),
@@ -107,7 +117,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         )
 
         //list buat simpan genre
-        val selectedGenres = mutableListOf<String>()
+        selectedGenres = mutableListOf()
 
         //untuk cek checkbox diklik atau tidak
         for (checkBox in genreCheckBoxes) {
@@ -137,26 +147,44 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         _btnNext.setOnClickListener {
-            //Buat tambah data
-            DialogHelper.showDialogBar(this.context, "Loading....")
-            val isDialogVisible = DialogHelper.isDialogVisible()
-            uploadFile(_etJudul.text.toString(),
-                _etDeskripsi.text.toString(),
-                _etDurasi.text.toString().toInt(),
-                _etProduser.text.toString(),
-                _etSutradara.text.toString(),
-                _etPenulis.text.toString(),
-                _etCasts.text.toString(),
-                selectedGenres,
-                "${mEditTextFileName.text}.${getFileExtension(mImageUri)}",
-                _etProduksi.text.toString(),
-                generateRandomStringId(),
-                _etURLTrailer.text.toString())
+            if (checkData()) {
+                if (::mImageUri.isInitialized) {
+                    DialogHelper.showDialogBar(this.context, "Loading....")
+                    val isDialogVisible = DialogHelper.isDialogVisible()
 
-
-            //Buat upload image
-
+                    uploadFile(
+                        _etJudul.text.toString(),
+                        _etDeskripsi.text.toString(),
+                        _etDurasi.text.toString().toInt(),
+                        _etProduser.text.toString(),
+                        _etSutradara.text.toString(),
+                        _etPenulis.text.toString(),
+                        _etCasts.text.toString(),
+                        selectedGenres,
+                        "${mEditTextFileName.text}.${getFileExtension(mImageUri)}",
+                        _etProduksi.text.toString(),
+                        generateRandomStringId(),
+                        _etURLTrailer.text.toString()
+                    )
+                } else {
+                    Toast.makeText(requireContext(), "Please select an image first", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    fun checkData() : Boolean{
+        return _etJudul.text.isNotBlank() &&
+                _etDeskripsi.text.isNotBlank() &&
+                _etDurasi.text.isNotBlank() &&
+                _etProduser.text.isNotBlank() &&
+                _etSutradara.text.isNotBlank() &&
+                _etPenulis.text.isNotBlank() &&
+                _etCasts.text.isNotBlank() &&
+                selectedGenres.isNotEmpty()
+//                this::mImageUri.isInitialized
     }
 
     fun openFileChooser() {
@@ -242,6 +270,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         var Quality = 100
         var streamLength: Int
         var MAXIMAL_SIZE = 1000000
+
         do {
             Log.d("COMPRESS QUALITY", Quality.toString())
             val bmpStream = ByteArrayOutputStream()
@@ -263,10 +292,10 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
             Log.d("TASKSNAPSHOT", taskSnapshot.toString())
             TambahData(judul_film, deskripsi, durasi, produser, sutradara, penulis, casts, jenis_film, filename, produksi, id, urlTrailer)
             val upload = Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
-                    val uploadId: String? = mDatabaseRef.push().key
-                    if (uploadId != null) {
-                        mDatabaseRef.child(uploadId).setValue(upload).addOnSuccessListener {
-                            Log.d("SUCCESFUL UPLOAD ID", "$uploadId, $upload")
+            val uploadId: String? = mDatabaseRef.push().key
+            if (uploadId != null) {
+                mDatabaseRef.child(uploadId).setValue(upload).addOnSuccessListener {
+                    Log.d("SUCCESFUL UPLOAD ID", "$uploadId, $upload")
 
 //                            val fragmentManager = requireActivity().supportFragmentManager
 //                            val mfMovieAdmin = fragmentMovieAdmin()
@@ -274,10 +303,10 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
 //                                replace(R.id.containeradmin, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
 //                                commit()
 //                            }
-                        }.addOnFailureListener {
-                            Log.d("EROR UPLOAD ID", it.message.toString())
-                        }
-                    }
+                }.addOnFailureListener {
+                    Log.d("EROR UPLOAD ID", it.message.toString())
+                }
+            }
             Toast.makeText(this.context, "Upload successful", Toast.LENGTH_LONG).show()
 
         }.addOnFailureListener { e ->
