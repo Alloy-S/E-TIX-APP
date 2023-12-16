@@ -183,6 +183,7 @@
         android:layout_width="375dp"
         android:layout_height="wrap_content"
         android:hint="Masukkan Harga Film"
+        android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
