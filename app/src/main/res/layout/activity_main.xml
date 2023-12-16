@@ -90,7 +90,7 @@
         android:layout_width="365dp"
         android:layout_height="46dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="23dp"
         android:background="@drawable/register"
         android:text="Register "
@@ -98,33 +98,19 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 <!--    forgot password-->
 
 
     <TextView
         android:id="@+id/tvForgot"
-        android:layout_width="160dp"
-        android:layout_height="31dp"
+        android:layout_width="162dp"
+        android:layout_height="19dp"
         android:layout_marginStart="247dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="23dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="30dp"
         android:text="Forgot PIN/Password?"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="197dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="198dp"
-        android:text="or"
-        android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
@@ -156,6 +142,29 @@
             tools:layout_editor_absoluteX="84dp"
             tools:layout_editor_absoluteY="696dp" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="177dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="176dp"
+        android:text="OR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
