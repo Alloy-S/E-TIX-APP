@@ -2,6 +2,7 @@ package com.alloys.e_tix
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import com.alloys.e_tix.dataClass.dataTransaksi
 import com.alloys.e_tix.helper.Currency.formatNumberWithCommas
 import com.alloys.e_tix.helper.DialogHelper
 import com.alloys.e_tix.helper.DialogHelper.dismissDialog
+import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -58,7 +60,7 @@ class detailTiket : AppCompatActivity() {
         DialogHelper.showDialogBar(this, "Loading....")
         val isDialogVisible = DialogHelper.isDialogVisible()
 
-        val poster = intent.getParcelableExtra("poster", Bitmap::class.java)
+        val poster = intent.getParcelableExtra("poster", Uri::class.java)
         val dataTransaksi = intent.getParcelableExtra("dataTransaksi", dataHistory::class.java)
         Log.d("data transaksi", dataTransaksi.toString())
 //        Log.d("DataTransaksiType", dataTransaksi?.javaClass?.simpleName ?: "null")
@@ -67,7 +69,8 @@ class detailTiket : AppCompatActivity() {
         val dateFormat2 = SimpleDateFormat("dd/MM/yyyy HH:mm")
 //
         if (poster != null && dataTransaksi != null) {
-            _ivPosterFilm.setImageBitmap(poster)
+//            _ivPosterFilm.setImageBitmap(poster)
+            Glide.with(this).load(poster).into(_ivPosterFilm)
 //            Log.d("data transaksi", dataTransaksi.toString())
             val arShowDate = dateFormat2.format(dataTransaksi.show_date).split(" ")
 
@@ -97,67 +100,72 @@ class detailTiket : AppCompatActivity() {
             }
             displayAllViews(findViewById(R.id.detailTikerView))
             dismissDialog()
-        }
+        } else {
 
-//        db.collection("users").document(auth.currentUser!!.uid).collection("transaction").document(uidTransaksi.toString()).get().addOnSuccessListener {
-//            Log.d("UID transaksi", uidTransaksi.toString())
-//            Log.d("isi detail transaksi", it.data.toString())
-//            val movieID = it.data?.get("movieId")
-//            val tangglTransaksi = it.data?.get("transaction_date").toString().toLong()
-//            val namaMall = it.data?.get("location").toString()
-//            val showDate = it.data?.get("show_date").toString().toLong()
-//            val bookingCode = it.data?.get("booking_code").toString()
-//            val seats = it.data?.get("seats") as List<String>
-//            val studio = it.data?.get("studio").toString()
-//            val totalTiket = it.data?.get("total_tiket").toString().toInt()
-//            val tiketPrice = it.data?.get("harga_tiket").toString().toInt()
-//            val admFee = it.data?.get("admFee").toString()
-//            val totalOrder = it.data?.get("total_order").toString().toInt()
-//            val payment = it.data?.get("payment").toString()
-//            val totalPayment = it.data?.get("total_order").toString().toInt()
-//
-//            db.collection("movies").document(movieID.toString()).get().addOnSuccessListener {
-//                Log.d("get Movie data", it.data.toString())
-//                val multiFormatWriter = MultiFormatWriter();
-//                try {
-//                    val bitMatrix = multiFormatWriter.encode(bookingCode, BarcodeFormat.QR_CODE,400,400);
-//                    val barcodeEncoder = BarcodeEncoder();
-//                    val bitmap = barcodeEncoder.createBitmap(bitMatrix);
-//                    _ivBarcode.setImageBitmap(bitmap);
-//                } catch (e: WriterException) {
-//                    e.printStackTrace();
-//                }
-////                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
-////                val dateFormat2 = SimpleDateFormat("dd/MM/yyyy HH:mm")
-//
-//                val dateshow = dateFormat2.format(showDate).split(" ")
-//
-//
-//                _tvTanggalTransaksi.setText(dateFormat.format(tangglTransaksi))
-//                _tvJudulFilm.setText(it.data?.get("judul_film").toString())
-//                _tvNamaMallDetail.setText(namaMall)
-//                _tvTanggalShow.setText(dateshow[0])
-//                _tvJamShow.setText(dateshow[1])
-//                _tvSeats.setText(seats.toString())
-//                _tvStudio.setText(studio)
-//
-//                _tvTotalTicket.setText(totalTiket.toString())
-//                _tvTiketPrice.setText(formatNumberWithCommas(tiketPrice))
-//                _tvTotalOrder.setText(formatNumberWithCommas(totalOrder))
-//                _tvPayment.setText(payment)
-//                _tvTotalPayment.setText(formatNumberWithCommas(totalPayment))
-//                _tvBookingCode.setText(bookingCode)
-//                _tvAdmFee.setText(admFee)
-//
-//                displayAllViews(findViewById(R.id.detailTikerView))
-//                dismissDialog()
-//
-//            }.addOnFailureListener {
-//                onBackPressed()
-//            }
-//        }.addOnFailureListener {
-//            onBackPressed()
-//        }
+            db.collection("users").document(auth.currentUser!!.uid).collection("transaction")
+                .document(uidTransaksi.toString()).get().addOnSuccessListener {
+                Log.d("UID transaksi", uidTransaksi.toString())
+                Log.d("isi detail transaksi", it.data.toString())
+                val movieID = it.data?.get("movieId")
+                val tangglTransaksi = it.data?.get("transaction_date").toString().toLong()
+                val namaMall = it.data?.get("location").toString()
+                val showDate = it.data?.get("show_date").toString().toLong()
+                val bookingCode = it.data?.get("booking_code").toString()
+                val seats = it.data?.get("seats") as List<String>
+                val studio = it.data?.get("studio").toString()
+                val totalTiket = it.data?.get("total_tiket").toString().toInt()
+                val tiketPrice = it.data?.get("harga_tiket").toString().toInt()
+                val admFee = it.data?.get("admFee").toString()
+                val totalOrder = it.data?.get("total_order").toString().toInt()
+                val payment = it.data?.get("payment").toString()
+                val totalPayment = it.data?.get("total_order").toString().toInt()
+
+
+
+                db.collection("movies").document(movieID.toString()).get().addOnSuccessListener {
+                    Log.d("get Movie data", it.data.toString())
+                    val multiFormatWriter = MultiFormatWriter();
+                    try {
+                        val bitMatrix =
+                            multiFormatWriter.encode(bookingCode, BarcodeFormat.QR_CODE, 400, 400);
+                        val barcodeEncoder = BarcodeEncoder();
+                        val bitmap = barcodeEncoder.createBitmap(bitMatrix);
+                        _ivBarcode.setImageBitmap(bitmap);
+                    } catch (e: WriterException) {
+                        e.printStackTrace();
+                    }
+//                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+//                val dateFormat2 = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
+                    val dateshow = dateFormat2.format(showDate).split(" ")
+
+                    Glide.with(this).load(poster).into(_ivPosterFilm)
+                    _tvTanggalTransaksi.setText(dateFormat.format(tangglTransaksi))
+                    _tvJudulFilm.setText(it.data?.get("judul_film").toString())
+                    _tvNamaMallDetail.setText(namaMall)
+                    _tvTanggalShow.setText(dateshow[0])
+                    _tvJamShow.setText(dateshow[1])
+                    _tvSeats.setText(seats.toString())
+                    _tvStudio.setText(studio)
+
+                    _tvTotalTicket.setText(totalTiket.toString())
+                    _tvTiketPrice.setText(formatNumberWithCommas(tiketPrice))
+                    _tvTotalOrder.setText(formatNumberWithCommas(totalOrder))
+                    _tvPayment.setText(payment)
+                    _tvTotalPayment.setText(formatNumberWithCommas(totalPayment))
+                    _tvBookingCode.setText(bookingCode)
+                    _tvAdmFee.setText(admFee)
+
+                    displayAllViews(findViewById(R.id.detailTikerView))
+                    dismissDialog()
+
+                }.addOnFailureListener {
+                    onBackPressed()
+                }
+            }.addOnFailureListener {
+                onBackPressed()
+            }
+        }
 _btnBack.setOnClickListener {
     val intent = Intent(this@detailTiket, Beranda::class.java)
     startActivity(intent)

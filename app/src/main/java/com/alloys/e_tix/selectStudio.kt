@@ -129,7 +129,8 @@ class selectStudio : AppCompatActivity() {
                                     document.data.get("nama_mall") as String,
                                     arShowtime,
                                     document.data.get("harga_tiket").toString().toInt(),
-                                    dataMovie.movieID
+                                    dataMovie.movieID,
+                                    posterMovie
                                 )
 
 //                    Log.d("MAP FIRESTORE", document)

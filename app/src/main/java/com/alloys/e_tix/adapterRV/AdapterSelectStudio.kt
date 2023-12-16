@@ -92,6 +92,7 @@ class AdapterSelectStudio (
                     putExtra("hargaTiket", 25000)
                     putExtra("waktuMulai", time.showtime)
                     putExtra("seats", time.purchased_seat)
+                    putExtra("dataMall", mall)
                 }
                 holder.context.startActivity(intent)
             }
