@@ -341,7 +341,18 @@
             app:layout_constraintTop_toBottomOf="@+id/btChooseImage" />
 
         <Button
-            android:id="@+id/btNext"
+            android:id="@+id/btneditJadwal"
+            android:layout_width="375dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="Edit jadwal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+            app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+
+        <Button
+            android:id="@+id/btnSave"
             android:layout_width="375dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -349,7 +360,7 @@
             android:text="SAVE"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
-            app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+            app:layout_constraintTop_toBottomOf="@+id/btneditJadwal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

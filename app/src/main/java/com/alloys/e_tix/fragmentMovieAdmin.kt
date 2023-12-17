@@ -139,7 +139,7 @@ class fragmentMovieAdmin : Fragment() {
         intent.putExtra("produksi", movie.produksi)
         intent.putExtra("URLTrailer", movie.URLTrailer)
         intent.putExtra("status", movie.status)
-
+        intent.putExtra("editMovie", movie)
         startActivity(intent)
     }
 

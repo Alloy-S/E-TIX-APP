@@ -24,5 +24,6 @@
     <string-array name="status">
         <item>Now Playing</item>
         <item>UpComing</item>
+        <item>Disable</item>
     </string-array>
 </resources>
