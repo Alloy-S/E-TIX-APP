@@ -1,18 +1,24 @@
 package com.alloys.e_tix.adapterRV
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.alloys.e_tix.R
-import com.alloys.e_tix.dataClass.dataHistory
 import com.alloys.e_tix.dataClass.dataTransaksi
 import com.alloys.e_tix.detailTiket
 import com.bumptech.glide.Glide
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import java.text.SimpleDateFormat
 
 class adapterHistory (
@@ -33,6 +39,14 @@ class adapterHistory (
         var context = itemView.context
     }
 
+    private fun showBarcodeDialog(barcode: Bitmap, context: Context) {
+        val builder = AlertDialog.Builder(context)
+        val imageView = ImageView(context)
+        imageView.setImageBitmap(barcode)
+        builder.setView(imageView)
+        builder.create().show()
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -41,6 +55,8 @@ class adapterHistory (
             .inflate(R.layout.itemhistory,parent,false)
         return ListViewHolder(view)
     }
+
+
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val history = dataTransaksi.arTransaksi[position]
@@ -68,6 +84,20 @@ class adapterHistory (
             }
             holder.context.startActivity(intent)
         }
+
+        holder._barcode.setOnClickListener {
+            val multiFormatWriter = MultiFormatWriter()
+            try {
+                val bitMatrix = multiFormatWriter.encode(history.booking_code, BarcodeFormat.QR_CODE,400,400)
+                val barcodeEncoder = BarcodeEncoder()
+                val bitmap = barcodeEncoder.createBitmap(bitMatrix)
+                showBarcodeDialog(bitmap, holder.context)
+            } catch (e: WriterException) {
+                e.printStackTrace()
+            }
+        }
+
+
     }
 
     override fun getItemCount(): Int {

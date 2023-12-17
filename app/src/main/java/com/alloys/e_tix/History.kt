@@ -62,7 +62,7 @@ class History : AppCompatActivity() {
                     val payment = document.data.get("payment").toString()
                     val totalPayment = document.data.get("total_order").toString().toInt()
 
-                    // Now, let's retrieve movie details using the movie ID
+
                     db.collection("movies").document(movieID).get()
                         .addOnSuccessListener { movieDocument ->
                             val judulFilm: String = movieDocument.getString("judul_film") ?: ""
