@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,6 +42,10 @@ class profileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val user = Firebase.auth.currentUser!!
+        val _nama = view.findViewById<TextView>(R.id.tvNamaProfile)
+        val _email = view.findViewById<TextView>(R.id.tvEmailProfile)
+        _nama.text = user.displayName
+        _email.text = user.email
         val _logout = view.findViewById<ConstraintLayout>(R.id.logoutProfile)
         _logout.setOnClickListener {
             // Create an AlertDialog to ask for confirmation
@@ -71,6 +76,7 @@ class profileFragment : Fragment() {
                     // User clicked "Yes," proceed with account deletion
                     user.delete().addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            db.collection("user").document(user.uid).delete()
                             val intent = Intent(requireContext(), MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
@@ -86,10 +92,13 @@ class profileFragment : Fragment() {
                 .show()
         }
 
-        val _nama = view.findViewById<TextView>(R.id.tvNamaProfile)
-        val _email = view.findViewById<TextView>(R.id.tvEmailProfile)
-        _nama.text = user.displayName
-        _email.text = user.email
+
+
+        val _updateProfile = view.findViewById<ConstraintLayout>(R.id.updateProfile)
+        _updateProfile.setOnClickListener {
+            val intent = Intent(requireActivity(), updateProfile::class.java)
+            startActivity(intent)
+        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

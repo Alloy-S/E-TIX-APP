@@ -55,7 +55,6 @@ class Register : AppCompatActivity() {
                                         .addOnSuccessListener {
                                             Log.d("ADDED TO FIRESTORE", "succes")
                                         }
-
                                     // Set additional user information
                                     val profileUpdates = UserProfileChangeRequest.Builder()
                                         .setDisplayName(name)   // Set display name

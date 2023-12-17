@@ -55,6 +55,12 @@
             android:name=".Beranda"
             android:exported="false" /> <!--  -->
         <activity
+            android:name=".updateProfile"
+            android:label="Update Profile">
+            <!-- Add any other necessary intent filters or configurations here -->
+        </activity>
+
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
