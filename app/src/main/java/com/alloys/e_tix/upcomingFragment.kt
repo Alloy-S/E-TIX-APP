@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alloys.e_tix.adapterRV.adapterUpcoming
 import com.alloys.e_tix.adapterRV.movieAdapter
 import com.alloys.e_tix.dataClass.Movie
 import com.alloys.e_tix.dataClass.dataMovie
@@ -111,7 +112,7 @@ class upcomingFragment : Fragment() {
 
                                     val filteredMovie = arMovie.filter { it.status.equals("UpComing") }.toCollection(ArrayList())
                                     movies = dataMovie(filteredMovie, imageUri)
-                                    recyclerView.adapter = movieAdapter(movies)
+                                    recyclerView.adapter = adapterUpcoming(movies)
                                     DialogHelper.dismissDialog()
                                 }
                             }

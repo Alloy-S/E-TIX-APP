@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alloys.e_tix.R
 import com.alloys.e_tix.dataClass.dataMovie
 import com.alloys.e_tix.detail_Film
-import com.alloys.e_tix.upcomingFragment
 import com.bumptech.glide.Glide
 
 class adapterUpcoming (
@@ -24,6 +23,7 @@ class adapterUpcoming (
         var _judulUpcoming = itemView.findViewById<TextView>(R.id.tvJudulUpcoming)
         var _durasiUpcoming = itemView.findViewById<TextView>(R.id.tvDurasiFilmUpcoming)
         var _posterUpcoming = itemView.findViewById<ImageView>(R.id.ivPosterUpcoming)
+        var _itemUpcoming = itemView.findViewById<ConstraintLayout>(R.id.itemUpcoming)
         val context = itemView.context
 
     }
@@ -42,10 +42,18 @@ class adapterUpcoming (
         val movie = dataMovieUpcoming.arMovie[position]
         val poster = dataMovieUpcoming.arPoster[movie.urlPoster]
 
-
         holder._judulUpcoming.setText(movie.judul_film)
         holder._durasiUpcoming.setText(movie.durasi + " Minutes")
         Glide.with(holder.context).load(poster).into(holder._posterUpcoming)
+        holder._itemUpcoming.setOnClickListener {
+            val intent = Intent(it.context, detail_Film::class.java).apply {
+                putExtra("movieID", movie.movieID)
+                putExtra("dataMovie", movie)
+                putExtra("posterMovie", poster)
+            }
+            it.context.startActivity(intent)
+        }
+
     }
 
 }

@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.alloys.e_tix.dataClass.Movie
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
@@ -38,25 +39,34 @@ class detail_Film : AppCompatActivity() {
         val _hsCast = findViewById<TextView>(R.id.hsCast)
 
         val genre = StringBuilder()
-        for (item in datamovie!!.jenis_film) {
-            genre.append("$item ")
+        if (datamovie != null) {
+            for (item in datamovie.jenis_film) {
+                genre.append("$item ")
+            }
         }
 
+
 //        _hsPoster.setImageBitmap(posterMovie)
-        Glide.with(this).load(posterMovie).into(_hsPoster)
-        _hsJudul.setText(datamovie!!.judul_film)
-        _hsGenre.setText(genre.toString())
-        _hsDurasi.setText(datamovie!!.durasi + " Minutes")
-        _hsSynopsis.setText(datamovie!!.deskripsi)
-        _hsProducer.setText(datamovie!!.produser)
-        _hsDirector.setText(datamovie!!.produksi)
-        _hsWriter.setText(datamovie!!.penulis)
-        _hsCast.setText(datamovie!!.casts)
+        if (datamovie != null) {
+            Glide.with(this).load(posterMovie).into(_hsPoster)
+            _hsJudul.text = datamovie.judul_film
+            _hsGenre.text = genre.toString()
+            _hsDurasi.text = "${datamovie.durasi} Minutes"
+            _hsSynopsis.text = datamovie.deskripsi
+            _hsProducer.text = datamovie.produser
+            _hsDirector.text = datamovie.produksi
+            _hsWriter.text = datamovie.penulis
+            _hsCast.text = datamovie.casts
+        } else {
+            // Handle the case when datamovie is null, show an error message, or take appropriate action.
+        }
+
 
 
         var arMovies = ArrayList<Movie>()
 
 
+        _btnBuyTiket.isVisible = datamovie?.status != "UpComing"
         _btnBuyTiket.setOnClickListener {
             val intent = Intent(this, selectStudio::class.java).apply {
                 putExtra("dataMovie", datamovie)
@@ -67,7 +77,7 @@ class detail_Film : AppCompatActivity() {
         }
 
         _btnTrailer.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(datamovie.URLTrailer));
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(datamovie?.URLTrailer));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setPackage("com.google.android.youtube");
             startActivity(intent)

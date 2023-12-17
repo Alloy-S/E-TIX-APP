@@ -19,8 +19,6 @@ class movieAdapter(
     private val dataMovie : dataMovie,
 ) :
     RecyclerView.Adapter<movieAdapter.ListViewHolder>() {
-
-
     inner class ListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
 //        var _poster = itemView.findViewById<ImageView>(R.id.ivPoster)
         var _judul = itemView.findViewById<TextView>(R.id.tvJudul)
