@@ -28,6 +28,8 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_movie_admin)
 
+
+
         _etJudul = findViewById(R.id.etJudul)
         _etCasts = findViewById(R.id.etCasts)
         _etDeskripsi = findViewById(R.id.etDeskripsi)
@@ -38,6 +40,15 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
         _etSutradara = findViewById(R.id.etSutradara)
         _etURLTrailer = findViewById(R.id.etUrlTrailer)
         spinner = findViewById(R.id.spStatus)
+
+        var spinner: Spinner = findViewById(R.id.spStatus)
+        var adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this,R.array.status,
+            com.google.android.material.R.layout.support_simple_spinner_dropdown_item)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = this
 
         val genreCheckBoxes = listOf<CheckBox>(
             findViewById(R.id.cbDrama),
@@ -77,6 +88,7 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
         _etProduser.setText(intent.getStringExtra("produser"))
         _etSutradara.setText(intent.getStringExtra("sutradara"))
         _etURLTrailer.setText(intent.getStringExtra("URLTrailer"))
+        val jenis_film = intent.getParcelableArrayListExtra("jenis_film", String::class.java)
 
         // Log data received from intent
         Log.d("EDIT_CLASS_DATA", "Judul: ${_etJudul.text}")
@@ -93,9 +105,14 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
         // Log.d("EDIT_CLASS_DATA", "Status: $selectedItem")
 
         // Uncomment the following code after checking the values received
-        // for (genre in selectedGenres) {
-        //     Log.d("EDIT_CLASS_DATA", "Genre: $genre")
-        // }
+         for (genre in jenis_film!!) {
+             Log.d("EDIT_CLASS_DATA", "Genre: $genre")
+             for (item in genreCheckBoxes) {
+                 if (genre.equals(item.text)) {
+                     item.isChecked = true
+                 }
+             }
+         }
 
         // Continue the implementation of spinner and other logic here...
     }
