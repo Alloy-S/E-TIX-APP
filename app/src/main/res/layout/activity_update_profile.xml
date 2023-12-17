@@ -52,10 +52,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtLayoutUpdateEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="326dp"
-        android:layout_height="48dp"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="37dp"
         android:hint="Isi Email Baru"
         app:boxStrokeColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +66,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etupdateEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="textEmailAddress"
             android:singleLine="true"
             android:textColor="@color/black"
@@ -77,8 +78,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtLayoutUpdateNama"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="326dp"
-        android:layout_height="48dp"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
 
         android:layout_marginEnd="43dp"
@@ -91,7 +92,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etupdateNama"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:inputType="textEmailAddress"
             android:singleLine="true"
             android:textColor="@color/black"
@@ -130,7 +131,7 @@
         android:layout_height="44dp"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="59dp"
-        android:layout_marginBottom="232dp"
+        android:layout_marginBottom="312dp"
         android:background="@color/darkGreen"
         android:text="Update "
         android:textColor="@color/white"

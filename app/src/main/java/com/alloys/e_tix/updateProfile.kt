@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 
 class updateProfile : AppCompatActivity() {
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_profile)
@@ -25,7 +27,6 @@ class updateProfile : AppCompatActivity() {
         val _newName = findViewById<EditText>(R.id.etupdateNama)
         val _newEmail = findViewById<EditText>(R.id.etupdateEmail)
         val _updateBtn = findViewById<Button>(R.id.btnUpdate)
-
 
             _updateBtn.setOnClickListener {
                 val name = _newName.text.toString()
