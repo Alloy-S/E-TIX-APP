@@ -1,9 +1,7 @@
 package com.alloys.e_tix
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +9,8 @@ import android.widget.Toast
 import com.alloys.e_tix.databinding.ActivityRegisterBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.auth.actionCodeSettings
 import com.google.firebase.auth.auth
-import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.firestore
 
 class Register : AppCompatActivity() {
