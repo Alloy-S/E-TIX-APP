@@ -73,13 +73,6 @@ class movieFragment : Fragment(){
                 if (task.isSuccessful) {
 
                     for (document in task.result) {
-//                        val judulFilm: String = document.getString("judul_film") ?: ""
-//                        val durasi: String = document.getString("durasi") ?: ""
-//                        val imageUrl: String = document.getString("urlPoster") ?: ""
-
-                        val judulFilm: String = document.getString("judul_film") ?: ""
-                        val durasi: String = document.getString("durasi") ?: ""
-                        val imageFileName: String = document.getString("urlPoster") ?: ""
 
                         val readData = Movie(
                             document.id,
@@ -114,8 +107,6 @@ class movieFragment : Fragment(){
                         for (item in arDaftarPoster) {
                             val isImgRef = storage.reference.child("img_poster_film/$item")
                             isImgRef.downloadUrl.addOnSuccessListener {
-//                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-//                                imageBitmap[item] = bitmap
                                 imageUri[item] = it
                                 counterDownload++
 
