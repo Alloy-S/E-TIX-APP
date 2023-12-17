@@ -2,6 +2,7 @@ package com.alloys.e_tix
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +29,7 @@ class History : AppCompatActivity() {
     val storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
     var arMovie = ArrayList<Movie>()
     val imageBitmap = mutableMapOf<String, Bitmap>()
+    val imageUri = mutableMapOf<String, Uri>()
     lateinit var dataTransaksi: dataTransaksi
     lateinit var _rvHistory : RecyclerView
 
@@ -102,15 +104,15 @@ class History : AppCompatActivity() {
                         var counterDownload = 0
                         for (item in arDaftarPoster) {
                             val isImgRef = storage.reference.child("img_poster_film/$item")
-                            isImgRef.getFile(localFile).addOnSuccessListener {
-                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-                                imageBitmap[item] = bitmap
+                            isImgRef.downloadUrl.addOnSuccessListener {
+//                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+                                imageUri[item] = it
                                 counterDownload++
 
                                 if (counterDownload == arDaftarPoster.size) {
                                     Log.d("ISI ARBITMAP", imageBitmap.size.toString())
-                                    listHistory.sortBy { it.transaction_date }
-                                    dataTransaksi = dataTransaksi(listHistory, imageBitmap)
+                                    listHistory.sortByDescending { it.transaction_date }
+                                    dataTransaksi = dataTransaksi(listHistory, imageUri)
                                     _rvHistory.layoutManager = LinearLayoutManager(this)
                                     val adapters = adapterHistory(dataTransaksi)
                                     _rvHistory.adapter = adapters

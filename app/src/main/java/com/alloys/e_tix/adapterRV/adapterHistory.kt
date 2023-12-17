@@ -12,6 +12,7 @@ import com.alloys.e_tix.R
 import com.alloys.e_tix.dataClass.dataHistory
 import com.alloys.e_tix.dataClass.dataTransaksi
 import com.alloys.e_tix.detailTiket
+import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 
 class adapterHistory (
@@ -48,7 +49,7 @@ class adapterHistory (
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
         val dateFormat2 = SimpleDateFormat("dd/MM/yyyy HH:mm")
         val traansactionDate = dateFormat.format(history.transaction_date).split(" ")
-        val dateshow = dateFormat2.format(history.transaction_date).split(" ")
+        val dateshow = dateFormat2.format(history.show_date).split(" ")
         holder._date.setText(traansactionDate[0])
         holder._time.setText(traansactionDate[1])
         holder._movie.setText(history.judulFilm)
@@ -56,7 +57,8 @@ class adapterHistory (
         holder._code.setText(history.booking_code)
         holder._dateShow.setText(dateshow[0])
         holder._timeShow.setText(dateshow[1])
-        holder._posterFilm.setImageBitmap(poster)
+//        holder._posterFilm.setImageBitmap(poster)
+        Glide.with(holder.context).load(poster).into(holder._posterFilm)
 
         holder._detail.setOnClickListener {
             val intent = Intent(holder.context, detailTiket::class.java).apply {
