@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -43,8 +44,28 @@ class adapterHistory (
         val builder = AlertDialog.Builder(context)
         val imageView = ImageView(context)
         imageView.setImageBitmap(barcode)
+        imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         builder.setView(imageView)
-        builder.create().show()
+
+        // tambahin close button
+        builder.setPositiveButton("Close") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // bikin dialognya
+        val dialog = builder.create()
+        dialog.show()
+
+        // bikin sak window
+        val window = dialog.window
+        if (window != null) {
+            val layoutParams = WindowManager.LayoutParams()
+            layoutParams.copyFrom(window.attributes)
+            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
+            layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+            window.attributes = layoutParams
+        }
+
     }
 
     override fun onCreateViewHolder(
@@ -88,7 +109,7 @@ class adapterHistory (
         holder._barcode.setOnClickListener {
             val multiFormatWriter = MultiFormatWriter()
             try {
-                val bitMatrix = multiFormatWriter.encode(history.booking_code, BarcodeFormat.QR_CODE,400,400)
+                val bitMatrix = multiFormatWriter.encode(history.booking_code, BarcodeFormat.QR_CODE,600,600)
                 val barcodeEncoder = BarcodeEncoder()
                 val bitmap = barcodeEncoder.createBitmap(bitMatrix)
                 showBarcodeDialog(bitmap, holder.context)
