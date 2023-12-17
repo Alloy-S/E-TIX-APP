@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".editMovieAdmin">
+
+    <!--    logo xxi -->
+    <LinearLayout
+        android:id="@+id/llXXI"
+        android:layout_width="412dp"
+        android:layout_height="86dp"
+        android:background="@color/darkGreen"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/xxi" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/llXXI"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--        Judul Film-->
+            <TextView
+                android:id="@+id/hsSynopsis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:text="Judul Film"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etJudul"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Judul Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/hsSynopsis" />
+
+            <!--        Casts Film-->
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Casts Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etJudul" />
+
+            <EditText
+                android:id="@+id/etCasts"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Casts Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            <!--        Deskripsi Film-->
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Deskripsi Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etCasts" />
+
+            <EditText
+                android:id="@+id/etDeskripsi"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Deskripsi Film"
+                app:layout_constraintStart_toStartOf="@+id/etJudul"
+                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+            <!--        Durasi Film-->
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Durasi Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etDeskripsi" />
+
+            <EditText
+                android:id="@+id/etDurasi"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Durasi Film"
+                android:inputType="number"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <!--        Genre Film-->
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Genre Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etDurasi" />
+
+            <CheckBox
+                android:id="@+id/cbDrama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drama"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+            <CheckBox
+                android:id="@+id/cbRomance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Romance"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/cbDrama" />
+
+            <CheckBox
+                android:id="@+id/cbComedy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comedy"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/cbRomance" />
+
+            <CheckBox
+                android:id="@+id/cbHorror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horror"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/cbComedy" />
+
+            <CheckBox
+                android:id="@+id/cbAdventure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Adventure"
+                app:layout_constraintStart_toEndOf="@+id/cbRomance"
+                app:layout_constraintTop_toTopOf="@+id/cbRomance" />
+
+            <CheckBox
+                android:id="@+id/cbAction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:text="Action"
+                app:layout_constraintStart_toEndOf="@+id/cbDrama"
+                app:layout_constraintTop_toTopOf="@+id/cbDrama" />
+
+            <CheckBox
+                android:id="@+id/cbDocumenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="Documenter"
+                app:layout_constraintStart_toEndOf="@+id/cbHorror"
+                app:layout_constraintTop_toTopOf="@+id/cbHorror" />
+
+            <CheckBox
+                android:id="@+id/cbAnimation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:text="Animation"
+                app:layout_constraintStart_toEndOf="@+id/cbComedy"
+                app:layout_constraintTop_toTopOf="@+id/cbComedy" />
+
+            <CheckBox
+                android:id="@+id/cbFantasy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Fantasy"
+                app:layout_constraintStart_toEndOf="@+id/cbDocumenter"
+                app:layout_constraintTop_toTopOf="@+id/cbDocumenter" />
+
+            <CheckBox
+                android:id="@+id/cbScifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:text="Sci-Fi"
+                app:layout_constraintStart_toEndOf="@+id/cbAnimation"
+                app:layout_constraintTop_toTopOf="@+id/cbAnimation" />
+
+            <CheckBox
+                android:id="@+id/cbThriller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:text="Thriller"
+                app:layout_constraintStart_toEndOf="@+id/cbAdventure"
+                app:layout_constraintTop_toTopOf="@+id/cbAdventure" />
+
+            <CheckBox
+                android:id="@+id/cbMistery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:text="Mistery"
+                app:layout_constraintStart_toEndOf="@+id/cbAction"
+                app:layout_constraintTop_toTopOf="@+id/cbAction" />
+
+            <!--        Penulis Film-->
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Penulis Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/cbHorror" />
+
+            <EditText
+                android:id="@+id/etPenulis"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Penulis Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+            <!--        Produksi Film-->
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Produksi Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etPenulis" />
+
+            <EditText
+                android:id="@+id/etProduksi"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Produksi Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <!--        Produser Film-->
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Produser Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etProduksi" />
+
+            <EditText
+                android:id="@+id/etProduser"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Produser"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+            <!--        Sutradara Film-->
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Sutradara Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etProduser" />
+
+            <EditText
+                android:id="@+id/etSutradara"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Sutradara Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <!--        URL Trailer-->
+            <TextView
+                android:id="@+id/URlLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="URL Trailer"
+                app:layout_constraintStart_toStartOf="@+id/etSutradara"
+                app:layout_constraintTop_toBottomOf="@+id/etSutradara" />
+
+            <EditText
+                android:id="@+id/etUrlTrailer"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Sutradara Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/URlLabel" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Status Film"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/etUrlTrailer" />
+
+            <Spinner
+                android:id="@+id/spStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Poster Film"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/spStatus" />
+
+            <Button
+                android:id="@+id/btChooseImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#d6d5d6"
+                android:text="Choose File"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <EditText
+                android:id="@+id/etNamaImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Masukkan Nama Image"
+                app:layout_constraintStart_toEndOf="@+id/btChooseImage"
+                app:layout_constraintTop_toTopOf="@+id/btChooseImage" />
+
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/btChooseImage" />
+
+            <Button
+                android:id="@+id/btNext"
+                android:layout_width="375dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:text="SAVE"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/hsSynopsis"
+                app:layout_constraintTop_toBottomOf="@+id/ivImage" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

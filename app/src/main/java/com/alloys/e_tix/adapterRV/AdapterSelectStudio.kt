@@ -89,16 +89,20 @@ class AdapterSelectStudio (
             val splitShowTime = time.showtime.split(":")
 
             frameLayout.addView(textView)
-            val timeNow = System.currentTimeMillis()
-            val instant = Instant.ofEpochMilli(timeNow)
-            val zoneId = ZoneId.systemDefault()
-            val formatter = DateTimeFormatter.ofPattern("HH:mm").withZone(zoneId)
+            val currentTime = System.currentTimeMillis()
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = currentTime
+            calendar.set(Calendar.HOUR_OF_DAY, splitShowTime[0].toInt())
+            calendar.set(Calendar.MINUTE, splitShowTime[1].toInt())
+            calendar.set(Calendar.SECOND, 0)
+            val timeShowtime = calendar.timeInMillis
 
-            val timeNowformatted = formatter.format(instant)
-            val splitTime = timeNowformatted.split(":")
-            Log.d("TIME NOW", timeNowformatted)
 
-            if (splitShowTime[0].toInt() <= splitTime[0].toInt() && splitShowTime[1].toInt() <= splitTime[1].toInt()) {
+
+            Log.d("TIME NOW", "${(timeShowtime < currentTime)} $timeShowtime < $currentTime")
+            Log.d("TIME NOW", "${calendar.get(Calendar.DAY_OF_MONTH)}, ${calendar.get(Calendar.MONTH)}, ${calendar.get(Calendar.YEAR)}, ${calendar.get(Calendar.HOUR_OF_DAY)}, ${calendar.get(Calendar.MINUTE)}, ${calendar.get(Calendar.SECOND)}")
+
+            if (timeShowtime < currentTime) {
                 frameLayout.setBackgroundResource(R.drawable.layout_border_disable)
             } else {
 

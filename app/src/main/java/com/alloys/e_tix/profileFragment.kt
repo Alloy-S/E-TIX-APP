@@ -99,6 +99,13 @@ class profileFragment : Fragment() {
             val intent = Intent(requireActivity(), updateProfile::class.java)
             startActivity(intent)
         }
+
+
+        val _history = view.findViewById<ConstraintLayout>(R.id.historyProfile)
+        _history.setOnClickListener {
+            val intent = Intent(requireContext(), History::class.java)
+            startActivity(intent)
+        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
