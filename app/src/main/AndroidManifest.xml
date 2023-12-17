@@ -28,6 +28,9 @@
             android:name=".addJadwalMovieAdmin"
             android:exported="false" />
         <activity
+            android:name=".editMovieAdmin"
+            android:exported="false" />
+        <activity
             android:name=".forgotPassword"
             android:exported="false" />
         <activity

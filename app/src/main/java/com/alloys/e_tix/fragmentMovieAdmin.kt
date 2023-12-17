@@ -1,5 +1,6 @@
 package com.alloys.e_tix
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -23,18 +24,10 @@ import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.storage
 import java.io.File
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [fragmentMovieAdmin.newInstance] factory method to
- * create an instance of this fragment.
- */
 class fragmentMovieAdmin : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
@@ -57,7 +50,6 @@ class fragmentMovieAdmin : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_movie_admin, container, false)
     }
 
@@ -67,7 +59,7 @@ class fragmentMovieAdmin : Fragment() {
         DialogHelper.showDialogBar(this.context, "Loading....")
         val isDialogVisible = DialogHelper.isDialogVisible()
         recyclerView = view.findViewById(R.id.rvMovieAdmin)
-        recyclerView.layoutManager = GridLayoutManager(this.context,2)
+        recyclerView.layoutManager = GridLayoutManager(this.context, 2)
         arMovie.clear()
         imageBitmap.clear()
 
@@ -100,9 +92,7 @@ class fragmentMovieAdmin : Fragment() {
 
                     }
 
-                    //    START STORAGE
                     val localFile = File.createTempFile("img", ".jpg")
-                    //    GET ALL NAME IN THE FOLDER
                     val arDaftarPoster = ArrayList<String>()
                     storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
                         for (item in result.items) {
@@ -114,8 +104,6 @@ class fragmentMovieAdmin : Fragment() {
                         for (item in arDaftarPoster) {
                             val isImgRef = storage.reference.child("img_poster_film/$item")
                             isImgRef.downloadUrl.addOnSuccessListener {
-//                                val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-//                                imageBitmap[item] = bitmap
                                 imageUri[item] = it
                                 counterDownload++
 
@@ -123,7 +111,9 @@ class fragmentMovieAdmin : Fragment() {
                                     Log.d("IMAGE URI", imageUri.toString())
 
                                     movies = dataMovie(arMovie, imageUri)
-                                    recyclerView.adapter = adapterMovieAdmin(movies)
+                                    recyclerView.adapter = adapterMovieAdmin(movies) { movie ->
+                                        navigateToEditMovieAdmin(movie)
+                                    }
                                     DialogHelper.dismissDialog()
                                 }
                             }
@@ -135,16 +125,25 @@ class fragmentMovieAdmin : Fragment() {
             }
     }
 
+    private fun navigateToEditMovieAdmin(movie: Movie) {
+        val intent = Intent(activity, editMovieAdmin::class.java)
+        intent.putExtra("judul_film", movie.judul_film)
+        intent.putExtra("deskripsi", movie.deskripsi)
+        intent.putExtra("durasi", movie.durasi)
+        intent.putExtra("produser", movie.produser)
+        intent.putExtra("sutradara", movie.sutradara)
+        intent.putExtra("penulis", movie.penulis)
+        intent.putExtra("casts", movie.casts)
+        intent.putExtra("jenis_film", ArrayList(movie.jenis_film))
+        intent.putExtra("urlPoster", movie.urlPoster)
+        intent.putExtra("produksi", movie.produksi)
+        intent.putExtra("URLTrailer", movie.URLTrailer)
+        intent.putExtra("status", movie.status)
+
+        startActivity(intent)
+    }
+
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragmentMovieAdmin.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             fragmentMovieAdmin().apply {

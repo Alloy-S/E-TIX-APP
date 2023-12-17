@@ -10,15 +10,16 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.alloys.e_tix.R
+import com.alloys.e_tix.dataClass.Movie
 import com.alloys.e_tix.dataClass.dataMovie
 import com.alloys.e_tix.detail_Film
 import com.bumptech.glide.Glide
 
 
 class adapterMovieAdmin(
-    private val dataMovie : dataMovie,
-) :
-    RecyclerView.Adapter<adapterMovieAdmin.ListViewHolder>() {
+    private val dataMovie: dataMovie,
+    private val onItemClick: (Movie) -> Unit
+) : RecyclerView.Adapter<adapterMovieAdmin.ListViewHolder>() {
 
 
     inner class ListViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -43,21 +44,14 @@ class adapterMovieAdmin(
         val movie = dataMovie.arMovie[position]
         val poster = dataMovie.arPoster[movie.urlPoster]
 
+        holder._judul.text = movie.judul_film
+        holder._durasi.text = "${movie.durasi} Minutes"
 
-        holder._judul.setText(movie.judul_film)
-        holder._durasi.setText(movie.durasi + " Minutes")
-//        holder._poster.setImageBitmap(poster)
         Glide.with(holder.context).load(poster).into(holder._poster)
 
         holder._itemMoview.setOnClickListener {
-//            val intent = Intent(it.context, detail_Film::class.java).apply {
-//                putExtra("movieID", movie.movieID)
-//                putExtra("dataMovie", movie)
-//                putExtra("posterMovie", poster)
-//            }
-//            it.context.startActivity(intent)
+            onItemClick(movie)
         }
-
     }
 
     override fun getItemCount(): Int {
