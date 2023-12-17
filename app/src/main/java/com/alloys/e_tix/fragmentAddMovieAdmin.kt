@@ -290,7 +290,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         val uploadTask2: UploadTask = childRef2.putBytes(data)
         uploadTask2.addOnSuccessListener { taskSnapshot ->
             Log.d("TASKSNAPSHOT", taskSnapshot.toString())
-            TambahData(judul_film, deskripsi, durasi, produser, sutradara, penulis, casts, jenis_film, filename, produksi, id, urlTrailer)
+            TambahData(judul_film, deskripsi, durasi, produser, sutradara, penulis, casts, jenis_film, filename, produksi, id, urlTrailer, selectedItem)
             val upload = Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
             val uploadId: String? = mDatabaseRef.push().key
             if (uploadId != null) {
@@ -354,7 +354,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun TambahData(judul_film : String, deskripsi : String, durasi : Int, produser : String, sutradara : String,
-                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String, urlTrailer: String){
+                   penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String, urlTrailer: String, status: String){
         val dataBaru = Movie(
             id,
             judul_film,
@@ -367,7 +367,8 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
             jenis_film,
             urlPoster,
             produksi,
-            urlTrailer
+            urlTrailer,
+            status
         )
 
         db.collection("movies").add(dataBaru)

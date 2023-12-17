@@ -124,10 +124,13 @@ class selectStudio : AppCompatActivity() {
                                         )
                                     )
                                 }
+
+                                val sortedArShowtime = arShowtime.sortedBy { it.showtime }.toCollection(ArrayList())
+
                                 var readData = Mall(
                                     document.id,
                                     document.data.get("nama_mall") as String,
-                                    arShowtime,
+                                    sortedArShowtime,
                                     document.data.get("harga_tiket").toString().toInt(),
                                     dataMovie.movieID,
                                     posterMovie

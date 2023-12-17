@@ -96,7 +96,8 @@ class movieFragment : Fragment(){
                             document.data.get("jenis_film") as List<String>,
                             document.data.get("urlPoster").toString(),
                             document.data.get("produksi").toString(),
-                            document.data.get("URLTrailer").toString()
+                            document.data.get("URLTrailer").toString(),
+                            document.data.get("status").toString()
                         )
                         arMovie.add(readData)
 
@@ -122,7 +123,9 @@ class movieFragment : Fragment(){
                                 counterDownload++
 
                                 if (counterDownload == arDaftarPoster.size) {
-                                    movies = dataMovie(arMovie, imageUri)
+
+                                    val filteredMovie = arMovie.filter { it.status.equals("Now Playing") }.toCollection(ArrayList())
+                                    movies = dataMovie(filteredMovie, imageUri)
                                     recyclerView.adapter = movieAdapter(movies)
                                     DialogHelper.dismissDialog()
                                 }
