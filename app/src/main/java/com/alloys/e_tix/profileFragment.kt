@@ -76,6 +76,7 @@ class profileFragment : Fragment() {
                     // User clicked "Yes," proceed with account deletion
                     user.delete().addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            db.collection("user").document(user.uid).delete()
                             val intent = Intent(requireContext(), MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)

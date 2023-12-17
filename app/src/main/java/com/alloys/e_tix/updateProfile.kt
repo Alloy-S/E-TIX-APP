@@ -11,9 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.google.firebase.Firebase
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.firestore
 
 class updateProfile : AppCompatActivity() {
 
@@ -23,61 +25,83 @@ class updateProfile : AppCompatActivity() {
         setContentView(R.layout.activity_update_profile)
         val auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
-
+        val db = Firebase.firestore
         val _newName = findViewById<EditText>(R.id.etupdateNama)
         val _newEmail = findViewById<EditText>(R.id.etupdateEmail)
         val _updateBtn = findViewById<Button>(R.id.btnUpdate)
 
-            _updateBtn.setOnClickListener {
-                val name = _newName.text.toString()
-                val email = _newEmail.text.toString()
+        _newName.setText(user?.displayName)
+        _newEmail.setText(user?.email)
+        _updateBtn.setOnClickListener {
+            val name = _newName.text.toString()
+            val email = _newEmail.text.toString()
 
-                if (name.isNotEmpty() && email.isNotEmpty() && email != user?.email) {
+            if (name != user?.displayName || email != user?.email) {
+                // Ada perubahan, lanjutkan dengan proses update
+
+                // Update Profile
+                val profileUpdatesBuilder = UserProfileChangeRequest.Builder()
+
+                if (name != user?.displayName) {
+                    profileUpdatesBuilder.setDisplayName(name)
+                }
+                val data = hashMapOf(
+                    "full_name" to name,
+                )
+
+                db.collection("users").document(user!!.uid).update(data as Map<String, Any>)
+                    .addOnSuccessListener {
+                        Log.d("UPDATED DATA", "success")
+                    }
+
+                if (email != user?.email) {
                     showPasswordPrompt(this) { password ->
-                        val credential = EmailAuthProvider.getCredential(user?.email.toString(), password)
+                        val credential =
+                            EmailAuthProvider.getCredential(user?.email.toString(), password)
                         user?.reauthenticate(credential)?.addOnCompleteListener { reauthTask ->
                             if (reauthTask.isSuccessful) {
                                 showToast("Reautentikasi berhasil")
 
-                                    user!!.verifyBeforeUpdateEmail(email).addOnCompleteListener { emailUpdateTask ->
+                                user!!.verifyBeforeUpdateEmail(email)
+                                    .addOnCompleteListener { emailUpdateTask ->
                                         if (emailUpdateTask.isSuccessful) {
                                             showToast("Cek email baru untuk verifikasi")
                                             auth.signOut()
-                                            val intent = Intent(this@updateProfile, MainActivity::class.java)
+                                            val intent =
+                                                Intent(this@updateProfile, MainActivity::class.java)
                                             startActivity(intent)
                                         } else {
                                             val exception = emailUpdateTask.exception
                                             showToast("Gagal memperbarui email: ${exception?.message}")
-                                            Log.d("emailku rusakk", "Gagal memperbarui email: ${exception?.message}")
+                                            Log.d(
+                                                "emailku rusakk",
+                                                "Gagal memperbarui email: ${exception?.message}"
+                                            )
                                         }
                                     }
-                                // Update Profile
-                                val profileUpdates = UserProfileChangeRequest.Builder()
-                                    .setDisplayName(name)
-                                    .build()
-
-                                user?.updateProfile(profileUpdates)?.addOnCompleteListener { profileUpdateTask ->
-                                    if (profileUpdateTask.isSuccessful) {
-                                        showToast("Nama pengguna berhasil diperbarui")
-                                        // Kembali ke FragmentProfile
-                                        onBackPressed()
-                                    } else {
-                                        val exception = profileUpdateTask.exception
-                                        showToast("Gagal memperbarui nama pengguna: ${exception?.message}")
-                                    }
-                                }
                             } else {
                                 showToast("Gagal reautentikasi: ${reauthTask.exception?.message}")
-                                // Handle reauthentication failure
                             }
                         }
                     }
-                } else {
-                    showToast("Nama dan email tidak boleh kosong")
                 }
+
+                user?.updateProfile(profileUpdatesBuilder.build())
+                    ?.addOnCompleteListener { profileUpdateTask ->
+                        if (profileUpdateTask.isSuccessful) {
+                            showToast("Data berhasil diperbarui")
+                            // Kembali ke FragmentProfile
+                            onBackPressed()
+                        } else {
+                            val exception = profileUpdateTask.exception
+                            showToast("Gagal memperbarui data: ${exception?.message}")
+                        }
+                    }
+            } else {
+                showToast("Tidak ada perubahan yang dilakukan")
             }
         }
-
+    }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
