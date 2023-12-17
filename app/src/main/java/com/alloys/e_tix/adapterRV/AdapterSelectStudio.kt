@@ -1,6 +1,7 @@
 package com.alloys.e_tix.adapterRV
 
 import android.content.Intent
+import android.util.DebugUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +15,11 @@ import com.alloys.e_tix.R
 import com.alloys.e_tix.helper.Currency
 import com.alloys.e_tix.selectSeat
 import com.google.android.flexbox.FlexboxLayout
+import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 class AdapterSelectStudio (
     private val listMall: ArrayList<Mall>
@@ -82,19 +86,34 @@ class AdapterSelectStudio (
             textView.layoutParams = textParams
             textView.text = time.showtime
 
-            frameLayout.addView(textView)
+            val splitShowTime = time.showtime.split(":")
 
-            frameLayout.setOnClickListener {
-                val intent = Intent(holder.context, selectSeat::class.java).apply {
-                    putExtra("movieID", mall.tmpMovieID)
-                    putExtra("namaMall", mall.namaMall)
-                    putExtra("tanggal", formatted.toString())
-                    putExtra("hargaTiket", 25000)
-                    putExtra("waktuMulai", time.showtime)
-                    putExtra("seats", time.purchased_seat)
-                    putExtra("dataMall", mall)
+            frameLayout.addView(textView)
+            val timeNow = System.currentTimeMillis()
+            val instant = Instant.ofEpochMilli(timeNow)
+            val zoneId = ZoneId.systemDefault()
+            val formatter = DateTimeFormatter.ofPattern("HH:mm").withZone(zoneId)
+
+            val timeNowformatted = formatter.format(instant)
+            val splitTime = timeNowformatted.split(":")
+            Log.d("TIME NOW", timeNowformatted)
+
+            if (splitShowTime[0].toInt() <= splitTime[0].toInt() && splitShowTime[1].toInt() <= splitTime[1].toInt()) {
+                frameLayout.setBackgroundResource(R.drawable.layout_border_disable)
+            } else {
+
+                frameLayout.setOnClickListener {
+                    val intent = Intent(holder.context, selectSeat::class.java).apply {
+                        putExtra("movieID", mall.tmpMovieID)
+                        putExtra("namaMall", mall.namaMall)
+                        putExtra("tanggal", formatted.toString())
+                        putExtra("hargaTiket", 25000)
+                        putExtra("waktuMulai", time.showtime)
+                        putExtra("seats", time.purchased_seat)
+                        putExtra("dataMall", mall)
+                    }
+                    holder.context.startActivity(intent)
                 }
-                holder.context.startActivity(intent)
             }
             holder._listWaktu.addView(frameLayout)
         }
