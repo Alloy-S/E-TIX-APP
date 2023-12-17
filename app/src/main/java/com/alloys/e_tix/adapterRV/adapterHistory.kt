@@ -44,7 +44,7 @@ class adapterHistory (
         val builder = AlertDialog.Builder(context)
         val imageView = ImageView(context)
         imageView.setImageBitmap(barcode)
-        imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         builder.setView(imageView)
 
         // tambahin close button
@@ -61,8 +61,8 @@ class adapterHistory (
         if (window != null) {
             val layoutParams = WindowManager.LayoutParams()
             layoutParams.copyFrom(window.attributes)
-            layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT
-            layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+            layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT
+            layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
             window.attributes = layoutParams
         }
 
@@ -109,7 +109,7 @@ class adapterHistory (
         holder._barcode.setOnClickListener {
             val multiFormatWriter = MultiFormatWriter()
             try {
-                val bitMatrix = multiFormatWriter.encode(history.booking_code, BarcodeFormat.QR_CODE,600,600)
+                val bitMatrix = multiFormatWriter.encode(history.booking_code, BarcodeFormat.QR_CODE,800,800)
                 val barcodeEncoder = BarcodeEncoder()
                 val bitmap = barcodeEncoder.createBitmap(bitMatrix)
                 showBarcodeDialog(bitmap, holder.context)
