@@ -75,8 +75,6 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
         }
 
         val _etHarga = findViewById<EditText>(R.id.etHarga)
-        val _etMulai = findViewById<EditText>(R.id.etMulai)
-        val _etBerakhir = findViewById<EditText>(R.id.etBerakhir)
 
         val _btnAdd = findViewById<Button>(R.id.btnAdd)
         _btnAdd.setOnClickListener {
