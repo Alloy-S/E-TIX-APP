@@ -52,7 +52,7 @@ class detailTiket : AppCompatActivity() {
         val _btnBack = findViewById<ImageView>(R.id.btnBack)
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener {
-            onBackPressed()
+            finish()
         }
         val uidTransaksi = intent.getStringExtra("UIDTransaksi")
         hideAllViews(findViewById(R.id.detailTikerView))

@@ -221,47 +221,6 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
                    penulis : String, casts : String, jenis_film : List<String>, urlPoster : String, produksi : String, id: String, urlTrailer: String) {
         val calendar = Calendar.getInstance()
         Log.d("PATH FILE", mImageUri.path.toString())
-//        val fileReference: StorageReference = mStorageRef.child("${mEditTextFileName.text}.${getFileExtension(mImageUri)}")
-//        try {
-//            val inputStream = requireContext().contentResolver.openInputStream(mImageUri)
-//
-//            val tempFile = File.createTempFile("temp", null, requireContext().cacheDir)
-//            tempFile.deleteOnExit()
-//
-//            val outputStream = FileOutputStream(tempFile)
-//            inputStream?.copyTo(outputStream)
-//            inputStream?.close()
-//            outputStream.close()
-//
-//            val recudedFile = tempFile.reduceFileImage()
-//
-//            val reducedUri = Uri.fromFile(recudedFile)
-//
-//
-//            fileReference.putFile(reducedUri)
-//                .addOnSuccessListener { taskSnapshot: UploadTask.TaskSnapshot ->
-//                    Toast.makeText(requireContext(), "Upload Successful", Toast.LENGTH_SHORT).show()
-//                    val upload =
-//                        Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
-//                    val uploadId: String? = mDatabaseRef.push().key
-//                    if (uploadId != null) {
-//                        mDatabaseRef.child(uploadId).setValue(upload)
-//                    }
-//
-//                    val intent = Intent(requireContext(), addJadwalMovieAdmin::class.java)
-//                    intent.putExtra("ID_MOVIE", idMovie)
-//                    startActivity(intent)
-//                }.addOnFailureListener {
-//                }
-//                .addOnFailureListener {
-//                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-//                    Log.d("EROR FIREBASE", it.message.toString())
-//                }
-//        } catch (e: Exception) {
-//            Log.d("ERROR UPLOAD FILE", e.toString())
-//        }
-
-
 
         val filename = "${calendar.timeInMillis}.${getFileExtension(mImageUri)}"
         val childRef2: StorageReference = mStorageRef.child(filename)
@@ -291,17 +250,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
         uploadTask2.addOnSuccessListener { taskSnapshot ->
             Log.d("TASKSNAPSHOT", taskSnapshot.toString())
             TambahData(judul_film, deskripsi, durasi, produser, sutradara, penulis, casts, jenis_film, filename, produksi, id, urlTrailer, selectedItem)
-            val upload = Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
-            val uploadId: String? = mDatabaseRef.push().key
-            if (uploadId != null) {
-                mDatabaseRef.child(uploadId).setValue(upload).addOnSuccessListener {
-                    Log.d("SUCCESFUL UPLOAD ID", "$uploadId, $upload")
 
-                }.addOnFailureListener {
-                    Log.d("EROR UPLOAD ID", it.message.toString())
-                }
-            }
-            Toast.makeText(this.context, "Upload successful", Toast.LENGTH_LONG).show()
 
         }.addOnFailureListener { e ->
             Toast.makeText(this.context, "Upload Failed -> $e", Toast.LENGTH_LONG).show()
@@ -352,6 +301,7 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
                 idMovie = documentReference.id
 
                 DialogHelper.dismissDialog()
+                Toast.makeText(this.context, "Upload successful", Toast.LENGTH_LONG).show()
                 val intent = Intent(requireContext(), addJadwalMovieAdmin::class.java)
                 intent.putExtra("ID_MOVIE", idMovie)
                 val fragmentManager = requireActivity().supportFragmentManager
