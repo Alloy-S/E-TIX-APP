@@ -79,4 +79,8 @@ dependencies {
     //upload image
     implementation("com.squareup.picasso:picasso:2.8")
 
+
+//    refresh layout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+
 }

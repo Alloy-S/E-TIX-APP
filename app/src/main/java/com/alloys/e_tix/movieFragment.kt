@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.alloys.e_tix.adapterRV.movieAdapter
 import com.alloys.e_tix.dataClass.Movie
 import com.alloys.e_tix.dataClass.dataMovie
@@ -42,6 +44,7 @@ class movieFragment : Fragment(){
     val user = Firebase.auth.currentUser!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieArrayList: ArrayList<dataMovie>
+    lateinit var swipeRLMain :SwipeRefreshLayout
     private val db = Firebase.firestore
     private var storage = Firebase.storage("gs://e-tix-8c2b4.appspot.com")
     lateinit var movies: dataMovie
@@ -60,7 +63,7 @@ class movieFragment : Fragment(){
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        swipeRLMain = view.findViewById(R.id.swipeRLMain)
         DialogHelper.showDialogBar(this.context, "Loading....")
         val isDialogVisible = DialogHelper.isDialogVisible()
         recyclerView = view.findViewById(R.id.rvMovie)
@@ -124,6 +127,66 @@ class movieFragment : Fragment(){
                     Toast.makeText(this.context, "Error fetching movies", Toast.LENGTH_SHORT).show()
                 }
             }
+
+        swipeRLMain.setOnRefreshListener {
+            arMovie.clear()
+            db.collection("movies").get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+
+                        for (document in task.result) {
+
+                            val readData = Movie(
+                                document.id,
+                                document.data.get("judul_film").toString(),
+                                document.data.get("deskripsi").toString(),
+                                document.data.get("durasi").toString(),
+                                document.data.get("produser").toString(),
+                                document.data.get("sutradara").toString(),
+                                document.data.get("penulis").toString(),
+                                document.data.get("casts").toString(),
+                                document.data.get("jenis_film") as List<String>,
+                                document.data.get("urlPoster").toString(),
+                                document.data.get("produksi").toString(),
+                                document.data.get("URLTrailer").toString(),
+                                document.data.get("status").toString()
+                            )
+                            arMovie.add(readData)
+
+                        }
+
+                        //    START STORAGE
+                        val localFile = File.createTempFile("img", ".jpg")
+                        //    GET ALL NAME IN THE FOLDER
+                        val arDaftarPoster = ArrayList<String>()
+                        storage.getReference("img_poster_film/").listAll().addOnSuccessListener { result ->
+                            for (item in result.items) {
+                                Log.d("ISI STORAGE", item.name)
+                                arDaftarPoster.add(item.name)
+                            }
+
+                            var counterDownload = 0;
+                            for (item in arDaftarPoster) {
+                                val isImgRef = storage.reference.child("img_poster_film/$item")
+                                isImgRef.downloadUrl.addOnSuccessListener {
+                                    imageUri[item] = it
+                                    counterDownload++
+
+                                    if (counterDownload == arDaftarPoster.size) {
+
+                                        val filteredMovie = arMovie.filter { it.status.equals("Now Playing") }.toCollection(ArrayList())
+                                        movies = dataMovie(filteredMovie, imageUri)
+                                        recyclerView.adapter = movieAdapter(movies)
+                                        swipeRLMain.isRefreshing = false
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        Toast.makeText(this.context, "Error fetching movies", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }
         val _namaUser = view.findViewById<TextView>(R.id.tvNamaUser)
         _namaUser.text = "Welcome, " + user.displayName
     }

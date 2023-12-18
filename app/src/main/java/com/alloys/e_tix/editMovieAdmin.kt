@@ -178,53 +178,58 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
                 if (::mImageUri.isInitialized) {
                     val calendar = Calendar.getInstance()
                     val mStorageRef = FirebaseStorage.getInstance().getReference("img_poster_film")
-                    val filename = "${calendar.timeInMillis}.${getFileExtension(mImageUri)}"
-                    val childRef2: StorageReference = mStorageRef.child(filename)
-                    val bmp: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, mImageUri)
-                    val baos = ByteArrayOutputStream()
-                    var Quality = 100
-                    var streamLength: Int
-                    var MAXIMAL_SIZE = 1000000
 
-                    do {
-                        Log.d("COMPRESS QUALITY", Quality.toString())
-                        val bmpStream = ByteArrayOutputStream()
-                        bmp?.compress(Bitmap.CompressFormat.JPEG, Quality, bmpStream)
-                        val bmpPicByteArray = bmpStream.toByteArray()
-                        streamLength = bmpPicByteArray.size
-                        Quality -= 5
-                        if (Quality <= 5) {
-                            Quality = 3
-                            break
-                        }
-                    } while (streamLength > MAXIMAL_SIZE)
-                    bmp.compress(Bitmap.CompressFormat.JPEG, Quality, baos)
-                    val data: ByteArray = baos.toByteArray()
 
-                    val uploadTask2: UploadTask = childRef2.putBytes(data)
-                    uploadTask2.addOnSuccessListener { taskSnapshot ->
-                        Log.d("TASKSNAPSHOT", taskSnapshot.toString())
-                        val newData = Movie(
-                            dataMovie!!.movieID,
-                            _etJudul.text.toString(),
-                            _etDeskripsi.text.toString(),
-                            _etDurasi.text.toString(),
-                            _etProduser.text.toString(),
-                            _etSutradara.text.toString(),
-                            _etPenulis.text.toString(),
-                            _etCasts.text.toString(),
-                            selectedGenres,
-                            filename,
-                            _etProduksi.text.toString(),
-                            _etURLTrailer.text.toString(),
-                            selectedItem
-                        )
+                    mStorageRef.child(dataMovie.urlPoster).delete().addOnSuccessListener {
+                        val filename = "${calendar.timeInMillis}.${getFileExtension(mImageUri)}"
+                        val childRef: StorageReference = mStorageRef.child(filename)
+                        val bmp: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, mImageUri)
+                        val baos = ByteArrayOutputStream()
+                        var Quality = 100
+                        var streamLength: Int
+                        var MAXIMAL_SIZE = 1000000
 
-                        db.collection("movies").document(dataMovie.movieID).set(newData)
-                            .addOnSuccessListener {
-                                Toast.makeText(this, "Data berhasil diperbarui", Toast.LENGTH_SHORT)
-                                    .show()
+                        do {
+                            Log.d("COMPRESS QUALITY", Quality.toString())
+                            val bmpStream = ByteArrayOutputStream()
+                            bmp?.compress(Bitmap.CompressFormat.JPEG, Quality, bmpStream)
+                            val bmpPicByteArray = bmpStream.toByteArray()
+                            streamLength = bmpPicByteArray.size
+                            Quality -= 5
+                            if (Quality <= 5) {
+                                Quality = 3
+                                break
                             }
+                        } while (streamLength > MAXIMAL_SIZE)
+                        bmp.compress(Bitmap.CompressFormat.JPEG, Quality, baos)
+                        val data: ByteArray = baos.toByteArray()
+
+                        val uploadTask2: UploadTask = childRef.putBytes(data)
+                        uploadTask2.addOnSuccessListener { taskSnapshot ->
+                            Log.d("TASKSNAPSHOT", taskSnapshot.toString())
+                            val newData = Movie(
+                                dataMovie!!.movieID,
+                                _etJudul.text.toString(),
+                                _etDeskripsi.text.toString(),
+                                _etDurasi.text.toString(),
+                                _etProduser.text.toString(),
+                                _etSutradara.text.toString(),
+                                _etPenulis.text.toString(),
+                                _etCasts.text.toString(),
+                                selectedGenres,
+                                filename,
+                                _etProduksi.text.toString(),
+                                _etURLTrailer.text.toString(),
+                                selectedItem
+                            )
+
+                            db.collection("movies").document(dataMovie.movieID).set(newData)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Data berhasil diperbarui", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                         }
+
                     }
 
                 } else {
