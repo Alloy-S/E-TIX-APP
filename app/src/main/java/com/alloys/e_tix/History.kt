@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alloys.e_tix.adapterRV.adapterHistory
@@ -132,6 +133,10 @@ class History : AppCompatActivity() {
                 DialogHelper.dismissDialog()
                 onBackPressed()
             }
+        val _btnBack = findViewById<ImageView>(R.id.btnBack)
+        _btnBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 }
 

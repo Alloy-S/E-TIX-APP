@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.alloys.e_tix.databinding.ActivityRegisterBinding
 import com.google.firebase.Firebase
@@ -94,5 +94,11 @@ class Register : AppCompatActivity() {
         binding.btnBackRegister.setOnClickListener {
             onBackPressed()
         }
+        val _terms = findViewById<TextView>(R.id.tvTerms)
+        _terms.setOnClickListener {
+            val intent = Intent(this, terms_condition::class.java)
+            startActivity(intent)
+        }
+
     }
 }
