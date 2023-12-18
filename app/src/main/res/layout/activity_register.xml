@@ -19,13 +19,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btnBack"
+            android:id="@+id/btnBackRegister"
             android:layout_width="37dp"
             android:layout_height="39dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="23dp"
-            app:srcCompat="@drawable/back" />
+            app:srcCompat="@drawable/backwhite" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

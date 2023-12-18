@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -34,6 +35,39 @@ class MainActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         firebaseAuth = FirebaseAuth.getInstance()
         val currentUser = firebaseAuth.currentUser
+
+        var isPasswordVisible = false // Variable to track password visibility
+
+        binding.unvisible.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible // Toggle the visibility state
+
+            // Change the visibility of the password EditText
+            if (isPasswordVisible) {
+                binding.etPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            } else {
+                binding.etPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            }
+
+            // Move the cursor to the end of the text to maintain the cursor position
+            binding.etPassword.setSelection(binding.etPassword.text.length)
+
+            // Change the visibility of the unvisible image
+            if (isPasswordVisible) {
+                binding.unvisible.setImageResource(R.drawable.visible) // Change to visible icon
+            } else {
+                binding.unvisible.setImageResource(R.drawable.unvisible) // Change to invisible icon
+            }
+        }
+
+// Set the initial state of the password to be invisible
+        binding.etPassword.inputType =
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+
+// Change the visibility of the unvisible image to the initial state
+        binding.unvisible.setImageResource(R.drawable.unvisible)
+
+
         binding.btnRegister.setOnClickListener {
             val intent = Intent(this@MainActivity, Register::class.java)
             startActivity(intent)

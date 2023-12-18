@@ -38,6 +38,7 @@ class detail_Film : AppCompatActivity() {
         val _hsWriter = findViewById<TextView>(R.id.hsWriter)
         val _hsCast = findViewById<TextView>(R.id.hsCast)
 
+
         val genre = StringBuilder()
         if (datamovie != null) {
             for (item in datamovie.jenis_film) {

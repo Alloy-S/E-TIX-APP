@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/btnBack"
+                android:id="@+id/btnBackUpdate"
                 android:layout_width="37dp"
                 android:layout_height="39dp"
                 android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/backwhite" />
 
             <ImageView
                 android:layout_width="100dp"

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -100,6 +101,10 @@ class updateProfile : AppCompatActivity() {
             } else {
                 showToast("Tidak ada perubahan yang dilakukan")
             }
+        }
+        val _btnBack = findViewById<ImageView>(R.id.btnBackUpdate)
+        _btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 

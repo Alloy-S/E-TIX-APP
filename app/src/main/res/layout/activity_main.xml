@@ -166,5 +166,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
+    <ImageView
+        android:id="@+id/unvisible"
+        android:layout_width="35dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailLogin"
+        app:srcCompat="@drawable/unvisible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

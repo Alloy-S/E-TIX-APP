@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import com.alloys.e_tix.databinding.ActivityRegisterBinding
 import com.google.firebase.Firebase
@@ -89,6 +90,9 @@ class Register : AppCompatActivity() {
                 // Empty fields not allowed
                 Toast.makeText(this, "Empty Fields are not Allowed", Toast.LENGTH_SHORT).show()
             }
+        }
+        binding.btnBackRegister.setOnClickListener {
+            onBackPressed()
         }
     }
 }

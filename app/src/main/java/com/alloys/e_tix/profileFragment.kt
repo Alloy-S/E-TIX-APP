@@ -39,6 +39,11 @@ class profileFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        val _changePassword = view?.findViewById<ConstraintLayout>(R.id.changepinProfile)
+        _changePassword?.setOnClickListener {
+            val intent = Intent(requireContext(), changePassword::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -119,7 +124,11 @@ class profileFragment : Fragment() {
         _nama.text = user.displayName
         _email.text = user.email
 
-
+        val _changePass = view.findViewById<ConstraintLayout>(R.id.changepinProfile)
+        _changePass.setOnClickListener {
+            val intent = Intent(requireActivity(), changePassword::class.java)
+            startActivity(intent)
+        }
 
     }
     override fun onCreateView(
