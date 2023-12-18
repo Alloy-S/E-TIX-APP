@@ -227,6 +227,7 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
                                 .addOnSuccessListener {
                                     Toast.makeText(this, "Data berhasil diperbarui", Toast.LENGTH_SHORT)
                                         .show()
+                                    finish()
                                 }
                          }
 
@@ -252,6 +253,7 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
                         .addOnSuccessListener {
                             Toast.makeText(this, "Data berhasil diperbarui", Toast.LENGTH_SHORT)
                                 .show()
+                            finish()
                         }
                 }
             }
@@ -334,6 +336,7 @@ class editMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListener  
                         .addOnSuccessListener {
                             Toast.makeText(this, "Data berhasil diperbarui", Toast.LENGTH_SHORT)
                                 .show()
+
                         }
                 }
                 val intent = Intent(this, editJadwalMovieAdmin::class.java)

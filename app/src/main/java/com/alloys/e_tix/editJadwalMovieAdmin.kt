@@ -63,8 +63,7 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
         val _btnAdd = findViewById<Button>(R.id.btnAdd)
         val _btnSave = findViewById<Button>(R.id.btnUpdate)
         _btnSave.setOnClickListener {
-            val intent = Intent(this, fragmentMovieAdmin::class.java)
-            startActivity(intent)
+            finish()
         }
         _btnAdd.setOnClickListener {
             if (ganti == false) {
