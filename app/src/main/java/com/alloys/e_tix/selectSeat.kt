@@ -205,7 +205,7 @@ class selectSeat : AppCompatActivity() {
                 Log.d("query", result.toString())
 
                 if (result.size() == 0) {
-                    Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "Not Found", Toast.LENGTH_SHORT).show()
 //                    finish()
                     val calendar2 = Calendar.getInstance()
                     Log.d("Date calender", getDate(calendar.timeInMillis, "dd/MM/yyyy hh:mm:ss.SSS").toString())
