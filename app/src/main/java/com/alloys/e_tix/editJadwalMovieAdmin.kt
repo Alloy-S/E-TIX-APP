@@ -55,12 +55,6 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         _etHarga = findViewById(R.id.etHarga)
 
-        if (_etHarga.text.isNotEmpty() && jadwalCheckBoxes.isNotEmpty()) {
-            Log.d("CHECKBOX TIDAK KOSONG",jadwalCheckBoxes.toString())
-        }
-        else {
-            Log.d("CHECKBOX KOSONG",jadwalCheckBoxes.toString())
-        }
         _btnAdd = findViewById<Button>(R.id.btnAdd)
         _btnSave = findViewById<Button>(R.id.btnUpdate)
 
