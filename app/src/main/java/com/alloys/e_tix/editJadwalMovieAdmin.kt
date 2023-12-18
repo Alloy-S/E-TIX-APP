@@ -69,54 +69,66 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
         }
 
         _btnAdd.setOnClickListener {
-            if (ganti == false) {
-                DialogHelper.showDialogBar(this, "Loading....")
-                val isDialogVisible = DialogHelper.isDialogVisible()
-                Log.d("SELECTED ITEM", selectedItem)
-                val selectedJadwal = getSelectedJadwal()
-                Log.d("selected Jadwal", selectedJadwal.toString())
-                val arShowTime = ArrayList<showTime>()
+            if (!_etHarga.text.toString().equals("") && getSelectedJadwal().size != 0) {
+                if (ganti == false) {
+                    DialogHelper.showDialogBar(this, "Loading....")
+                    val isDialogVisible = DialogHelper.isDialogVisible()
+                    Log.d("SELECTED ITEM", selectedItem)
+                    val selectedJadwal = getSelectedJadwal()
+                    Log.d("selected Jadwal", selectedJadwal.toString())
+                    val arShowTime = ArrayList<showTime>()
 
-                var counter = 0
-                for (jam in selectedJadwal) {
-                    val dataShowtime = hashMapOf(
-                        "movieID" to idMovie,
-                        "nama_mall" to selectedItem,
-                        "showtime" to jam
-                    )
-                    db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
-                        arShowTime.add(showTime(it.id, jam))
-                        counter++
-                        if (counter == selectedJadwal.size) {
-                            TambahJadwal(selectedItem, arShowTime, _etHarga.text.toString().toInt())
+                    var counter = 0
+                    for (jam in selectedJadwal) {
+                        val dataShowtime = hashMapOf(
+                            "movieID" to idMovie,
+                            "nama_mall" to selectedItem,
+                            "showtime" to jam
+                        )
+                        db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
+                            arShowTime.add(showTime(it.id, jam))
+                            counter++
+                            if (counter == selectedJadwal.size) {
+                                TambahJadwal(
+                                    selectedItem,
+                                    arShowTime,
+                                    _etHarga.text.toString().toInt()
+                                )
+                            }
                         }
                     }
                 }
-            }
-            if (ganti == true) {
-                DialogHelper.showDialogBar(this, "Loading....")
-                val isDialogVisible = DialogHelper.isDialogVisible()
-                Log.d("SELECTED ITEM", selectedItem)
-                val selectedJadwal = getSelectedJadwal()
-                Log.d("selected Jadwal", selectedJadwal.toString())
-                val arShowTime = ArrayList<showTime>()
+                if (ganti == true) {
+                    DialogHelper.showDialogBar(this, "Loading....")
+                    val isDialogVisible = DialogHelper.isDialogVisible()
+                    Log.d("SELECTED ITEM", selectedItem)
+                    val selectedJadwal = getSelectedJadwal()
+                    Log.d("selected Jadwal", selectedJadwal.toString())
+                    val arShowTime = ArrayList<showTime>()
 
-                var counter = 0
-                for (jam in selectedJadwal) {
-                    val dataShowtime = hashMapOf(
-                        "movieID" to idMovie,
-                        "nama_mall" to selectedItem,
-                        "showtime" to jam
-                    )
-                    db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
-                        arShowTime.add(showTime(it.id, jam))
-                        counter++
-                        if (counter == selectedJadwal.size) {
-                            // Menggunakan ID dokumen untuk pembaruan data
-                            TambahJadwal(selectedItem, arShowTime, _etHarga.text.toString().toInt())
+                    var counter = 0
+                    for (jam in selectedJadwal) {
+                        val dataShowtime = hashMapOf(
+                            "movieID" to idMovie,
+                            "nama_mall" to selectedItem,
+                            "showtime" to jam
+                        )
+                        db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
+                            arShowTime.add(showTime(it.id, jam))
+                            counter++
+                            if (counter == selectedJadwal.size) {
+                                // Menggunakan ID dokumen untuk pembaruan data
+                                TambahJadwal(
+                                    selectedItem,
+                                    arShowTime,
+                                    _etHarga.text.toString().toInt()
+                                )
+                            }
                         }
                     }
                 }
+            }else {
+                Toast.makeText(this, "HARAP LENGKAPI DATA", Toast.LENGTH_SHORT).show()
             }
         }
     }
