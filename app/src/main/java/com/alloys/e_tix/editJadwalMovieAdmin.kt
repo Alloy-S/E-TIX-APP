@@ -5,14 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import com.alloys.e_tix.dataClass.showTime
 import com.alloys.e_tix.helper.DialogHelper
 import com.google.firebase.Firebase
@@ -26,6 +19,8 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
     private val jadwalCheckBoxes = mutableListOf<CheckBox>()
     var ganti: Boolean = true
     var selectedDocumentId: String? = null
+    private lateinit var _btnAdd: Button
+    private lateinit var _btnSave: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,11 +55,13 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         _etHarga = findViewById(R.id.etHarga)
 
-        val _btnAdd = findViewById<Button>(R.id.btnAdd)
-        val _btnSave = findViewById<Button>(R.id.btnUpdate)
+        _btnAdd = findViewById<Button>(R.id.btnAdd)
+        _btnSave = findViewById<Button>(R.id.btnUpdate)
+
         _btnSave.setOnClickListener {
             finish()
         }
+
         _btnAdd.setOnClickListener {
             if (ganti == false) {
                 DialogHelper.showDialogBar(this, "Loading....")
@@ -127,6 +124,7 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
         }
         return selectedJadwal
     }
+
 
     fun TambahJadwal(lokasi: String, jadwal: ArrayList<showTime>, harga: Int) {
         val dataBaru = hashMapOf(
@@ -208,7 +206,6 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
 
         selectedItem = parent?.getItemAtPosition(position).toString()
     }
-
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         // ...
