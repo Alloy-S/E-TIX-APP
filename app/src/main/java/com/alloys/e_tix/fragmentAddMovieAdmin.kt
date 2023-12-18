@@ -297,32 +297,6 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
                 mDatabaseRef.child(uploadId).setValue(upload).addOnSuccessListener {
                     Log.d("SUCCESFUL UPLOAD ID", "$uploadId, $upload")
 
-//            val intent = Intent(requireContext(), addJadwalMovieAdmin::class.java)
-//            intent.putExtra("ID_MOVIE", idMovie)
-//            startActivity(intent)
-
-//            val upload = Upload(mEditTextFileName.text.toString().trim(), taskSnapshot.toString())
-//            val uploadId: String? = mDatabaseRef.push().key
-//            if (uploadId != null) {
-//                mDatabaseRef.child(uploadId).setValue(upload).addOnSuccessListener {
-//                    Log.d("SUCCESFUL UPLOAD ID", "$uploadId, $upload")
-//
-////                            val fragmentManager = requireActivity().supportFragmentManager
-////                            val mfMovieAdmin = fragmentMovieAdmin()
-////                            fragmentManager.beginTransaction().apply {
-////                                replace(R.id.containeradmin, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
-////                                commit()
-////                            }
-//                }.addOnFailureListener {
-//                    Log.d("EROR UPLOAD ID", it.message.toString())
-//                }
-//            }
-//                            val fragmentManager = requireActivity().supportFragmentManager
-//                            val mfMovieAdmin = fragmentMovieAdmin()
-//                            fragmentManager.beginTransaction().apply {
-//                                replace(R.id.containeradmin, mfMovieAdmin, fragmentMovieAdmin::class.java.simpleName)
-//                                commit()
-//                            }
                 }.addOnFailureListener {
                     Log.d("EROR UPLOAD ID", it.message.toString())
                 }
