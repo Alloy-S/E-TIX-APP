@@ -131,7 +131,9 @@ class selectSeat : AppCompatActivity() {
                             "total_tiket" to selectedSeat.size,
                             "total_order" to (selectedSeat.size * hargaTiket) + (selectedSeat.size * 2500),
                             "show_date" to showtime,
-                            "admFee" to 2500
+                            "admFee" to 2500,
+                            "seatsTicketRef" to purchasedTicketTimeRef,
+                            "purchased_seats" to purchased_seatsRef
                         )
                         Log.d("Make Transaction data", dataTransaksi.toString())
 

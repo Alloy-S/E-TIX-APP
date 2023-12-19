@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alloys.e_tix.dataClass.dataHistory
 import com.alloys.e_tix.dataClass.dataTransaksi
@@ -50,6 +52,7 @@ class detailTiket : AppCompatActivity() {
         val _ivBarcode = findViewById<ImageView>(R.id.ivBarcode)
         val _ivPosterFilm = findViewById<ImageView>(R.id.ivPosterFilm)
         val _btnBack = findViewById<ImageView>(R.id.btnBack)
+        val _btnRefund = findViewById<Button>(R.id.btnRefund)
 
         findViewById<ImageView>(R.id.btnBack).setOnClickListener {
             finish()
@@ -62,11 +65,64 @@ class detailTiket : AppCompatActivity() {
 
         val poster = intent.getParcelableExtra("poster", Uri::class.java)
         val dataTransaksi = intent.getParcelableExtra("dataTransaksi", dataHistory::class.java)
+        val IDTransaksi = intent.getStringExtra("UIDTransaksi")
         Log.d("data transaksi", dataTransaksi.toString())
 //        Log.d("DataTransaksiType", dataTransaksi?.javaClass?.simpleName ?: "null")
 
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
         val dateFormat2 = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
+        _btnRefund.setOnClickListener {
+            if (IDTransaksi != null) {
+                db.collection("users").document(auth.currentUser!!.uid).collection("transaction").document(IDTransaksi).get().addOnSuccessListener {
+                    val dataRefund = hashMapOf(
+                        "transaction_date" to it.data?.get("transaction_date").toString().toLong(),
+                        "movieId" to it.data?.get("movieId").toString(),
+                        "location" to it.data?.get("location").toString(),
+                        "booking_code" to it.data?.get("booking_code").toString(),
+                        "harga_tiket" to it.data?.get("harga_tiket").toString().toInt(),
+                        "studio" to 1,
+                        "payment" to "Free",
+                        "seats" to it.data?.get("seats") as List<String>,
+                        "total_tiket" to it.data?.get("total_tiket").toString().toInt(),
+                        "total_order" to it.data?.get("total_order").toString().toInt(),
+                        "show_date" to it.data?.get("show_date").toString().toLong(),
+                        "admFee" to 2500,
+                        "seatsTicketRef" to it.data?.get("seatsTicketRef").toString(),
+                        "purchased_seats" to it.data?.get("purchased_seats").toString()
+                    )
+
+                    db.collection("purchased_seats").document(dataRefund.get("purchased_seats").toString()).collection("time_of_purchase").document(dataRefund.get("seatsTicketRef").toString()).get().addOnSuccessListener {
+                        val date = it.data!!.get("date").toString().toLong()
+                        var seats = it.data!!.get("seats") as List<String>
+                        var listSeat = seats.toCollection(ArrayList())
+
+                        for (seat in dataRefund.get("seats") as List<String>) {
+                            if (seats.contains(seat)) {
+                                listSeat.remove(seat)
+                            }
+                        }
+
+                        val dataSeat = hashMapOf(
+                            "date" to date,
+                            "seats" to listSeat
+                        )
+
+                        db.collection("purchased_seats").document(dataRefund.get("purchased_seats").toString()).collection("time_of_purchase").document(dataRefund.get("seatsTicketRef").toString()).set(dataSeat).addOnSuccessListener {
+                            db.collection("users").document(auth.currentUser!!.uid).collection("refund").add(dataRefund).addOnSuccessListener {
+                                db.collection("users").document(auth.currentUser!!.uid).collection("transaction").document(IDTransaksi).delete().addOnSuccessListener {
+                                    Toast.makeText(this, "Berhasil Refund dalam 1 taun", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+
+            }
+        }
 //
         if (poster != null && dataTransaksi != null) {
 //            _ivPosterFilm.setImageBitmap(poster)
