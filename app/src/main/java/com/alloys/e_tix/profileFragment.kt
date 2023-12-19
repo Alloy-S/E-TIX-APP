@@ -64,6 +64,7 @@ class profileFragment : Fragment() {
                     auth.signOut()
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
+                    requireActivity().finish()
                     Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
                 }
                 .setNegativeButton("No") { dialog, which ->
@@ -87,6 +88,7 @@ class profileFragment : Fragment() {
                             val intent = Intent(requireContext(), MainActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
+                            requireActivity().finish()
                             Toast.makeText(requireContext(), "account has been deleted", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(requireContext(), "Failed to delete account", Toast.LENGTH_SHORT).show()
