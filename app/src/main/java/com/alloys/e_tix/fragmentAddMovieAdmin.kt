@@ -148,31 +148,56 @@ class fragmentAddMovieAdmin : Fragment(), AdapterView.OnItemSelectedListener {
 
         _btnNext.setOnClickListener {
             if (checkData()) {
-                if (::mImageUri.isInitialized) {
-                    DialogHelper.showDialogBar(this.context, "Loading....")
-                    val isDialogVisible = DialogHelper.isDialogVisible()
+                cekJudulFilm { isMatch ->
+                    if (isMatch) {
+                        Toast.makeText(requireContext(), "Title already exists", Toast.LENGTH_SHORT).show()
+                    } else {
+                        if (::mImageUri.isInitialized) {
+                            DialogHelper.showDialogBar(this.context, "Loading....")
+                            val isDialogVisible = DialogHelper.isDialogVisible()
 
-                    uploadFile(
-                        _etJudul.text.toString(),
-                        _etDeskripsi.text.toString(),
-                        _etDurasi.text.toString().toInt(),
-                        _etProduser.text.toString(),
-                        _etSutradara.text.toString(),
-                        _etPenulis.text.toString(),
-                        _etCasts.text.toString(),
-                        selectedGenres,
-                        "${mEditTextFileName.text}.${getFileExtension(mImageUri)}",
-                        _etProduksi.text.toString(),
-                        generateRandomStringId(),
-                        _etURLTrailer.text.toString()
-                    )
-                } else {
-                    Toast.makeText(requireContext(), "Please select an image first", Toast.LENGTH_SHORT).show()
+                            uploadFile(
+                                _etJudul.text.toString(),
+                                _etDeskripsi.text.toString(),
+                                _etDurasi.text.toString().toInt(),
+                                _etProduser.text.toString(),
+                                _etSutradara.text.toString(),
+                                _etPenulis.text.toString(),
+                                _etCasts.text.toString(),
+                                selectedGenres,
+                                "${mEditTextFileName.text}.${getFileExtension(mImageUri)}",
+                                _etProduksi.text.toString(),
+                                generateRandomStringId(),
+                                _etURLTrailer.text.toString()
+                            )
+                        } else {
+                            Toast.makeText(requireContext(), "Please select an image first", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             } else {
                 Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    fun cekJudulFilm(callback: (Boolean) -> Unit) {
+        db.collection("movies")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val judulFilm = document.getString("judul_film")
+                    if (judulFilm != null && judulFilm.toLowerCase() == _etJudul.text.toString().toLowerCase()) {
+                        callback(true)
+                        return@addOnSuccessListener
+                    }
+                }
+                callback(false)
+            }
+            .addOnFailureListener { e ->
+                Log.w("Firestore", "Error getting documents: $e")
+                callback(false)
+            }
     }
 
     fun checkData() : Boolean{
