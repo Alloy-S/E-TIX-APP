@@ -22,6 +22,9 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
     val db = Firebase.firestore
     var idMovie: String? = null
     var selectedItem: String = ""
+    lateinit var _etHarga: EditText
+    lateinit var jadwalCheckBoxes: List<CheckBox>
+    lateinit var selectedJadwal: MutableList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_jadwal_movie_admin)
@@ -48,7 +51,12 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
             onBackPressed()
         }
 
-        val jadwalCheckBoxes = listOf<CheckBox>(
+        val _btnSave = findViewById<Button>(R.id.btnUpdate)
+        _btnSave.setOnClickListener {
+            finish()
+        }
+
+        jadwalCheckBoxes = listOf<CheckBox>(
             findViewById(R.id.cb1),
             findViewById(R.id.cb2),
             findViewById(R.id.cb3),
@@ -60,7 +68,7 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
         )
 
         //list buat simpan genre
-        val selectedJadwal = mutableListOf<String>()
+        selectedJadwal = mutableListOf<String>()
 
         //untuk cek checkbox diklik atau tidak
         for (checkBox in jadwalCheckBoxes) {
@@ -74,31 +82,45 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
             }
         }
 
-        val _etHarga = findViewById<EditText>(R.id.etHarga)
+        _etHarga = findViewById<EditText>(R.id.etHarga)
 
         val _btnAdd = findViewById<Button>(R.id.btnAdd)
+
         _btnAdd.setOnClickListener {
-            DialogHelper.showDialogBar(this, "Loading....")
-            val isDialogVisible = DialogHelper.isDialogVisible()
-            Log.d("SELECTED ITEM", selectedItem)
-            Log.d("selected Jadwal", selectedJadwal.toString())
-            val arShowTime = ArrayList<showTime>()
+            if (!_etHarga.text.toString().equals("")) {
+                DialogHelper.showDialogBar(this, "Loading....")
+                val isDialogVisible = DialogHelper.isDialogVisible()
+                Log.d("SELECTED ITEM", selectedItem)
+                Log.d("selected Jadwal", selectedJadwal.toString())
+                val arShowTime = ArrayList<showTime>()
 
-            var counter = 0
-            for (jam in selectedJadwal) {
+                var counter = 0
+                for (jam in selectedJadwal) {
 
-                val dataShowtime = hashMapOf(
-                    "movieID" to idMovie,
-                    "nama_mall" to selectedItem,
-                    "showtime" to jam
-                )
-                db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
-                    arShowTime.add(showTime(it.id, jam))
-                    counter++
-                    if (counter == selectedJadwal.size) {
-                        TambahJadwal(selectedItem,arShowTime,_etHarga.text.toString().toInt())
+                    val dataShowtime = hashMapOf(
+                        "movieID" to idMovie,
+                        "nama_mall" to selectedItem,
+                        "showtime" to jam
+                    )
+                    db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
+                        arShowTime.add(showTime(it.id, jam))
+                        counter++
+                        for (checkBox in jadwalCheckBoxes) {
+                            Log.d("checkbox text & jam", "${checkBox.text} == $jam")
+                            if (checkBox.text.toString().equals(jam)) {
+                                Log.d("Checkbox disable before", checkBox.isEnabled.toString())
+                                checkBox.isEnabled = false
+
+                            }
+                        }
+                        if (counter == selectedJadwal.size) {
+
+                            TambahJadwal(selectedItem, arShowTime, _etHarga.text.toString().toInt())
+                        }
                     }
                 }
+            } else {
+                Toast.makeText(this, "Harga tiket harap di isi", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -124,6 +146,34 @@ class addJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedListe
     }
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         selectedItem = parent?.getItemAtPosition(position).toString()
+        Log.d("Selected Item", selectedItem)
+        for (checkBox in jadwalCheckBoxes) {
+            checkBox.isChecked = false
+            checkBox.isEnabled = true
+        }
+        db.collection("movies").document(idMovie.toString()).collection("show_schedule").whereEqualTo("nama_mall", selectedItem)
+            .get()
+            .addOnSuccessListener { result ->
+
+                if (result.size() == 0) {
+
+                } else {
+                    val document = result.documents[0]
+                    _etHarga.setText(document.get("harga_tiket").toString())
+
+                    val showTimeList: List<Map<String, String>> =
+                        document.get("showtime") as? List<Map<String, String>> ?: emptyList()
+                    for ((index, checkBox) in jadwalCheckBoxes.withIndex()) {
+                        val waktuCheckBox = checkBox.text.toString()
+                        val isTimeChecked =
+                            showTimeList.any { it["waktu"] == waktuCheckBox }
+                        checkBox.isChecked = isTimeChecked
+                        selectedJadwal.add(checkBox.text.toString())
+                        checkBox.isEnabled = !isTimeChecked
+                    }
+                    Log.d("isi selected jadwal", selectedJadwal.toString())
+                }
+            }
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

@@ -82,6 +82,15 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
                         db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
                             arShowTime.add(showTime(it.id, jam))
                             counter++
+
+                            for (checkBox in jadwalCheckBoxes) {
+                                Log.d("checkbox text & jam", "${checkBox.text} == $jam")
+                                if (checkBox.text.toString().equals(jam)) {
+                                    Log.d("Checkbox disable before", checkBox.isEnabled.toString())
+                                    checkBox.isEnabled = false
+
+                                }
+                            }
                             if (counter == selectedJadwal.size) {
                                 TambahJadwal(
                                     selectedItem,
@@ -110,6 +119,15 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
                         db.collection("purchased_seats").add(dataShowtime).addOnSuccessListener {
                             arShowTime.add(showTime(it.id, jam))
                             counter++
+
+                            for (checkBox in jadwalCheckBoxes) {
+                                Log.d("checkbox text & jam", "${checkBox.text} == $jam")
+                                if (checkBox.text.toString().equals(jam)) {
+                                    Log.d("Checkbox disable before", checkBox.isEnabled.toString())
+                                    checkBox.isEnabled = false
+
+                                }
+                            }
                             if (counter == selectedJadwal.size) {
                                 // Menggunakan ID dokumen untuk pembaruan data
                                 TambahJadwal(
@@ -197,6 +215,7 @@ class editJadwalMovieAdmin : AppCompatActivity(), AdapterView.OnItemSelectedList
                             val isTimeChecked =
                                 showTimeList.any { it["waktu"] == waktuCheckBox }
                             checkBox.isChecked = isTimeChecked
+                            checkBox.isEnabled = !isTimeChecked
                         }
 
                         // Menyimpan ID dokumen yang sesuai ke dalam variabel global
